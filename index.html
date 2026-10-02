@@ -14,8 +14,7 @@
     }
 
     body {
-      background: #f2f5f7;
-      min-height: 100vh;
+      background: #eef2f6;
     }
 
     .app {
@@ -23,65 +22,56 @@
       margin: auto;
       min-height: 100vh;
       background: white;
-      position: relative;
     }
 
-    /* LOGIN */
+    /* AUTH */
 
-    .auth-screen {
+    .auth {
       min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       padding: 25px;
-      background: linear-gradient(135deg, #ffffff, #eef5ff);
+      background: linear-gradient(135deg, #ffffff, #eaf1ff);
     }
 
     .auth-box {
       width: 100%;
       max-width: 380px;
-      padding: 30px 25px;
+      padding: 30px 24px;
       border-radius: 22px;
       background: white;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+      box-shadow: 0 10px 35px rgba(0,0,0,.12);
     }
 
     .logo {
       text-align: center;
-      font-size: 38px;
-      font-weight: bold;
       color: #1769ff;
+      font-size: 40px;
+      font-weight: bold;
       margin-bottom: 8px;
     }
 
     .tagline {
       text-align: center;
       color: #777;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
-    .auth-box input {
+    input {
       width: 100%;
       padding: 14px;
-      margin-bottom: 14px;
       border: 1px solid #ddd;
       border-radius: 12px;
-      font-size: 15px;
       outline: none;
+      margin-bottom: 12px;
+      font-size: 15px;
     }
 
-    .auth-box input:focus {
-      border-color: #1769ff;
-    }
-
-    button {
-      border: none;
-      cursor: pointer;
-    }
-
-    .primary-btn {
+    .btn {
       width: 100%;
       padding: 14px;
+      border: none;
       border-radius: 12px;
       background: #1769ff;
       color: white;
@@ -90,41 +80,35 @@
       margin-top: 5px;
     }
 
-    .secondary-btn {
-      width: 100%;
-      padding: 13px;
-      border-radius: 12px;
-      background: #eef3ff;
+    .btn.secondary {
+      background: #edf3ff;
       color: #1769ff;
-      font-size: 15px;
-      margin-top: 10px;
     }
 
-    .auth-message {
+    #authMessage {
       text-align: center;
       margin-top: 15px;
-      font-size: 14px;
       color: #e53935;
-      min-height: 20px;
+      font-size: 14px;
     }
 
-    /* APP */
+    /* MAIN APP */
 
-    .main-app {
+    #mainApp {
       display: none;
       min-height: 100vh;
       padding-bottom: 75px;
     }
 
     .topbar {
-      background: white;
-      padding: 18px;
+      padding: 17px;
       border-bottom: 1px solid #eee;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       position: sticky;
       top: 0;
+      background: white;
       z-index: 5;
     }
 
@@ -133,11 +117,11 @@
       font-size: 27px;
     }
 
-    .logout-btn {
-      background: #f1f1f1;
+    .logout {
       padding: 8px 12px;
+      border: none;
       border-radius: 10px;
-      color: #555;
+      background: #f1f1f1;
     }
 
     .content {
@@ -149,31 +133,22 @@
       color: white;
       padding: 20px;
       border-radius: 18px;
-      margin-bottom: 20px;
-    }
-
-    .welcome h2 {
-      margin-bottom: 7px;
-    }
-
-    .search {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
       margin-bottom: 18px;
-      outline: none;
+    }
+
+    .welcome p {
+      margin-top: 7px;
+      font-size: 14px;
     }
 
     .section-title {
-      margin: 18px 0 10px;
-      font-size: 19px;
+      margin: 18px 0 12px;
     }
 
     .chat {
       display: flex;
       align-items: center;
-      padding: 13px 5px;
+      padding: 14px 4px;
       border-bottom: 1px solid #eee;
       cursor: pointer;
     }
@@ -185,8 +160,8 @@
       background: #1769ff;
       color: white;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       font-weight: bold;
       margin-right: 13px;
     }
@@ -196,7 +171,6 @@
     }
 
     .chat-info h3 {
-      font-size: 16px;
       margin-bottom: 4px;
     }
 
@@ -205,61 +179,28 @@
       font-size: 13px;
     }
 
-    .feature-card {
-      background: #f7f9fc;
+    .card {
       padding: 18px;
+      background: #f7f9fc;
       border-radius: 17px;
       margin-bottom: 12px;
     }
 
-    .feature-card h3 {
-      margin-bottom: 7px;
-    }
-
-    .feature-card p {
+    .card p {
       color: #666;
       font-size: 14px;
-      margin-bottom: 12px;
+      margin: 8px 0 12px;
     }
 
-    .feature-btn {
+    .small-btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 10px;
       background: #1769ff;
       color: white;
-      padding: 10px 15px;
-      border-radius: 10px;
     }
 
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 500px;
-      background: white;
-      border-top: 1px solid #ddd;
-      display: flex;
-      justify-content: space-around;
-      padding: 9px 3px;
-      z-index: 10;
-    }
-
-    .nav-btn {
-      background: transparent;
-      color: #777;
-      font-size: 12px;
-      text-align: center;
-    }
-
-    .nav-btn span {
-      display: block;
-      font-size: 21px;
-      margin-bottom: 3px;
-    }
-
-    .nav-btn.active {
-      color: #1769ff;
-    }
+    /* PAGES */
 
     .page {
       display: none;
@@ -269,50 +210,105 @@
       display: block;
     }
 
-    /* CHAT */
+    /* NAV */
 
-    .chat-screen {
+    .nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 500px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: white;
+      border-top: 1px solid #ddd;
+      padding: 9px 2px;
+      z-index: 20;
+    }
+
+    .nav button {
+      background: transparent;
+      border: none;
+      color: #777;
+      font-size: 11px;
+    }
+
+    .nav button span {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 3px;
+    }
+
+    .nav button.active {
+      color: #1769ff;
+    }
+
+    /* CHAT SCREEN */
+
+    #chatScreen {
       display: none;
       min-height: 100vh;
-      background: #f2f5f7;
+      background: #eef2f6;
     }
 
     .chat-header {
+      height: 65px;
       background: white;
-      padding: 15px;
+      border-bottom: 1px solid #ddd;
       display: flex;
       align-items: center;
-      border-bottom: 1px solid #ddd;
+      padding: 10px 15px;
+      position: sticky;
+      top: 0;
+      z-index: 5;
     }
 
-    .back-btn {
-      font-size: 25px;
+    .back {
+      border: none;
       background: none;
+      font-size: 27px;
       margin-right: 12px;
     }
 
-    .chat-messages {
-      padding: 20px;
-      min-height: calc(100vh - 130px);
-      padding-bottom: 80px;
+    .chat-header strong {
+      font-size: 17px;
+    }
+
+    .chat-header small {
+      display: block;
+      color: #777;
+      margin-top: 3px;
+    }
+
+    #messages {
+      padding: 18px;
+      padding-bottom: 85px;
     }
 
     .message {
-      background: white;
+      max-width: 75%;
       padding: 10px 13px;
+      background: white;
       border-radius: 14px;
       margin-bottom: 10px;
-      max-width: 75%;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      word-wrap: break-word;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
     }
 
-    .message.me {
+    .message.mine {
+      margin-left: auto;
       background: #1769ff;
       color: white;
-      margin-left: auto;
     }
 
-    .message-box {
+    .message-time {
+      font-size: 10px;
+      opacity: .65;
+      margin-top: 4px;
+    }
+
+    .message-input {
       position: fixed;
       bottom: 0;
       width: 100%;
@@ -324,75 +320,79 @@
       border-top: 1px solid #ddd;
     }
 
-    .message-box input {
+    .message-input input {
+      margin: 0;
       flex: 1;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      outline: none;
     }
 
-    .send-btn {
+    .send {
+      border: none;
+      border-radius: 12px;
       background: #1769ff;
       color: white;
       padding: 0 17px;
-      border-radius: 12px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #888;
+      margin-top: 50px;
     }
   </style>
 </head>
 
 <body>
 
-<!-- LOGIN / SIGNUP -->
+<div class="app">
 
-<div class="auth-screen" id="authScreen">
+  <!-- LOGIN -->
 
-  <div class="auth-box">
+  <div class="auth" id="authScreen">
 
-    <div class="logo">ToGeo</div>
+    <div class="auth-box">
 
-    <p class="tagline">
-      Connect. Chat. Watch. Listen. Together.
-    </p>
+      <div class="logo">ToGeo</div>
 
-    <input
-      type="email"
-      id="email"
-      placeholder="Email address"
-    >
+      <p class="tagline">
+        Connect. Chat. Watch. Listen. Together.
+      </p>
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-    >
+      <input
+        id="email"
+        type="email"
+        placeholder="Email address"
+      >
 
-    <button class="primary-btn" id="loginBtn">
-      Login
-    </button>
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+      >
 
-    <button class="secondary-btn" id="signupBtn">
-      Create Account
-    </button>
+      <button class="btn" id="loginBtn">
+        Login
+      </button>
 
-    <div class="auth-message" id="authMessage"></div>
+      <button class="btn secondary" id="signupBtn">
+        Create Account
+      </button>
+
+      <div id="authMessage"></div>
+
+    </div>
 
   </div>
 
-</div>
 
+  <!-- MAIN APP -->
 
-<!-- MAIN APP -->
-
-<div class="app">
-
-  <div class="main-app" id="mainApp">
+  <div id="mainApp">
 
     <div class="topbar">
 
       <h1>ToGeo</h1>
 
-      <button class="logout-btn" id="logoutBtn">
+      <button class="logout" id="logoutBtn">
         Logout
       </button>
 
@@ -401,75 +401,65 @@
 
     <div class="content">
 
-      <!-- HOME -->
+      <!-- CHATS -->
 
-      <div class="page active" id="homePage">
+      <div class="page active" id="chatsPage">
 
         <div class="welcome">
 
           <h2 id="welcomeText">
-            Welcome to ToGeo
+            Welcome to ToGeo 👋
           </h2>
 
           <p>
-            Connect with people and enjoy moments together.
+            Your conversations, together in one place.
           </p>
 
         </div>
-
-        <input
-          class="search"
-          id="searchInput"
-          placeholder="Search chats..."
-        >
 
         <h2 class="section-title">
           Chats
         </h2>
 
-        <div id="chatList">
+        <div class="chat" onclick="openChat('Priya')">
 
-          <div class="chat" onclick="openChat('Priya')">
+          <div class="avatar">P</div>
 
-            <div class="avatar">P</div>
+          <div class="chat-info">
 
-            <div class="chat-info">
+            <h3>Priya</h3>
 
-              <h3>Priya</h3>
-
-              <p>Hey! What's up?</p>
-
-            </div>
+            <p>Tap to open chat</p>
 
           </div>
 
+        </div>
 
-          <div class="chat" onclick="openChat('Rahul')">
 
-            <div class="avatar">R</div>
+        <div class="chat" onclick="openChat('Rahul')">
 
-            <div class="chat-info">
+          <div class="avatar">R</div>
 
-              <h3>Rahul</h3>
+          <div class="chat-info">
 
-              <p>Let's watch something!</p>
+            <h3>Rahul</h3>
 
-            </div>
+            <p>Tap to open chat</p>
 
           </div>
 
+        </div>
 
-          <div class="chat" onclick="openChat('Neha')">
 
-            <div class="avatar">N</div>
+        <div class="chat" onclick="openChat('Neha')">
 
-            <div class="chat-info">
+          <div class="avatar">N</div>
 
-              <h3>Neha</h3>
+          <div class="chat-info">
 
-              <p>Good morning 😊</p>
+            <h3>Neha</h3>
 
-            </div>
+            <p>Tap to open chat</p>
 
           </div>
 
@@ -486,15 +476,15 @@
           Friends
         </h2>
 
-        <div class="feature-card">
+        <div class="card">
 
-          <h3>👤 Find Friends</h3>
+          <h3>👥 Find Friends</h3>
 
           <p>
             Search and connect with people on ToGeo.
           </p>
 
-          <button class="feature-btn">
+          <button class="small-btn">
             Find Friends
           </button>
 
@@ -511,36 +501,31 @@
           Together
         </h2>
 
-        <div class="feature-card">
+        <div class="card">
 
           <h3>🎬 Watch Together</h3>
 
           <p>
-            Watch videos together in sync with your friends.
+            Watch videos together in sync.
           </p>
 
-          <button
-            class="feature-btn"
-            onclick="createRoom()"
-          >
+          <button class="small-btn"
+                  onclick="createRoom()">
             Create Room
           </button>
 
         </div>
 
-
-        <div class="feature-card">
+        <div class="card">
 
           <h3>🎵 Listen Together</h3>
 
           <p>
-            Listen to music together in real time.
+            Listen to music together.
           </p>
 
-          <button
-            class="feature-btn"
-            onclick="createRoom()"
-          >
+          <button class="small-btn"
+                  onclick="createRoom()">
             Create Room
           </button>
 
@@ -557,15 +542,15 @@
           Status
         </h2>
 
-        <div class="feature-card">
+        <div class="card">
 
-          <h3>➕ Add Status</h3>
+          <h3>⭕ Status</h3>
 
           <p>
-            Share a moment with your friends.
+            Share moments with your friends.
           </p>
 
-          <button class="feature-btn">
+          <button class="small-btn">
             Add Status
           </button>
 
@@ -582,7 +567,7 @@
           Settings
         </h2>
 
-        <div class="feature-card">
+        <div class="card">
 
           <h3>Account</h3>
 
@@ -592,12 +577,12 @@
 
         </div>
 
-        <div class="feature-card">
+        <div class="card">
 
           <h3>About ToGeo</h3>
 
           <p>
-            ToGeo — Connect. Chat. Watch. Listen. Together.
+            Connect. Chat. Watch. Listen. Together.
           </p>
 
         </div>
@@ -609,18 +594,17 @@
 
     <!-- NAVIGATION -->
 
-    <div class="bottom-nav">
+    <div class="nav">
 
       <button
-        class="nav-btn active"
-        onclick="showPage('homePage', this)"
+        class="active"
+        onclick="showPage('chatsPage', this)"
       >
         <span>💬</span>
         Chats
       </button>
 
       <button
-        class="nav-btn"
         onclick="showPage('friendsPage', this)"
       >
         <span>👥</span>
@@ -628,7 +612,6 @@
       </button>
 
       <button
-        class="nav-btn"
         onclick="showPage('togetherPage', this)"
       >
         <span>🎬</span>
@@ -636,7 +619,6 @@
       </button>
 
       <button
-        class="nav-btn"
         onclick="showPage('statusPage', this)"
       >
         <span>⭕</span>
@@ -644,7 +626,6 @@
       </button>
 
       <button
-        class="nav-btn"
         onclick="showPage('settingsPage', this)"
       >
         <span>⚙️</span>
@@ -658,14 +639,11 @@
 
   <!-- CHAT SCREEN -->
 
-  <div class="chat-screen" id="chatScreen">
+  <div id="chatScreen">
 
     <div class="chat-header">
 
-      <button
-        class="back-btn"
-        onclick="closeChat()"
-      >
+      <button class="back" onclick="closeChat()">
         ←
       </button>
 
@@ -675,38 +653,33 @@
           Chat
         </strong>
 
-        <div style="font-size:12px;color:#777;">
-          ToGeo chat
-        </div>
+        <small>
+          Real-time ToGeo chat
+        </small>
 
       </div>
 
     </div>
 
 
-    <div
-      class="chat-messages"
-      id="chatMessages"
-    >
+    <div id="messages">
 
-      <div class="message">
-        Welcome to ToGeo 👋
+      <div class="empty" id="emptyMessages">
+        No messages yet.<br>
+        Send the first message! 👋
       </div>
 
     </div>
 
 
-    <div class="message-box">
+    <div class="message-input">
 
       <input
         id="messageInput"
         placeholder="Type a message..."
       >
 
-      <button
-        class="send-btn"
-        onclick="sendMessage()"
-      >
+      <button class="send" onclick="sendMessage()">
         Send
       </button>
 
@@ -716,8 +689,6 @@
 
 </div>
 
-
-<!-- FIREBASE -->
 
 <script type="module">
 
@@ -733,6 +704,19 @@
   }
   from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+  }
+  from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+  /* FIREBASE CONFIG */
 
   const firebaseConfig = {
 
@@ -753,9 +737,23 @@
   };
 
 
-  const app = initializeApp(firebaseConfig);
+  /* INITIALIZE */
 
-  const auth = getAuth(app);
+  const app =
+    initializeApp(firebaseConfig);
+
+  const auth =
+    getAuth(app);
+
+  const db =
+    getFirestore(app);
+
+
+  let currentUser = null;
+
+  let unsubscribeMessages = null;
+
+  let currentChat = "";
 
 
   const authScreen =
@@ -775,16 +773,21 @@
     .addEventListener("click", async () => {
 
       const email =
-        document.getElementById("email").value.trim();
+        document
+          .getElementById("email")
+          .value
+          .trim();
 
       const password =
-        document.getElementById("password").value;
+        document
+          .getElementById("password")
+          .value;
 
 
       if (!email || !password) {
 
         authMessage.textContent =
-          "Please enter email and password.";
+          "Enter email and password.";
 
         return;
 
@@ -800,14 +803,14 @@
         );
 
         authMessage.textContent =
-          "Account created successfully!";
+          "";
 
       }
 
       catch (error) {
 
         authMessage.textContent =
-          getFriendlyError(error);
+          friendlyError(error);
 
       }
 
@@ -821,16 +824,21 @@
     .addEventListener("click", async () => {
 
       const email =
-        document.getElementById("email").value.trim();
+        document
+          .getElementById("email")
+          .value
+          .trim();
 
       const password =
-        document.getElementById("password").value;
+        document
+          .getElementById("password")
+          .value;
 
 
       if (!email || !password) {
 
         authMessage.textContent =
-          "Please enter email and password.";
+          "Enter email and password.";
 
         return;
 
@@ -845,12 +853,15 @@
           password
         );
 
+        authMessage.textContent =
+          "";
+
       }
 
       catch (error) {
 
         authMessage.textContent =
-          getFriendlyError(error);
+          friendlyError(error);
 
       }
 
@@ -870,37 +881,242 @@
 
   /* AUTH STATE */
 
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, user => {
 
     if (user) {
 
-      authScreen.style.display = "none";
+      currentUser = user;
 
-      mainApp.style.display = "block";
+      authScreen.style.display =
+        "none";
 
-      document.getElementById("accountEmail")
+      mainApp.style.display =
+        "block";
+
+      document
+        .getElementById("accountEmail")
         .textContent = user.email;
-
-      document.getElementById("welcomeText")
-        .textContent =
-        "Welcome to ToGeo 👋";
 
     }
 
     else {
 
-      authScreen.style.display = "flex";
+      currentUser = null;
 
-      mainApp.style.display = "none";
+      authScreen.style.display =
+        "flex";
+
+      mainApp.style.display =
+        "none";
 
     }
 
   });
 
 
-  /* FRIENDLY ERRORS */
+  /* SEND MESSAGE */
 
-  function getFriendlyError(error) {
+  window.sendMessage = async function() {
+
+    if (!currentUser) return;
+
+    const input =
+      document.getElementById("messageInput");
+
+    const text =
+      input.value.trim();
+
+    if (!text) return;
+
+
+    try {
+
+      await addDoc(
+        collection(
+          db,
+          "chats",
+          currentChat,
+          "messages"
+        ),
+        {
+
+          text: text,
+
+          senderId:
+            currentUser.uid,
+
+          senderEmail:
+            currentUser.email,
+
+          timestamp:
+            serverTimestamp()
+
+        }
+      );
+
+      input.value = "";
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Message send failed: " +
+        error.message
+      );
+
+    }
+
+  };
+
+
+  /* LOAD REAL-TIME MESSAGES */
+
+  window.loadMessages = function(chatName) {
+
+    if (unsubscribeMessages) {
+
+      unsubscribeMessages();
+
+    }
+
+
+    currentChat =
+      chatName.toLowerCase();
+
+
+    const messagesDiv =
+      document.getElementById("messages");
+
+
+    messagesDiv.innerHTML = "";
+
+
+    const messagesRef =
+      collection(
+        db,
+        "chats",
+        currentChat,
+        "messages"
+      );
+
+
+    const q =
+      query(
+        messagesRef,
+        orderBy("timestamp", "asc")
+      );
+
+
+    unsubscribeMessages =
+      onSnapshot(
+        q,
+        snapshot => {
+
+          messagesDiv.innerHTML = "";
+
+
+          if (snapshot.empty) {
+
+            messagesDiv.innerHTML =
+              `<div class="empty">
+                No messages yet.<br>
+                Send the first message! 👋
+              </div>`;
+
+            return;
+
+          }
+
+
+          snapshot.forEach(doc => {
+
+            const data =
+              doc.data();
+
+
+            const message =
+              document.createElement("div");
+
+
+            message.className =
+              "message";
+
+
+            if (
+              currentUser &&
+              data.senderId === currentUser.uid
+            ) {
+
+              message.classList.add("mine");
+
+            }
+
+
+            const text =
+              document.createElement("div");
+
+            text.textContent =
+              data.text;
+
+
+            message.appendChild(text);
+
+
+            const time =
+              document.createElement("div");
+
+            time.className =
+              "message-time";
+
+
+            if (data.timestamp) {
+
+              time.textContent =
+                data.timestamp
+                  .toDate()
+                  .toLocaleTimeString(
+                    [],
+                    {
+                      hour: "2-digit",
+                      minute: "2-digit"
+                    }
+                  );
+
+            }
+
+
+            message.appendChild(time);
+
+            messagesDiv.appendChild(message);
+
+          });
+
+
+          window.scrollTo(
+            0,
+            document.body.scrollHeight
+          );
+
+        },
+
+        error => {
+
+          console.error(
+            "Firestore listener error:",
+            error
+          );
+
+        }
+
+      );
+
+  };
+
+
+  function friendlyError(error) {
 
     switch (error.code) {
 
@@ -908,10 +1124,10 @@
         return "This email is already registered.";
 
       case "auth/invalid-email":
-        return "Please enter a valid email.";
+        return "Invalid email address.";
 
       case "auth/weak-password":
-        return "Password should be at least 6 characters.";
+        return "Password must be at least 6 characters.";
 
       case "auth/invalid-credential":
         return "Incorrect email or password.";
@@ -935,8 +1151,11 @@
     document
       .querySelectorAll(".page")
       .forEach(page => {
+
         page.classList.remove("active");
+
       });
+
 
     document
       .getElementById(pageId)
@@ -944,91 +1163,83 @@
 
 
     document
-      .querySelectorAll(".nav-btn")
+      .querySelectorAll(".nav button")
       .forEach(btn => {
+
         btn.classList.remove("active");
+
       });
+
 
     button.classList.add("active");
 
   }
 
 
-  /* CHAT */
+  /* OPEN CHAT */
 
   function openChat(name) {
 
     document
       .getElementById("mainApp")
-      .style.display = "none";
+      .style.display =
+      "none";
+
 
     document
       .getElementById("chatScreen")
-      .style.display = "block";
+      .style.display =
+      "block";
+
 
     document
       .getElementById("chatName")
-      .textContent = name;
+      .textContent =
+      name;
+
+
+    window.loadMessages(name);
 
   }
 
+
+  /* CLOSE CHAT */
 
   function closeChat() {
 
     document
       .getElementById("chatScreen")
-      .style.display = "none";
+      .style.display =
+      "none";
+
 
     document
       .getElementById("mainApp")
-      .style.display = "block";
+      .style.display =
+      "block";
 
   }
 
 
-  function sendMessage() {
-
-    const input =
-      document.getElementById("messageInput");
-
-    const text =
-      input.value.trim();
-
-    if (!text) return;
-
-
-    const message =
-      document.createElement("div");
-
-    message.className = "message me";
-
-    message.textContent = text;
-
-
-    document
-      .getElementById("chatMessages")
-      .appendChild(message);
-
-
-    input.value = "";
-
-  }
-
+  /* ENTER TO SEND */
 
   document
     .getElementById("messageInput")
-    .addEventListener("keydown", function(event) {
+    .addEventListener(
+      "keydown",
+      event => {
 
-      if (event.key === "Enter") {
+        if (event.key === "Enter") {
 
-        sendMessage();
+          window.sendMessage();
+
+        }
 
       }
+    );
 
-    });
 
-
-  /* ROOM */
+  /* TOGETHER ROOM */
 
   function createRoom() {
 
@@ -1038,40 +1249,12 @@
         .substring(2, 8)
         .toUpperCase();
 
+
     alert(
-      "Your ToGeo Room Code: " + code
+      "ToGeo Room Code: " + code
     );
 
   }
-
-
-  /* SEARCH */
-
-  document
-    .getElementById("searchInput")
-    .addEventListener("input", function() {
-
-      const value =
-        this.value.toLowerCase();
-
-      document
-        .querySelectorAll("#chatList .chat")
-        .forEach(chat => {
-
-          const name =
-            chat
-              .querySelector("h3")
-              .textContent
-              .toLowerCase();
-
-          chat.style.display =
-            name.includes(value)
-              ? "flex"
-              : "none";
-
-        });
-
-    });
 
 </script>
 
