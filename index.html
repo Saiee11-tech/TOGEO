@@ -2,12 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToGeo</title>
 
   <style>
@@ -17,22 +12,26 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
       font-family: Arial, sans-serif;
       background: #eef3f8;
+    }
 
+    /* LOGIN */
+
+    #loginPage {
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    .container {
+    .loginBox {
       width: 92%;
       max-width: 400px;
       background: white;
       padding: 30px 25px;
       border-radius: 22px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+      box-shadow: 0 10px 35px rgba(0,0,0,.12);
     }
 
     .logo {
@@ -40,50 +39,34 @@
       font-size: 36px;
       font-weight: bold;
       color: #1769ff;
-      margin-bottom: 5px;
     }
 
     .subtitle {
       text-align: center;
       color: #777;
-      margin-bottom: 25px;
+      margin: 8px 0 25px;
     }
 
     input {
       width: 100%;
       padding: 14px;
       margin-bottom: 12px;
-
-      border: 1px solid #d9dfe7;
+      border: 1px solid #ddd;
       border-radius: 12px;
-
       font-size: 16px;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: #1769ff;
     }
 
     button {
       width: 100%;
       padding: 14px;
       margin-top: 8px;
-
       border: none;
       border-radius: 12px;
-
       background: #1769ff;
       color: white;
-
       font-size: 16px;
       font-weight: bold;
-
       cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.9;
     }
 
     .signup {
@@ -92,63 +75,209 @@
     }
 
     #message {
-      margin-top: 18px;
       text-align: center;
-      font-size: 14px;
-      line-height: 1.5;
+      margin-top: 15px;
       min-height: 20px;
     }
 
-    .loading {
-      opacity: 0.6;
-      pointer-events: none;
+
+    /* MAIN APP */
+
+    #mainApp {
+      display: none;
+      min-height: 100vh;
+      background: #f5f7fb;
+    }
+
+    .topbar {
+      height: 65px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
+
+    .topLogo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #1769ff;
+    }
+
+    .logoutBtn {
+      width: auto;
+      padding: 10px 18px;
+      margin: 0;
+      background: #ff3b30;
+      font-size: 14px;
+    }
+
+    .welcome {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .welcome h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      color: #777;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .feature {
+      background: white;
+      padding: 25px 15px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,.06);
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .feature span {
+      display: block;
+      font-size: 32px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
 
-    <div class="logo">
-      ToGeo
+  <!-- ========================= -->
+  <!-- LOGIN PAGE -->
+  <!-- ========================= -->
+
+  <div id="loginPage">
+
+    <div class="loginBox">
+
+      <div class="logo">
+        ToGeo
+      </div>
+
+      <div class="subtitle">
+        Connect with everyone
+      </div>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="Email address"
+      >
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+      >
+
+      <button id="loginBtn">
+        Login
+      </button>
+
+      <button
+        id="signupBtn"
+        class="signup"
+      >
+        Create Account
+      </button>
+
+      <div id="message"></div>
+
     </div>
-
-    <div class="subtitle">
-      Connect with everyone
-    </div>
-
-    <input
-      id="email"
-      type="email"
-      placeholder="Email address"
-      autocomplete="email"
-    >
-
-    <input
-      id="password"
-      type="password"
-      placeholder="Password"
-      autocomplete="current-password"
-    >
-
-    <button id="loginBtn">
-      Login
-    </button>
-
-    <button
-      id="signupBtn"
-      class="signup"
-    >
-      Create Account
-    </button>
-
-    <div id="message"></div>
 
   </div>
 
 
+  <!-- ========================= -->
+  <!-- MAIN APP -->
+  <!-- ========================= -->
+
+  <div id="mainApp">
+
+    <div class="topbar">
+
+      <div class="topLogo">
+        ToGeo
+      </div>
+
+      <button
+        id="logoutBtn"
+        class="logoutBtn"
+      >
+        Logout
+      </button>
+
+    </div>
+
+
+    <div class="welcome">
+
+      <h1>
+        Welcome to ToGeo 🎉
+      </h1>
+
+      <p id="userEmail">
+        You are logged in.
+      </p>
+
+    </div>
+
+
+    <div class="features">
+
+      <div class="feature">
+        <span>💬</span>
+        Chats
+      </div>
+
+      <div class="feature">
+        <span>👥</span>
+        Friends
+      </div>
+
+      <div class="feature">
+        <span>🎬</span>
+        Together
+      </div>
+
+      <div class="feature">
+        <span>⭕</span>
+        Status
+      </div>
+
+      <div class="feature">
+        <span>📞</span>
+        Calls
+      </div>
+
+      <div class="feature">
+        <span>⚙️</span>
+        Settings
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
   <!-- FIREBASE -->
+  <!-- ========================= -->
 
   <script type="module">
 
@@ -160,13 +289,10 @@
       getAuth,
       createUserWithEmailAndPassword,
       signInWithEmailAndPassword,
-      onAuthStateChanged
+      onAuthStateChanged,
+      signOut
     } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
-
-    // =========================
-    // FIREBASE CONFIG
-    // =========================
 
     const firebaseConfig = {
 
@@ -193,10 +319,6 @@
     };
 
 
-    // =========================
-    // INITIALIZE FIREBASE
-    // =========================
-
     const app =
       initializeApp(firebaseConfig);
 
@@ -204,9 +326,13 @@
       getAuth(app);
 
 
-    // =========================
-    // HTML ELEMENTS
-    // =========================
+    // ELEMENTS
+
+    const loginPage =
+      document.getElementById("loginPage");
+
+    const mainApp =
+      document.getElementById("mainApp");
 
     const emailInput =
       document.getElementById("email");
@@ -220,79 +346,25 @@
     const signupBtn =
       document.getElementById("signupBtn");
 
+    const logoutBtn =
+      document.getElementById("logoutBtn");
+
     const message =
       document.getElementById("message");
 
+    const userEmail =
+      document.getElementById("userEmail");
 
-    // =========================
-    // MESSAGE FUNCTION
-    // =========================
 
     function showMessage(
       text,
-      type = "error"
+      success = false
     ) {
 
       message.textContent = text;
 
-      if (type === "success") {
-
-        message.style.color = "green";
-
-      } else if (type === "info") {
-
-        message.style.color = "#1769ff";
-
-      } else {
-
-        message.style.color = "red";
-      }
-    }
-
-
-    // =========================
-    // VALIDATE INPUT
-    // =========================
-
-    function getInput() {
-
-      const email =
-        emailInput.value.trim();
-
-      const password =
-        passwordInput.value;
-
-      if (!email) {
-
-        showMessage(
-          "Please enter your email."
-        );
-
-        return null;
-      }
-
-      if (!password) {
-
-        showMessage(
-          "Please enter your password."
-        );
-
-        return null;
-      }
-
-      if (password.length < 6) {
-
-        showMessage(
-          "Password must be at least 6 characters."
-        );
-
-        return null;
-      }
-
-      return {
-        email,
-        password
-      };
+      message.style.color =
+        success ? "green" : "red";
     }
 
 
@@ -302,109 +374,54 @@
 
     signupBtn.addEventListener(
       "click",
-      async function () {
+      async () => {
 
-        const data =
-          getInput();
+        const email =
+          emailInput.value.trim();
 
-        if (!data) {
+        const password =
+          passwordInput.value;
+
+        if (!email || !password) {
+
+          showMessage(
+            "Enter email and password."
+          );
+
           return;
         }
 
-        signupBtn.classList.add("loading");
+        if (password.length < 6) {
 
-        loginBtn.classList.add("loading");
+          showMessage(
+            "Password must be at least 6 characters."
+          );
 
-        showMessage(
-          "Creating account...",
-          "info"
-        );
+          return;
+        }
 
 
         try {
 
           await createUserWithEmailAndPassword(
             auth,
-            data.email,
-            data.password
+            email,
+            password
           );
 
           showMessage(
-            "Account created successfully! 🎉",
-            "success"
+            "Account created successfully!",
+            true
           );
 
         } catch (error) {
 
-          console.error(
-            "SIGNUP ERROR:",
-            error
-          );
+          console.error(error);
 
-
-          if (
-            error.code ===
-            "auth/email-already-in-use"
-          ) {
-
-            showMessage(
-              "This email is already registered. Please login."
-            );
-
-          }
-
-          else if (
-            error.code ===
-            "auth/invalid-email"
-          ) {
-
-            showMessage(
-              "Please enter a valid email address."
-            );
-
-          }
-
-          else if (
-            error.code ===
-            "auth/weak-password"
-          ) {
-
-            showMessage(
-              "Password must contain at least 6 characters."
-            );
-
-          }
-
-          else if (
-            error.code ===
-            "auth/operation-not-allowed"
-          ) {
-
-            showMessage(
-              "Email/Password authentication is not enabled in Firebase."
-            );
-
-          }
-
-          else {
-
-            showMessage(
-              error.code +
-              " : " +
-              error.message
-            );
-          }
-
-        }
-
-        finally {
-
-          signupBtn.classList.remove(
-            "loading"
-          );
-
-          loginBtn.classList.remove(
-            "loading"
+          showMessage(
+            error.code +
+            " : " +
+            error.message
           );
         }
 
@@ -418,109 +435,45 @@
 
     loginBtn.addEventListener(
       "click",
-      async function () {
+      async () => {
 
-        const data =
-          getInput();
+        const email =
+          emailInput.value.trim();
 
-        if (!data) {
+        const password =
+          passwordInput.value;
+
+        if (!email || !password) {
+
+          showMessage(
+            "Enter email and password."
+          );
+
           return;
         }
-
-        signupBtn.classList.add("loading");
-
-        loginBtn.classList.add("loading");
-
-        showMessage(
-          "Logging in...",
-          "info"
-        );
 
 
         try {
 
           await signInWithEmailAndPassword(
             auth,
-            data.email,
-            data.password
+            email,
+            password
           );
 
           showMessage(
-            "Login successful! 🎉",
-            "success"
+            "Login successful!",
+            true
           );
 
         } catch (error) {
 
-          console.error(
-            "LOGIN ERROR:",
-            error
-          );
+          console.error(error);
 
-
-          if (
-            error.code ===
-            "auth/invalid-credential"
-          ) {
-
-            showMessage(
-              "Invalid email or password."
-            );
-
-          }
-
-          else if (
-            error.code ===
-            "auth/user-not-found"
-          ) {
-
-            showMessage(
-              "Account not found. Please create an account first."
-            );
-
-          }
-
-          else if (
-            error.code ===
-            "auth/wrong-password"
-          ) {
-
-            showMessage(
-              "Incorrect password."
-            );
-
-          }
-
-          else if (
-            error.code ===
-            "auth/invalid-email"
-          ) {
-
-            showMessage(
-              "Please enter a valid email."
-            );
-
-          }
-
-          else {
-
-            showMessage(
-              error.code +
-              " : " +
-              error.message
-            );
-          }
-
-        }
-
-        finally {
-
-          signupBtn.classList.remove(
-            "loading"
-          );
-
-          loginBtn.classList.remove(
-            "loading"
+          showMessage(
+            error.code +
+            " : " +
+            error.message
           );
         }
 
@@ -534,20 +487,36 @@
 
     onAuthStateChanged(
       auth,
-      function (user) {
+      (user) => {
 
         if (user) {
 
+          // USER LOGGED IN
+
+          loginPage.style.display =
+            "none";
+
+          mainApp.style.display =
+            "block";
+
+          userEmail.textContent =
+            "Logged in as: " +
+            user.email;
+
           console.log(
-            "Firebase user:",
+            "MAIN APP OPENED:",
             user.email
           );
 
         } else {
 
-          console.log(
-            "No user logged in."
-          );
+          // USER LOGGED OUT
+
+          loginPage.style.display =
+            "flex";
+
+          mainApp.style.display =
+            "none";
         }
 
       }
@@ -555,11 +524,24 @@
 
 
     // =========================
-    // FIREBASE READY
+    // LOGOUT
     // =========================
 
-    console.log(
-      "ToGeo Firebase initialized successfully."
+    logoutBtn.addEventListener(
+      "click",
+      async () => {
+
+        try {
+
+          await signOut(auth);
+
+        } catch (error) {
+
+          console.error(error);
+
+        }
+
+      }
     );
 
   </script>
