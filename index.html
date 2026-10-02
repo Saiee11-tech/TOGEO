@@ -1,144 +1,1231 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToGeo Test</title>
+
+  <title>ToGeo</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* AUTH */
+
+    #authScreen {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #1769ff, #6c4cff);
+    }
+
+    .authBox {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .logo {
+      text-align: center;
+      color: #1769ff;
+      font-size: 38px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .tagline {
+      text-align: center;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #1769ff;
+    }
+
+    .primaryBtn {
+      width: 100%;
+      padding: 14px;
+      background: #1769ff;
+      color: white;
+      border-radius: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .secondaryBtn {
+      width: 100%;
+      padding: 13px;
+      background: #eef3ff;
+      color: #1769ff;
+      border-radius: 10px;
+      font-size: 15px;
+      margin-top: 10px;
+    }
+
+    #authMessage {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* APP */
+
+    #appScreen {
+      min-height: 100vh;
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topBar {
+      background: #1769ff;
+      color: white;
+      padding: 15px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .topLogo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .logoutBtn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .content {
+      flex: 1;
+      padding: 18px;
+      padding-bottom: 85px;
+    }
+
+    .sectionTitle {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .searchBox {
+      display: flex;
+      gap: 8px;
+    }
+
+    .searchBox input {
+      margin: 0;
+    }
+
+    .searchBtn {
+      width: 90px;
+      background: #1769ff;
+      color: white;
+      border-radius: 10px;
+    }
+
+    .userResult {
+      margin-top: 15px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .userEmail {
+      font-weight: bold;
+      word-break: break-word;
+    }
+
+    .chatBtn {
+      background: #1769ff;
+      color: white;
+      padding: 9px 13px;
+      border-radius: 8px;
+    }
+
+    /* CHAT */
+
+    #chatScreen {
+      position: fixed;
+      inset: 0;
+      background: white;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chatHeader {
+      background: #1769ff;
+      color: white;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .backBtn {
+      background: transparent;
+      color: white;
+      font-size: 25px;
+    }
+
+    .chatTitle {
+      font-weight: bold;
+      font-size: 17px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px;
+      background: #f2f5f9;
+    }
+
+    .message {
+      max-width: 75%;
+      padding: 10px 13px;
+      border-radius: 14px;
+      margin-bottom: 9px;
+      word-wrap: break-word;
+    }
+
+    .sent {
+      background: #1769ff;
+      color: white;
+      margin-left: auto;
+      border-bottom-right-radius: 4px;
+    }
+
+    .received {
+      background: white;
+      color: #222;
+      margin-right: auto;
+      border-bottom-left-radius: 4px;
+    }
+
+    .messageTime {
+      font-size: 10px;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    .messageBox {
+      display: flex;
+      gap: 8px;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+      background: white;
+    }
+
+    .messageBox input {
+      margin: 0;
+      flex: 1;
+    }
+
+    .sendBtn {
+      width: 65px;
+      background: #1769ff;
+      color: white;
+      border-radius: 10px;
+    }
+
+    /* BOTTOM NAV */
+
+    .bottomNav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1000px;
+      height: 65px;
+      background: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .navBtn {
+      background: transparent;
+      color: #777;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .navIcon {
+      font-size: 22px;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .active {
+      color: #1769ff;
+    }
+
+    /* TOGETHER */
+
+    .featureCard {
+      background: linear-gradient(135deg,#1769ff,#694cff);
+      color: white;
+      padding: 20px;
+      border-radius: 18px;
+      margin-bottom: 15px;
+    }
+
+    .featureCard h3 {
+      margin-top: 0;
+    }
+
+    .featureBtn {
+      background: white;
+      color: #1769ff;
+      padding: 10px 15px;
+      border-radius: 9px;
+      margin-top: 10px;
+    }
+
+    /* SETTINGS */
+
+    .settingCard {
+      padding: 16px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 700px) {
+      #appScreen {
+        min-height: 100vh;
+        box-shadow: 0 0 30px rgba(0,0,0,0.08);
+      }
+    }
+  </style>
 </head>
 
-<body style="padding:30px;font-family:Arial">
+<body>
 
-<h1 style="color:#1769ff">ToGeo</h1>
+<!-- ================= AUTH ================= -->
 
-<input id="email" type="email" placeholder="Email"
-style="display:block;width:100%;padding:15px;margin:10px 0">
+<div id="authScreen">
 
-<input id="password" type="password" placeholder="Password"
-style="display:block;width:100%;padding:15px;margin:10px 0">
+  <div class="authBox">
 
-<button id="loginBtn"
-style="padding:15px;width:100%;background:#1769ff;color:white;border:0">
-Login
-</button>
+    <div class="logo">ToGeo</div>
 
-<button id="signupBtn"
-style="padding:15px;width:100%;margin-top:10px">
-Create Account
-</button>
+    <div class="tagline">
+      Connect. Chat. Together.
+    </div>
 
-<p id="message"></p>
+    <input
+      id="email"
+      type="email"
+      placeholder="Email address"
+    >
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+    >
+
+    <button class="primaryBtn" id="loginBtn">
+      Login
+    </button>
+
+    <button class="secondaryBtn" id="signupBtn">
+      Create Account
+    </button>
+
+    <div id="authMessage"></div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= MAIN APP ================= -->
+
+<div id="appScreen" class="hidden">
+
+  <div class="topBar">
+
+    <div class="topLogo">
+      ToGeo
+    </div>
+
+    <button class="logoutBtn" id="logoutBtn">
+      Logout
+    </button>
+
+  </div>
+
+
+  <div class="content">
+
+    <!-- HOME -->
+
+    <div id="homePage">
+
+      <div class="sectionTitle">
+        Chats
+      </div>
+
+      <div class="searchBox">
+
+        <input
+          id="searchEmail"
+          type="email"
+          placeholder="Search user by email"
+        >
+
+        <button
+          class="searchBtn"
+          id="searchBtn"
+        >
+          Search
+        </button>
+
+      </div>
+
+      <div id="searchResult"></div>
+
+      <h3 style="margin-top:30px;">
+        Recent Chats
+      </h3>
+
+      <div id="chatList">
+        <p style="color:#777;">
+          No chats yet.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- TOGETHER -->
+
+    <div id="togetherPage" class="hidden">
+
+      <div class="sectionTitle">
+        Together
+      </div>
+
+      <div class="featureCard">
+
+        <h3>
+          🎬 Watch Together
+        </h3>
+
+        <p>
+          Watch videos with your friend in sync.
+        </p>
+
+        <button
+          class="featureBtn"
+          id="createRoomBtn"
+        >
+          Create Room
+        </button>
+
+      </div>
+
+
+      <div class="featureCard">
+
+        <h3>
+          🎵 Listen Together
+        </h3>
+
+        <p>
+          Listen to music together.
+        </p>
+
+        <button
+          class="featureBtn"
+          onclick="alert('Listen Together coming next 🚀')"
+        >
+          Coming Soon
+        </button>
+
+      </div>
+
+      <div id="roomResult"></div>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div id="statusPage" class="hidden">
+
+      <div class="sectionTitle">
+        Status
+      </div>
+
+      <div class="featureCard">
+
+        <h3>
+          📸 Your Status
+        </h3>
+
+        <p>
+          Share updates with your friends.
+        </p>
+
+        <button
+          class="featureBtn"
+          onclick="alert('Status feature coming next 🚀')"
+        >
+          Add Status
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- SETTINGS -->
+
+    <div id="settingsPage" class="hidden">
+
+      <div class="sectionTitle">
+        Settings
+      </div>
+
+      <div class="settingCard">
+        <b>Account</b>
+        <p id="accountEmail"></p>
+      </div>
+
+      <div class="settingCard">
+        🔒 Privacy
+      </div>
+
+      <div class="settingCard">
+        🎨 Appearance
+      </div>
+
+      <div class="settingCard">
+        ℹ️ About ToGeo
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- BOTTOM NAV -->
+
+  <div class="bottomNav">
+
+    <button class="navBtn active" id="homeNav">
+      <span class="navIcon">💬</span>
+      Chats
+    </button>
+
+    <button class="navBtn" id="togetherNav">
+      <span class="navIcon">🎬</span>
+      Together
+    </button>
+
+    <button class="navBtn" id="statusNav">
+      <span class="navIcon">⭕</span>
+      Status
+    </button>
+
+    <button class="navBtn" id="settingsNav">
+      <span class="navIcon">⚙️</span>
+      Settings
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= CHAT SCREEN ================= -->
+
+<div id="chatScreen" class="hidden">
+
+  <div class="chatHeader">
+
+    <button
+      class="backBtn"
+      id="backChatBtn"
+    >
+      ←
+    </button>
+
+    <div
+      class="chatTitle"
+      id="chatTitle"
+    >
+      Chat
+    </div>
+
+  </div>
+
+
+  <div id="messages"></div>
+
+
+  <div class="messageBox">
+
+    <input
+      id="messageInput"
+      type="text"
+      placeholder="Type a message..."
+    >
+
+    <button
+      class="sendBtn"
+      id="sendBtn"
+    >
+      Send
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-}
-from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
-
-const firebaseConfig = {
-
-  apiKey: "AIzaSyCMYx-0G0gCJMhuV-uHZGoYqNQwkQtAUc8",
-
-  authDomain: "togeo-8e24c.firebaseapp.com",
-
-  projectId: "togeo-8e24c",
-
-  storageBucket: "togeo-8e24c.firebasestorage.app",
-
-  messagingSenderId: "772918055389",
-
-  appId: "1:772918055389:web:14605859a71cf22860e634",
-
-  measurementId: "G-DF8JCSHQCH"
-};
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDoc,
+    collection,
+    addDoc,
+    query,
+    where,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
-const app = initializeApp(firebaseConfig);
+  /* ================= FIREBASE CONFIG ================= */
 
-const auth = getAuth(app);
+  const firebaseConfig = {
 
-const message =
-document.getElementById("message");
+    apiKey: "AIzaSyCMU-0G0gCJMhuV-uHZGoYqNQwkQtAUc8",
+
+    authDomain: "togeo-8e24c.firebaseapp.com",
+
+    projectId: "togeo-8e24c",
+
+    storageBucket: "togeo-8e24c.firebasestorage.app",
+
+    messagingSenderId: "772918055389",
+
+    appId: "1:772918055389:web:14605859a71cf22860e634",
+
+    measurementId: "G-DF8JCSHQCH"
+
+  };
 
 
-document
-.getElementById("signupBtn")
-.addEventListener("click", async () => {
+  /* ================= INITIALIZE ================= */
 
-  message.textContent = "Creating account...";
+  const app = initializeApp(firebaseConfig);
 
-  const email =
-  document.getElementById("email").value.trim();
+  const auth = getAuth(app);
 
-  const password =
-  document.getElementById("password").value;
+  const db = getFirestore(app);
 
 
-  try {
+  /* ================= VARIABLES ================= */
 
-    await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+  let currentUser = null;
 
-    message.textContent =
-      "Account created successfully!";
+  let currentChatId = null;
+
+  let unsubscribeMessages = null;
+
+  let unsubscribeChats = null;
+
+
+  /* ================= ELEMENTS ================= */
+
+  const authScreen =
+    document.getElementById("authScreen");
+
+  const appScreen =
+    document.getElementById("appScreen");
+
+  const chatScreen =
+    document.getElementById("chatScreen");
+
+  const authMessage =
+    document.getElementById("authMessage");
+
+
+  /* ================= SIGNUP ================= */
+
+  document
+    .getElementById("signupBtn")
+    .addEventListener("click", async () => {
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+
+      if (!email || !password) {
+
+        authMessage.textContent =
+          "Enter email and password.";
+
+        return;
+
+      }
+
+
+      if (password.length < 6) {
+
+        authMessage.textContent =
+          "Password must be at least 6 characters.";
+
+        return;
+
+      }
+
+
+      authMessage.textContent =
+        "Creating account...";
+
+
+      try {
+
+        const result =
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+        const user = result.user;
+
+
+        await setDoc(
+          doc(db, "users", user.uid),
+          {
+            uid: user.uid,
+            email: user.email,
+            createdAt: serverTimestamp()
+          }
+        );
+
+
+        authMessage.textContent =
+          "Account created successfully ✅";
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        authMessage.textContent =
+          error.code + " : " + error.message;
+
+      }
+
+    });
+
+
+  /* ================= LOGIN ================= */
+
+  document
+    .getElementById("loginBtn")
+    .addEventListener("click", async () => {
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+
+      if (!email || !password) {
+
+        authMessage.textContent =
+          "Enter email and password.";
+
+        return;
+
+      }
+
+
+      authMessage.textContent =
+        "Logging in...";
+
+
+      try {
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+        authMessage.textContent =
+          "Login successful ✅";
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        authMessage.textContent =
+          error.code + " : " + error.message;
+
+      }
+
+    });
+
+
+  /* ================= AUTH STATE ================= */
+
+  onAuthStateChanged(
+    auth,
+    async (user) => {
+
+      if (user) {
+
+        currentUser = user;
+
+        authScreen.classList.add("hidden");
+
+        appScreen.classList.remove("hidden");
+
+        document.getElementById("accountEmail")
+          .textContent = user.email;
+
+
+        await ensureUserProfile();
+
+        loadChats();
+
+      } else {
+
+        currentUser = null;
+
+        authScreen.classList.remove("hidden");
+
+        appScreen.classList.add("hidden");
+
+        chatScreen.classList.add("hidden");
+
+      }
+
+    }
+  );
+
+
+  /* ================= USER PROFILE ================= */
+
+  async function ensureUserProfile() {
+
+    const userRef =
+      doc(db, "users", currentUser.uid);
+
+    const userSnap =
+      await getDoc(userRef);
+
+
+    if (!userSnap.exists()) {
+
+      await setDoc(
+        userRef,
+        {
+          uid: currentUser.uid,
+          email: currentUser.email,
+          createdAt: serverTimestamp()
+        }
+      );
+
+    }
 
   }
 
-  catch(error) {
 
-    message.textContent =
-      error.code + " : " + error.message;
+  /* ================= LOGOUT ================= */
+
+  document
+    .getElementById("logoutBtn")
+    .addEventListener("click", async () => {
+
+      await signOut(auth);
+
+    });
+
+
+  /* ================= SEARCH USER ================= */
+
+  document
+    .getElementById("searchBtn")
+    .addEventListener("click", searchUser);
+
+
+  async function searchUser() {
+
+    const email =
+      document
+        .getElementById("searchEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const resultBox =
+      document.getElementById("searchResult");
+
+
+    resultBox.innerHTML =
+      "Searching...";
+
+
+    if (!email) {
+
+      resultBox.innerHTML =
+        "Enter an email.";
+
+      return;
+
+    }
+
+
+    try {
+
+      const usersRef =
+        collection(db, "users");
+
+
+      const q =
+        query(
+          usersRef,
+          where("email", "==", email)
+        );
+
+
+      const snapshot =
+        await getDocsSafe(q);
+
+
+      if (snapshot.empty) {
+
+        resultBox.innerHTML =
+          "<p style='color:#777'>User not found.</p>";
+
+        return;
+
+      }
+
+
+      let foundUser = null;
+
+
+      snapshot.forEach((docSnap) => {
+
+        foundUser = docSnap.data();
+
+      });
+
+
+      if (foundUser.uid === currentUser.uid) {
+
+        resultBox.innerHTML =
+          "<p style='color:#777'>This is your own account.</p>";
+
+        return;
+
+      }
+
+
+      resultBox.innerHTML = `
+
+        <div class="userResult">
+
+          <div class="userEmail">
+            ${escapeHtml(foundUser.email)}
+          </div>
+
+          <button
+            class="chatBtn"
+            id="startChatBtn"
+          >
+            Chat
+          </button>
+
+        </div>
+
+      `;
+
+
+      document
+        .getElementById("startChatBtn")
+        .addEventListener(
+          "click",
+          () => openChat(foundUser)
+        );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      resultBox.innerHTML =
+        error.code + " : " + error.message;
+
+    }
 
   }
 
-});
 
+  /*
+    Small helper because getDocs is imported below
+  */
 
-document
-.getElementById("loginBtn")
-.addEventListener("click", async () => {
+  async function getDocsSafe(q) {
 
-  message.textContent = "Logging in...";
+    const module =
+      await import(
+        "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js"
+      );
 
-  const email =
-  document.getElementById("email").value.trim();
-
-  const password =
-  document.getElementById("password").value;
-
-
-  try {
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    message.textContent =
-      "LOGIN SUCCESSFUL ✅";
+    return await module.getDocs(q);
 
   }
 
-  catch(error) {
 
-    message.textContent =
-      error.code + " : " + error.message;
+  /* ================= CHAT ID ================= */
+
+  function getChatId(uid1, uid2) {
+
+    return [uid1, uid2]
+      .sort()
+      .join("_");
 
   }
 
-});
 
-</script>
+  /* ================= OPEN CHAT ================= */
 
-</body>
-</html>
+  async function openChat(otherUser) {
+
+    if (!currentUser) return;
+
+
+    currentChatId =
+      getChatId(
+        currentUser.uid,
+        otherUser.uid
+      );
+
+
+    const chatRef =
+      doc(
+        db,
+        "chats",
+        currentChatId
+      );
+
+
+    const chatSnap =
+      await getDoc(chatRef);
+
+
+    if (!chatSnap.exists()) {
+
+      await setDoc(
+        chatRef,
+        {
+          participants: [
+            currentUser.uid,
+            otherUser.uid
+          ],
+
+          participantEmails: [
+            currentUser.email,
+            otherUser.email
+          ],
+
+          createdAt: serverTimestamp(),
+
+          lastMessage: "",
+
+          lastMessageAt: serverTimestamp()
+        }
+      );
+
+    }
+
+
+    document.getElementById("chatTitle")
+      .textContent = otherUser.email;
+
+
+    chatScreen.classList.remove("hidden");
+
+
+    loadMessages();
+
+  }
+
+
+  /* ================= LOAD MESSAGES ================= */
+
+  function loadMessages() {
+
+    const messagesBox =
+      document.getElementById("messages");
+
+
+    messagesBox.innerHTML = "";
+
+
+    if (unsubscribeMessages) {
+
+      unsubscribeMessages();
+
+    }
+
+
+    const messagesRef =
+      collection(
+        db,
+        "chats",
+        currentChatId,
+        "messages"
+      );
+
+
+    const q =
+      query(
+        messagesRef,
+        orderBy("createdAt", "asc")
+      );
+
+
+    unsubscribeMessages =
+      onSnapshot(
+        q,
+        (snapshot) => {
+
+          messagesBox.innerHTML = "";
+
+
+          snapshot.forEach(
+            (docSnap) => {
+
+              const data =
+                docSnap.data();
+
+
+              const div =
+                document.createElement("div");
+
+
+              div.classList.add("message");
+
+
+              if (
+                data.senderId ===
+                currentUser.uid
+              ) {
+
+                div.classList.add("sent");
+
+              } else {
+
+                div.classList.add("received");
+
+              }
+
+
+              const text =
+                document.createElement("div");
+
+              text.textContent =
+                data.text || "";
+
+
+              const time =
+                document.createElement("div");
+
+              time.classList.add(
+                "messageTime"
+              );
+
+
+              if (data.createdAt) {
+
+                try {
+
+                  time.textContent =
+                    data.createdAt
+                      .toDate()
+                      
