@@ -1,1965 +1,568 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
-<title>ToGeo</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<style>
+  <title>ToGeo</title>
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body{
-  background:#eef2f6;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #eef3f8;
 
-.app{
-  max-width:500px;
-  margin:auto;
-  min-height:100vh;
-  background:white;
-}
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* AUTH */
+    .container {
+      width: 92%;
+      max-width: 400px;
+      background: white;
+      padding: 30px 25px;
+      border-radius: 22px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+    }
 
-.auth{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:25px;
-  background:linear-gradient(135deg,#fff,#eaf1ff);
-}
+    .logo {
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: #1769ff;
+      margin-bottom: 5px;
+    }
 
-.auth-box{
-  width:100%;
-  max-width:380px;
-  padding:30px 24px;
-  border-radius:22px;
-  background:white;
-  box-shadow:0 10px 35px rgba(0,0,0,.12);
-}
+    .subtitle {
+      text-align: center;
+      color: #777;
+      margin-bottom: 25px;
+    }
 
-.logo{
-  text-align:center;
-  color:#1769ff;
-  font-size:40px;
-  font-weight:bold;
-  margin-bottom:8px;
-}
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 12px;
 
-.tagline{
-  text-align:center;
-  color:#777;
-  margin-bottom:28px;
-}
+      border: 1px solid #d9dfe7;
+      border-radius: 12px;
 
-input{
-  width:100%;
-  padding:14px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  outline:none;
-  margin-bottom:12px;
-  font-size:15px;
-}
+      font-size: 16px;
+      outline: none;
+    }
 
-input:focus{
-  border-color:#1769ff;
-}
+    input:focus {
+      border-color: #1769ff;
+    }
 
-.btn{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:#1769ff;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  margin-top:5px;
-  cursor:pointer;
-}
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 8px;
 
-.btn.secondary{
-  background:#edf3ff;
-  color:#1769ff;
-}
+      border: none;
+      border-radius: 12px;
 
-#authMessage{
-  text-align:center;
-  margin-top:15px;
-  font-size:14px;
-  min-height:20px;
-}
+      background: #1769ff;
+      color: white;
 
-.success{
-  color:#159447;
-}
+      font-size: 16px;
+      font-weight: bold;
 
-.error{
-  color:#e53935;
-}
+      cursor: pointer;
+    }
 
-/* MAIN */
+    button:hover {
+      opacity: 0.9;
+    }
 
-#mainApp{
-  display:none;
-  min-height:100vh;
-  padding-bottom:75px;
-}
+    .signup {
+      background: #eaf1ff;
+      color: #1769ff;
+    }
 
-.topbar{
-  padding:17px;
-  border-bottom:1px solid #eee;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:sticky;
-  top:0;
-  background:white;
-  z-index:5;
-}
+    #message {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 20px;
+    }
 
-.topbar h1{
-  color:#1769ff;
-  font-size:27px;
-}
-
-.logout{
-  padding:8px 12px;
-  border:none;
-  border-radius:10px;
-  background:#f1f1f1;
-  cursor:pointer;
-}
-
-.content{
-  padding:18px;
-}
-
-.welcome{
-  background:#1769ff;
-  color:white;
-  padding:20px;
-  border-radius:18px;
-  margin-bottom:18px;
-}
-
-.welcome p{
-  margin-top:7px;
-  font-size:14px;
-}
-
-.section-title{
-  margin:18px 0 12px;
-}
-
-/* PAGES */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-/* FRIEND / USER */
-
-.user-row{
-  display:flex;
-  align-items:center;
-  padding:14px 4px;
-  border-bottom:1px solid #eee;
-}
-
-.avatar{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:#1769ff;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  margin-right:13px;
-  flex-shrink:0;
-}
-
-.user-info{
-  flex:1;
-}
-
-.user-info h3{
-  margin-bottom:4px;
-}
-
-.user-info p{
-  color:#777;
-  font-size:13px;
-  word-break:break-all;
-}
-
-.small-btn{
-  padding:9px 13px;
-  border:none;
-  border-radius:10px;
-  background:#1769ff;
-  color:white;
-  cursor:pointer;
-}
-
-.remove-btn{
-  background:#f1f1f1;
-  color:#555;
-}
-
-.chat-button{
-  border:none;
-  background:none;
-  text-align:left;
-  width:100%;
-  cursor:pointer;
-}
-
-/* CARDS */
-
-.card{
-  padding:18px;
-  background:#f7f9fc;
-  border-radius:17px;
-  margin-bottom:12px;
-}
-
-.card p{
-  color:#666;
-  font-size:14px;
-  margin:8px 0 12px;
-}
-
-/* NAV */
-
-.nav{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  max-width:500px;
-  width:100%;
-  display:flex;
-  justify-content:space-around;
-  background:white;
-  border-top:1px solid #ddd;
-  padding:9px 2px;
-  z-index:20;
-}
-
-.nav button{
-  background:transparent;
-  border:none;
-  color:#777;
-  font-size:11px;
-  cursor:pointer;
-}
-
-.nav button span{
-  display:block;
-  font-size:20px;
-  margin-bottom:3px;
-}
-
-.nav button.active{
-  color:#1769ff;
-}
-
-/* CHAT */
-
-#chatScreen{
-  display:none;
-  min-height:100vh;
-  background:#eef2f6;
-}
-
-.chat-header{
-  height:65px;
-  background:white;
-  border-bottom:1px solid #ddd;
-  display:flex;
-  align-items:center;
-  padding:10px 15px;
-  position:sticky;
-  top:0;
-  z-index:5;
-}
-
-.back{
-  border:none;
-  background:none;
-  font-size:27px;
-  margin-right:12px;
-  cursor:pointer;
-}
-
-.chat-header strong{
-  font-size:17px;
-}
-
-.chat-header small{
-  display:block;
-  color:#777;
-  margin-top:3px;
-}
-
-#messages{
-  padding:18px;
-  padding-bottom:85px;
-}
-
-.message{
-  max-width:75%;
-  padding:10px 13px;
-  background:white;
-  border-radius:14px;
-  margin-bottom:10px;
-  word-wrap:break-word;
-  box-shadow:0 1px 3px rgba(0,0,0,.05);
-}
-
-.message.mine{
-  margin-left:auto;
-  background:#1769ff;
-  color:white;
-}
-
-.message-time{
-  font-size:10px;
-  opacity:.65;
-  margin-top:4px;
-}
-
-.message-input{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  max-width:500px;
-  background:white;
-  padding:10px;
-  display:flex;
-  gap:8px;
-  border-top:1px solid #ddd;
-}
-
-.message-input input{
-  margin:0;
-  flex:1;
-}
-
-.send{
-  border:none;
-  border-radius:12px;
-  background:#1769ff;
-  color:white;
-  padding:0 17px;
-  color:white;
-  cursor:pointer;
-}
-
-.empty{
-  text-align:center;
-  color:#888;
-  margin-top:50px;
-}
-
-.loading{
-  text-align:center;
-  color:#777;
-  padding:20px;
-}
-
-.search-box{
-  margin-bottom:15px;
-}
-
-</style>
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  </style>
 </head>
-
 
 <body>
 
-<div class="app">
+  <div class="container">
 
+    <div class="logo">
+      ToGeo
+    </div>
 
-<!-- ================= AUTH ================= -->
+    <div class="subtitle">
+      Connect with everyone
+    </div>
 
-<div class="auth" id="authScreen">
+    <input
+      id="email"
+      type="email"
+      placeholder="Email address"
+      autocomplete="email"
+    >
 
-<div class="auth-box">
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
 
-<div class="logo">ToGeo</div>
+    <button id="loginBtn">
+      Login
+    </button>
 
-<p class="tagline">
-Connect. Chat. Watch. Listen. Together.
-</p>
+    <button
+      id="signupBtn"
+      class="signup"
+    >
+      Create Account
+    </button>
 
-<input
-id="email"
-type="email"
-placeholder="Email address"
-autocomplete="email"
->
+    <div id="message"></div>
 
-<input
-id="password"
-type="password"
-placeholder="Password"
-autocomplete="current-password"
->
+  </div>
 
-<button class="btn" id="loginBtn">
-Login
-</button>
 
-<button class="btn secondary" id="signupBtn">
-Create Account
-</button>
+  <!-- FIREBASE -->
 
-<div id="authMessage"></div>
+  <script type="module">
 
-</div>
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
-</div>
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
 
-<!-- ================= MAIN APP ================= -->
+    // =========================
+    // FIREBASE CONFIG
+    // =========================
 
-<div id="mainApp">
+    const firebaseConfig = {
 
-<div class="topbar">
+      apiKey:
+        "AIzaSyCMYx-0G0gCJMhuV-uHZGoYqNQwkQtAUc8",
 
-<h1>ToGeo</h1>
+      authDomain:
+        "togeo-8e24c.firebaseapp.com",
 
-<button class="logout" id="logoutBtn">
-Logout
-</button>
+      projectId:
+        "togeo-8e24c",
 
-</div>
+      storageBucket:
+        "togeo-8e24c.firebasestorage.app",
 
+      messagingSenderId:
+        "772918055389",
 
-<div class="content">
+      appId:
+        "1:772918055389:web:14605859a71cf22860e634",
 
+      measurementId:
+        "G-DF8JCSHQCH"
+    };
 
-<!-- CHATS -->
 
-<div class="page active" id="chatsPage">
+    // =========================
+    // INITIALIZE FIREBASE
+    // =========================
 
-<div class="welcome">
+    const app =
+      initializeApp(firebaseConfig);
 
-<h2>
-Welcome to ToGeo 👋
-</h2>
+    const auth =
+      getAuth(app);
 
-<p>
-Your conversations, together in one place.
-</p>
 
-</div>
+    // =========================
+    // HTML ELEMENTS
+    // =========================
 
-<h2 class="section-title">
-Chats
-</h2>
+    const emailInput =
+      document.getElementById("email");
 
-<div id="chatList">
+    const passwordInput =
+      document.getElementById("password");
 
-<div class="empty">
-No chats yet.<br>
-Add a friend to start chatting.
-</div>
+    const loginBtn =
+      document.getElementById("loginBtn");
 
-</div>
+    const signupBtn =
+      document.getElementById("signupBtn");
 
-</div>
+    const message =
+      document.getElementById("message");
 
 
-<!-- FRIENDS -->
+    // =========================
+    // MESSAGE FUNCTION
+    // =========================
 
-<div class="page" id="friendsPage">
+    function showMessage(
+      text,
+      type = "error"
+    ) {
 
-<h2 class="section-title">
-Find Friends
-</h2>
+      message.textContent = text;
 
-<input
-id="friendSearch"
-class="search-box"
-type="email"
-placeholder="Enter friend's email"
->
+      if (type === "success") {
 
-<button
-class="btn"
-onclick="searchUser()"
->
-Search
-</button>
+        message.style.color = "green";
 
-<div id="searchResult"></div>
+      } else if (type === "info") {
 
+        message.style.color = "#1769ff";
 
-<h2 class="section-title">
-My Friends
-</h2>
+      } else {
 
-<div id="friendsList">
+        message.style.color = "red";
+      }
+    }
 
-<div class="empty">
-No friends added yet.
-</div>
 
-</div>
+    // =========================
+    // VALIDATE INPUT
+    // =========================
 
-</div>
+    function getInput() {
 
+      const email =
+        emailInput.value.trim();
 
-<!-- TOGETHER -->
+      const password =
+        passwordInput.value;
 
-<div class="page" id="togetherPage">
+      if (!email) {
 
-<h2 class="section-title">
-Together
-</h2>
+        showMessage(
+          "Please enter your email."
+        );
 
-<div class="card">
+        return null;
+      }
 
-<h3>
-🎬 Watch Together
-</h3>
+      if (!password) {
 
-<p>
-Watch videos together in sync.
-</p>
+        showMessage(
+          "Please enter your password."
+        );
 
-<button class="small-btn">
-Create Room
-</button>
+        return null;
+      }
 
-</div>
+      if (password.length < 6) {
 
-<div class="card">
+        showMessage(
+          "Password must be at least 6 characters."
+        );
 
-<h3>
-🎵 Listen Together
-</h3>
+        return null;
+      }
 
-<p>
-Listen to music together.
-</p>
+      return {
+        email,
+        password
+      };
+    }
 
-<button class="small-btn">
-Create Room
-</button>
 
-</div>
+    // =========================
+    // CREATE ACCOUNT
+    // =========================
 
-</div>
+    signupBtn.addEventListener(
+      "click",
+      async function () {
 
+        const data =
+          getInput();
 
-<!-- STATUS -->
+        if (!data) {
+          return;
+        }
 
-<div class="page" id="statusPage">
+        signupBtn.classList.add("loading");
 
-<h2 class="section-title">
-Status
-</h2>
+        loginBtn.classList.add("loading");
 
-<div class="card">
+        showMessage(
+          "Creating account...",
+          "info"
+        );
 
-<h3>
-⭕ Status
-</h3>
 
-<p>
-Share moments with your friends.
-</p>
+        try {
 
-<button class="small-btn">
-Add Status
-</button>
+          await createUserWithEmailAndPassword(
+            auth,
+            data.email,
+            data.password
+          );
 
-</div>
+          showMessage(
+            "Account created successfully! 🎉",
+            "success"
+          );
 
-</div>
+        } catch (error) {
 
+          console.error(
+            "SIGNUP ERROR:",
+            error
+          );
 
-<!-- SETTINGS -->
 
-<div class="page" id="settingsPage">
+          if (
+            error.code ===
+            "auth/email-already-in-use"
+          ) {
 
-<h2 class="section-title">
-Settings
-</h2>
+            showMessage(
+              "This email is already registered. Please login."
+            );
 
-<div class="card">
+          }
 
-<h3>
-Account
-</h3>
+          else if (
+            error.code ===
+            "auth/invalid-email"
+          ) {
 
-<p id="accountEmail">
--
-</p>
+            showMessage(
+              "Please enter a valid email address."
+            );
 
-</div>
+          }
 
-<div class="card">
+          else if (
+            error.code ===
+            "auth/weak-password"
+          ) {
 
-<h3>
-About ToGeo
-</h3>
+            showMessage(
+              "Password must contain at least 6 characters."
+            );
 
-<p>
-Connect. Chat. Watch. Listen. Together.
-</p>
+          }
 
-</div>
+          else if (
+            error.code ===
+            "auth/operation-not-allowed"
+          ) {
 
-</div>
+            showMessage(
+              "Email/Password authentication is not enabled in Firebase."
+            );
 
-</div>
+          }
 
+          else {
 
-<!-- NAV -->
+            showMessage(
+              error.code +
+              " : " +
+              error.message
+            );
+          }
 
-<div class="nav">
+        }
 
-<button
-class="active"
-onclick="showPage('chatsPage',this)"
->
+        finally {
 
-<span>💬</span>
-Chats
+          signupBtn.classList.remove(
+            "loading"
+          );
 
-</button>
+          loginBtn.classList.remove(
+            "loading"
+          );
+        }
 
+      }
+    );
 
-<button
-onclick="showPage('friendsPage',this)"
->
 
-<span>👥</span>
-Friends
+    // =========================
+    // LOGIN
+    // =========================
 
-</button>
+    loginBtn.addEventListener(
+      "click",
+      async function () {
 
+        const data =
+          getInput();
 
-<button
-onclick="showPage('togetherPage',this)"
->
+        if (!data) {
+          return;
+        }
 
-<span>🎬</span>
-Together
+        signupBtn.classList.add("loading");
 
-</button>
+        loginBtn.classList.add("loading");
 
+        showMessage(
+          "Logging in...",
+          "info"
+        );
 
-<button
-onclick="showPage('statusPage',this)"
->
 
-<span>⭕</span>
-Status
+        try {
 
-</button>
+          await signInWithEmailAndPassword(
+            auth,
+            data.email,
+            data.password
+          );
 
+          showMessage(
+            "Login successful! 🎉",
+            "success"
+          );
 
-<button
-onclick="showPage('settingsPage',this)"
->
+        } catch (error) {
 
-<span>⚙️</span>
-Settings
+          console.error(
+            "LOGIN ERROR:",
+            error
+          );
 
-</button>
 
-</div>
+          if (
+            error.code ===
+            "auth/invalid-credential"
+          ) {
 
-</div>
+            showMessage(
+              "Invalid email or password."
+            );
 
+          }
 
-<!-- ================= CHAT SCREEN ================= -->
+          else if (
+            error.code ===
+            "auth/user-not-found"
+          ) {
 
-<div id="chatScreen">
+            showMessage(
+              "Account not found. Please create an account first."
+            );
 
-<div class="chat-header">
+          }
 
-<button
-class="back"
-onclick="closeChat()"
->
-←
-</button>
+          else if (
+            error.code ===
+            "auth/wrong-password"
+          ) {
 
-<div>
+            showMessage(
+              "Incorrect password."
+            );
 
-<strong id="chatName">
-Chat
-</strong>
+          }
 
-<small id="chatEmail">
--
-</small>
+          else if (
+            error.code ===
+            "auth/invalid-email"
+          ) {
 
-</div>
+            showMessage(
+              "Please enter a valid email."
+            );
 
-</div>
+          }
 
+          else {
 
-<div id="messages">
+            showMessage(
+              error.code +
+              " : " +
+              error.message
+            );
+          }
 
-<div class="empty">
-No messages yet.<br>
-Send the first message! 👋
-</div>
+        }
 
-</div>
+        finally {
 
+          signupBtn.classList.remove(
+            "loading"
+          );
 
-<div class="message-input">
+          loginBtn.classList.remove(
+            "loading"
+          );
+        }
 
-<input
-id="messageInput"
-placeholder="Type a message..."
->
+      }
+    );
 
-<button
-class="send"
-onclick="sendMessage()"
->
-Send
-</button>
 
-</div>
+    // =========================
+    // AUTH STATE
+    // =========================
 
-</div>
+    onAuthStateChanged(
+      auth,
+      function (user) {
 
-</div>
+        if (user) {
 
+          console.log(
+            "Firebase user:",
+            user.email
+          );
 
-<!-- ================= FIREBASE ================= -->
+        } else {
 
-<script type="module">
+          console.log(
+            "No user logged in."
+          );
+        }
 
-import {
-initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+      }
+    );
 
 
-import {
-getAuth,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword,
-signOut,
-onAuthStateChanged
-}
-from
-"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+    // =========================
+    // FIREBASE READY
+    // =========================
 
+    console.log(
+      "ToGeo Firebase initialized successfully."
+    );
 
-import {
-getFirestore,
-doc,
-setDoc,
-getDoc,
-collection,
-query,
-where,
-getDocs,
-addDoc,
-onSnapshot,
-orderBy,
-serverTimestamp,
-deleteDoc
-}
-from
-"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+  </script>
 
-
-/* ================= FIREBASE CONFIG ================= */
-
-const firebaseConfig = {
-
-apiKey:
-"AIzaSyCMYx-0G0gCJMhuV-uHZGoYqNQwkQtAUc8",
-
-authDomain:
-"togeo-8e24c.firebaseapp.com",
-
-projectId:
-"togeo-8e24c",
-
-storageBucket:
-"togeo-8e24c.firebasestorage.app",
-
-messagingSenderId:
-"772918055389",
-
-appId:
-"1:772918055389:web:14605859a71cf22860e634",
-
-measurementId:
-"G-DF8JCSHQCH"
-
-};
-
-
-/* ================= INIT ================= */
-
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
-
-const db =
-getFirestore(app);
-
-
-let currentUser = null;
-
-let currentFriend = null;
-
-let unsubscribeMessages = null;
-
-let unsubscribeFriends = null;
-
-
-/* ================= ELEMENTS ================= */
-
-const authScreen =
-document.getElementById("authScreen");
-
-const mainApp =
-document.getElementById("mainApp");
-
-const chatScreen =
-document.getElementById("chatScreen");
-
-const authMessage =
-document.getElementById("authMessage");
-
-
-/* ================= MESSAGE ================= */
-
-function showAuthMessage(
-message,
-type="error"
-){
-
-authMessage.textContent =
-message;
-
-authMessage.className =
-type;
-
-}
-
-
-/* ================= CREATE ACCOUNT ================= */
-
-document
-.getElementById("signupBtn")
-.addEventListener(
-"click",
-async()=>{
-
-const email =
-document
-.getElementById("email")
-.value
-.trim()
-.toLowerCase();
-
-const password =
-document
-.getElementById("password")
-.value;
-
-
-if(!email || !password){
-
-showAuthMessage(
-"Please enter email and password."
-);
-
-return;
-
-}
-
-
-if(password.length < 6){
-
-showAuthMessage(
-"Password must be at least 6 characters."
-);
-
-return;
-
-}
-
-
-try{
-
-const result =
-await createUserWithEmailAndPassword(
-auth,
-email,
-password
-);
-
-
-const user =
-result.user;
-
-
-/* CREATE USER PROFILE */
-
-await setDoc(
-doc(db,"users",user.uid),
-{
-
-uid:user.uid,
-
-email:user.email,
-
-emailLower:user.email.toLowerCase(),
-
-createdAt:serverTimestamp()
-
-}
-);
-
-
-showAuthMessage(
-"Account created successfully! 🎉",
-"success"
-);
-
-}
-
-catch(error){
-
-console.error(error);
-
-
-if(
-error.code ===
-"auth/email-already-in-use"
-){
-
-showAuthMessage(
-"This email is already registered. Please login."
-);
-
-}
-
-else if(
-error.code ===
-"auth/invalid-email"
-){
-
-showAuthMessage(
-"Please enter a valid email address."
-);
-
-}
-
-else if(
-error.code ===
-"auth/weak-password"
-){
-
-showAuthMessage(
-"Password must be at least 6 characters."
-);
-
-}
-
-else{
-
-showAuthMessage(
-error.message
-);
-
-}
-
-}
-
-}
-);
-
-
-/* ================= LOGIN ================= */
-
-document
-.getElementById("loginBtn")
-.addEventListener(
-"click",
-async()=>{
-
-const email =
-document
-.getElementById("email")
-.value
-.trim()
-.toLowerCase();
-
-const password =
-document
-.getElementById("password")
-.value;
-
-
-if(!email || !password){
-
-showAuthMessage(
-"Please enter email and password."
-);
-
-return;
-
-}
-
-
-try{
-
-await signInWithEmailAndPassword(
-auth,
-email,
-password
-);
-
-showAuthMessage(
-"Login successful! Welcome to ToGeo 👋",
-"success"
-);
-
-}
-
-catch(error){
-
-console.error(error);
-
-if(
-error.code ===
-"auth/invalid-credential"
-){
-
-showAuthMessage(
-"Account not found or password is incorrect."
-);
-
-}
-
-else if(
-error.code ===
-"auth/user-not-found"
-){
-
-showAuthMessage(
-"Account not found. Please create an account first."
-);
-
-}
-
-else{
-
-showAuthMessage(
-error.message
-);
-
-}
-
-}
-
-}
-);
-
-
-/* ================= AUTH STATE ================= */
-
-onAuthStateChanged(
-auth,
-async user=>{
-
-if(user){
-
-currentUser =
-user;
-
-
-authScreen.style.display =
-"none";
-
-mainApp.style.display =
-"block";
-
-chatScreen.style.display =
-"none";
-
-
-document
-.getElementById("accountEmail")
-.textContent =
-user.email;
-
-
-await createMissingProfile();
-
-
-loadFriends();
-
-loadChats();
-
-}
-
-else{
-
-currentUser =
-null;
-
-authScreen.style.display =
-"flex";
-
-mainApp.style.display =
-"none";
-
-chatScreen.style.display =
-"none";
-
-}
-
-}
-);
-
-
-/* ================= CREATE PROFILE ================= */
-
-async function createMissingProfile(){
-
-if(!currentUser){
-
-return;
-
-}
-
-
-const userRef =
-doc(
-db,
-"users",
-currentUser.uid
-);
-
-
-const userSnap =
-await getDoc(userRef);
-
-
-if(!userSnap.exists()){
-
-await setDoc(
-userRef,
-{
-
-uid:currentUser.uid,
-
-email:currentUser.email,
-
-emailLower:
-currentUser.email.toLowerCase(),
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-}
-
-}
-
-
-/* ================= SEARCH USER ================= */
-
-window.searchUser =
-async function(){
-
-if(!currentUser){
-
-return;
-
-}
-
-
-const input =
-document
-.getElementById("friendSearch")
-.value
-.trim()
-.toLowerCase();
-
-
-const result =
-document
-.getElementById("searchResult");
-
-
-result.innerHTML =
-`<div class="loading">Searching...</div>`;
-
-
-if(!input){
-
-result.innerHTML =
-`<div class="empty">
-Enter an email address.
-</div>`;
-
-return;
-
-}
-
-
-try{
-
-const usersRef =
-collection(db,"users");
-
-
-const q =
-query(
-usersRef,
-where(
-"emailLower",
-"==",
-input
-)
-);
-
-
-const snapshot =
-await getDocs(q);
-
-
-if(snapshot.empty){
-
-result.innerHTML =
-`<div class="empty">
-No ToGeo account found with this email.
-</div>`;
-
-return;
-
-}
-
-
-let foundUser = null;
-
-
-snapshot.forEach(
-docSnap=>{
-
-foundUser =
-docSnap.data();
-
-}
-);
-
-
-if(
-foundUser.uid ===
-currentUser.uid
-){
-
-result.innerHTML =
-`<div class="empty">
-You cannot add yourself.
-</div>`;
-
-return;
-
-}
-
-
-/* CHECK ALREADY FRIEND */
-
-const friendId =
-makeFriendId(
-currentUser.uid,
-foundUser.uid
-);
-
-
-const friendSnap =
-await getDoc(
-doc(db,"friends",friendId)
-);
-
-
-if(friendSnap.exists()){
-
-result.innerHTML =
-`
-<div class="user-row">
-
-<div class="avatar">
-${getInitial(foundUser.email)}
-</div>
-
-<div class="user-info">
-
-<h3>${foundUser.email}</h3>
-
-<p>Already your friend</p>
-
-</div>
-
-<button
-class="small-btn"
-onclick="openFriendChat('${foundUser.uid}')"
->
-Chat
-</button>
-
-</div>
-`;
-
-return;
-
-}
-
-
-/* SHOW USER */
-
-result.innerHTML =
-`
-<div class="user-row">
-
-<div class="avatar">
-${getInitial(foundUser.email)}
-</div>
-
-<div class="user-info">
-
-<h3>${foundUser.email}</h3>
-
-<p>ToGeo user</p>
-
-</div>
-
-<button
-class="small-btn"
-onclick="addFriend(
-'${foundUser.uid}',
-'${escapeHtml(foundUser.email)}'
-)"
->
-Add
-</button>
-
-</div>
-`;
-
-}
-
-catch(error){
-
-console.error(error);
-
-result.innerHTML =
-`
-<div class="empty">
-Search failed.<br>
-${error.message}
-</div>
-`;
-
-}
-
-};
-
-
-/* ================= ADD FRIEND ================= */
-
-window.addFriend =
-async function(
-friendUid,
-friendEmail
-){
-
-if(!currentUser){
-
-return;
-
-}
-
-
-const friendId =
-makeFriendId(
-currentUser.uid,
-friendUid
-);
-
-
-try{
-
-await setDoc(
-doc(
-db,
-"friends",
-friendId
-),
-{
-
-users:[
-currentUser.uid,
-friendUid
-],
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-
-/* STORE FRIEND COPY FOR EASY DISPLAY */
-
-await setDoc(
-doc(
-db,
-"users",
-currentUser.uid,
-"myFriends",
-friendUid
-),
-{
-
-uid:friendUid,
-
-email:friendEmail
-
-}
-);
-
-
-/* ADD CURRENT USER TO OTHER USER */
-
-await setDoc(
-doc(
-db,
-"users",
-friendUid,
-"myFriends",
-currentUser.uid
-),
-{
-
-uid:currentUser.uid,
-
-email:currentUser.email
-
-}
-);
-
-
-document
-.getElementById("searchResult")
-.innerHTML =
-`
-<div class="card">
-
-<h3>Friend added successfully! 🎉</h3>
-
-<p>
-${friendEmail} is now your friend.
-</p>
-
-<button
-class="small-btn"
-onclick="openFriendChat('${friendUid}')"
->
-Start Chat
-</button>
-
-</div>
-`;
-
-
-loadFriends();
-
-loadChats();
-
-}
-
-catch(error){
-
-console.error(error);
-
-alert(
-"Could not add friend: " +
-error.message
-);
-
-}
-
-};
-
-
-/* ================= LOAD FRIENDS ================= */
-
-function loadFriends(){
-
-if(!currentUser){
-
-return;
-
-}
-
-
-if(unsubscribeFriends){
-
-unsubscribeFriends();
-
-}
-
-
-const friendsRef =
-collection(
-db,
-"users",
-currentUser.uid,
-"myFriends"
-);
-
-
-unsubscribeFriends =
-onSnapshot(
-friendsRef,
-snapshot=>{
-
-const container =
-document.getElementById(
-"friendsList"
-);
-
-
-container.innerHTML =
-"";
-
-
-if(snapshot.empty){
-
-container.innerHTML =
-`
-<div class="empty">
-No friends added yet.
-</div>
-`;
-
-return;
-
-}
-
-
-snapshot.forEach(
-docSnap=>{
-
-const friend =
-docSnap.data();
-
-
-const row =
-document.createElement(
-"div"
-);
-
-
-row.className =
-"user-row";
-
-
-row.innerHTML =
-`
-<div class="avatar">
-${getInitial(friend.email)}
-</div>
-
-<div class="user-info">
-
-<h3>
-${escapeHtml(friend.email)}
-</h3>
-
-<p>
-ToGeo friend
-</p>
-
-</div>
-
-<button
-class="small-btn"
-onclick="openFriendChat('${friend.uid}')"
->
-Chat
-</button>
-`;
-
-
-container.appendChild(row);
-
-});
-
-},
-error=>{
-
-console.error(
-"Friends listener:",
-error
-);
-
-}
-);
-
-}
-
-
-/* ================= LOAD CHATS ================= */
-
-function loadChats(){
-
-if(!currentUser){
-
-return;
-
-}
-
-
-const friendsRef =
-collection(
-db,
-"users",
-currentUser.uid,
-"myFriends"
-);
-
-
-onSnapshot(
-friendsRef,
-snapshot=>{
-
-const container =
-document.getElementById(
-"chatList"
-);
-
-
-container.innerHTML =
-"";
-
-
-if(snapshot.empty){
-
-container.innerHTML =
-`
-<div class="empty">
-No chats yet.<br>
-Add a friend to start chatting.
-</div>
-`;
-
-return;
-
-}
-
-
-snapshot.forEach(
-docSnap=>{
-
-const friend =
-docSnap.data();
-
-
-const row =
-document.createElement(
-"div"
-);
-
-
-row.className =
-"user-row";
-
-
-row.style.cursor =
-"pointer";
-
-
-row.onclick =
-()=>openFriendChat(
-friend.uid
-);
-
-
-row.innerHTML =
-`
-<div class="avatar">
-${getInitial(friend.email)}
-</div>
-
-<div class="user-info">
-
-<h3>
-${escapeHtml(friend.email)}
-</h3>
-
-<p>
-Tap to open chat
-</p>
-
-</div>
-`;
-
-
-container.appendChild(row);
-
-});
-
-}
-);
-
-}
-
-
-/* ================= OPEN FRIEND CHAT ================= */
-
-window.openFriendChat =
-async function(friendUid){
-
-if(!currentUser){
-
-return;
-
-}
-
-
-const friendSnap =
-await getDoc(
-doc(db,"users",friendUid)
-);
-
-
-if(!friendSnap.exists()){
-
-alert(
-"Friend account not found."
-);
-
-return;
-
-}
-
-
-currentFriend =
-friendSnap.data();
-
-
-document
-.getElementById("mainApp")
-.style.display =
-"none";
-
-
-chatScreen.style.display =
-"block";
-
-
-document
-.getElementById("chatName")
-.textContent =
-currentFriend.email;
-
-
-document
-.getElementById("chatEmail")
-.textContent =
-"ToGeo friend";
-
-
-loadPrivateMessages(
-currentFriend.uid
-);
-
-};
-
-
-/* ================= PRIVATE CHAT ================= */
-
-function loadPrivateMessages(
-friendUid
-){
-
-if(unsubscribeMessages){
-
-unsubscribeMessages();
-
-}
-
-
-const chatId =
-makeFriendId(
-currentUser.uid,
-friendUid
-);
-
-
-const messagesRef =
-collection(
-db,
-"chats",
-chatId,
-"messages"
-);
-
-
-const q =
-query(
-messagesRef,
-orderBy(
-"timestamp",
-"asc"
-)
-);
-
-
-unsubscribeMessages =
-onSnapshot(
-q,
-snapshot=>{
-
-const messages =
-document.getElementById(
-"messages"
-);
-
-
-messages.innerHTML =
-"";
-
-
-if(snapshot.empty){
-
-messages.innerHTML =
-`
-<div class="empty">
-No messages yet.<br>
-Send the first message! 👋
-</div>
-`;
-
-return;
-
-}
-
-
-snapshot.forEach(
-docSnap=>{
-
-const data =
-docSnap.data();
-
-
-const message =
-document.createElement(
-"div"
-);
-
-
-message.className =
-"message";
-
-
-if(
-data.senderId ===
-currentUser.uid
-){
-
-message.classList.add(
-"mine"
-);
-
-}
-
-
-const text =
-document.createElement(
-"div"
-);
-
-
-text.textContent =
-data.text;
-
-
-message.appendChild(
-text
-);
-
-
-const time =
-document.createElement(
-"div"
-);
-
-
-time.className =
-"message-time";
-
-
-if(data.timestamp){
-
-time.textContent =
-data.timestamp
-.toDate()
-.toLocaleTimeString(
-[],
-{
-hour:"2-digit",
-minute:"2-digit"
-}
-);
-
-}
-
-
-message.appendChild(
-time
-);
-
-
-messages.appendChild(
-message
-);
-
-});
-
+</body>
+</html>
