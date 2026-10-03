@@ -1,1372 +1,1191 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ToGeo</title>
 
 <style>
-
-* {
-  box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f1f5f9;
+    color:#111827;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
 }
 
 /* ================= LOGIN ================= */
 
-#loginPage {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
 
-.loginBox {
-  width: 92%;
-  max-width: 400px;
-  background: white;
-  padding: 30px 25px;
-  border-radius: 22px;
-  box-shadow: 0 10px 35px rgba(0,0,0,.12);
+.loginBox{
+    width:100%;
+    max-width:400px;
+    background:white;
+    padding:30px;
+    border-radius:22px;
+    box-shadow:0 10px 35px rgba(0,0,0,.12);
 }
 
-.logo {
-  text-align: center;
-  font-size: 36px;
-  font-weight: bold;
-  color: #1769ff;
+.logo{
+    text-align:center;
+    font-size:38px;
+    font-weight:bold;
+    color:#1769ff;
 }
 
-.subtitle {
-  text-align: center;
-  color: #777;
-  margin: 8px 0 25px;
+.subtitle{
+    text-align:center;
+    color:#6b7280;
+    margin:8px 0 25px;
 }
 
-input {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 12px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  font-size: 16px;
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    font-size:16px;
+    margin-bottom:12px;
+    outline:none;
 }
 
-button {
-  border: none;
-  border-radius: 12px;
-  padding: 13px 18px;
-  background: #1769ff;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
+input:focus{
+    border-color:#1769ff;
 }
 
-.loginBtn {
-  width: 100%;
-  margin-top: 5px;
+.primaryBtn{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    background:#1769ff;
+    color:white;
+    font-size:16px;
+    margin-top:5px;
 }
 
-.signupBtn {
-  width: 100%;
-  margin-top: 10px;
-  background: #eaf1ff;
-  color: #1769ff;
+.secondaryBtn{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    background:#eaf1ff;
+    color:#1769ff;
+    font-size:16px;
+    margin-top:10px;
 }
 
-#message {
-  text-align: center;
-  margin-top: 15px;
-  min-height: 20px;
+#message{
+    text-align:center;
+    min-height:22px;
+    margin-top:15px;
 }
 
+/* ================= APP ================= */
 
-/* ================= MAIN ================= */
-
-#mainApp {
-  display: none;
-  min-height: 100vh;
+#mainApp{
+    min-height:100vh;
 }
 
-.topbar {
-  height: 65px;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 18px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+.topbar{
+    height:65px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:10;
 }
 
-.topLogo {
-  font-size: 25px;
-  font-weight: bold;
-  color: #1769ff;
+.topLogo{
+    font-size:25px;
+    font-weight:bold;
+    color:#1769ff;
 }
 
-.logoutBtn {
-  background: #ff3b30;
-  padding: 9px 15px;
+.logoutBtn{
+    background:#ff3b30;
+    color:white;
+    padding:10px 17px;
+    border-radius:10px;
 }
 
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
 
 /* ================= NAV ================= */
 
-.nav {
-  display: flex;
-  background: white;
-  border-bottom: 1px solid #eee;
-  overflow-x: auto;
+.nav{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    background:white;
+    padding:8px;
+    border-radius:15px;
+    margin-bottom:20px;
 }
 
-.nav button {
-  flex: 1;
-  min-width: 90px;
-  background: white;
-  color: #666;
-  border-radius: 0;
+.nav button{
+    padding:12px 5px;
+    background:white;
+    border-radius:10px;
+    font-size:14px;
 }
 
-.nav button.active {
-  color: #1769ff;
-  border-bottom: 3px solid #1769ff;
+.nav button.active{
+    background:#1769ff;
+    color:white;
 }
 
+/* ================= SECTIONS ================= */
 
-/* ================= PAGES ================= */
-
-.page {
-  display: none;
-  padding: 20px;
+.section{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
 }
 
-.page.active {
-  display: block;
+.section h2{
+    margin-top:0;
 }
 
-.pageTitle {
-  font-size: 25px;
-  font-weight: bold;
-  margin-bottom: 20px;
+/* ================= SEARCH ================= */
+
+.searchRow{
+    display:flex;
+    gap:10px;
 }
 
-
-/* ================= FRIENDS ================= */
-
-.searchBox {
-  display: flex;
-  gap: 10px;
+.searchRow input{
+    margin:0;
+    flex:1;
 }
 
-.searchBox input {
-  flex: 1;
-  margin: 0;
+.searchBtn{
+    padding:0 20px;
+    border-radius:12px;
+    background:#1769ff;
+    color:white;
+    font-size:15px;
 }
 
-.searchBox button {
-  white-space: nowrap;
+.result{
+    margin-top:15px;
+    padding:15px;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
 }
 
-#searchResult {
-  margin-top: 15px;
+.userInfo{
+    min-width:0;
 }
 
-.userCard {
-  background: white;
-  padding: 15px;
-  border-radius: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 3px 12px rgba(0,0,0,.05);
+.userName{
+    font-weight:bold;
+    font-size:16px;
 }
 
-.userInfo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.userEmail{
+    color:#6b7280;
+    font-size:13px;
+    word-break:break-all;
 }
 
-.avatar {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: #1769ff;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
+.smallBtn{
+    background:#1769ff;
+    color:white;
+    padding:9px 13px;
+    border-radius:9px;
+    white-space:nowrap;
 }
 
-.userName {
-  font-weight: bold;
+.acceptBtn{
+    background:#16a34a;
 }
 
-.userEmail {
-  font-size: 13px;
-  color: #777;
+.rejectBtn{
+    background:#ef4444;
 }
 
-.sectionTitle {
-  margin-top: 25px;
-  margin-bottom: 12px;
+/* ================= LIST ================= */
+
+.listItem{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 5px;
+    border-bottom:1px solid #e5e7eb;
 }
 
-
-/* ================= CHAT ================= */
-
-.chatPage {
-  padding: 0;
-  height: calc(100vh - 120px);
+.listItem:last-child{
+    border-bottom:none;
 }
 
-.chatHeader {
-  background: white;
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid #eee;
+.empty{
+    text-align:center;
+    color:#6b7280;
+    padding:30px 10px;
 }
 
-.backBtn {
-  background: #eef3ff;
-  color: #1769ff;
-  padding: 8px 12px;
+/* ================= CHAT LIST ================= */
+
+.chatItem{
+    padding:15px;
+    border-bottom:1px solid #e5e7eb;
+    cursor:pointer;
 }
 
-.chatMessages {
-  height: calc(100% - 125px);
-  overflow-y: auto;
-  padding: 15px;
+.chatItem:hover{
+    background:#f8fafc;
 }
 
-.message {
-  max-width: 75%;
-  padding: 10px 13px;
-  border-radius: 15px;
-  margin-bottom: 9px;
-  word-wrap: break-word;
+.chatName{
+    font-weight:bold;
 }
 
-.message.me {
-  margin-left: auto;
-  background: #1769ff;
-  color: white;
-  border-bottom-right-radius: 4px;
+.lastMessage{
+    color:#6b7280;
+    font-size:14px;
+    margin-top:5px;
 }
 
-.message.other {
-  background: white;
-  color: #222;
-  border-bottom-left-radius: 4px;
+/* ================= CHAT WINDOW ================= */
+
+#chatWindow{
+    position:fixed;
+    inset:0;
+    background:#f1f5f9;
+    z-index:100;
+    display:none;
+    flex-direction:column;
 }
 
-.chatInput {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  padding: 10px;
-  display: flex;
-  gap: 10px;
-  border-top: 1px solid #ddd;
+.chatHeader{
+    height:65px;
+    background:white;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:0 15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-.chatInput input {
-  margin: 0;
-  flex: 1;
+.backBtn{
+    background:#eef2ff;
+    color:#1769ff;
+    padding:9px 13px;
+    border-radius:10px;
 }
 
-.chatInput button {
-  width: 90px;
+.chatTitle{
+    font-weight:bold;
 }
 
-
-/* ================= PLACEHOLDERS ================= */
-
-.placeholder {
-  background: white;
-  padding: 30px;
-  border-radius: 18px;
-  text-align: center;
-  color: #777;
+.chatMessages{
+    flex:1;
+    overflow-y:auto;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
+.bubble{
+    max-width:75%;
+    padding:11px 14px;
+    border-radius:15px;
+    word-wrap:break-word;
+}
+
+.mine{
+    align-self:flex-end;
+    background:#1769ff;
+    color:white;
+    border-bottom-right-radius:4px;
+}
+
+.theirs{
+    align-self:flex-start;
+    background:white;
+    border-bottom-left-radius:4px;
+}
+
+.chatInputArea{
+    background:white;
+    padding:10px;
+    display:flex;
+    gap:8px;
+}
+
+.chatInputArea input{
+    margin:0;
+    flex:1;
+}
+
+.sendBtn{
+    width:70px;
+    border-radius:12px;
+    background:#1769ff;
+    color:white;
+}
+
+/* ================= HOME ================= */
+
+.home{
+    text-align:center;
+    padding:30px 10px;
+}
+
+.home h1{
+    margin-bottom:5px;
+}
+
+.home p{
+    color:#6b7280;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-top:25px;
+}
+
+.stat{
+    padding:25px;
+    background:#f8fafc;
+    border-radius:15px;
+}
+
+.statNumber{
+    font-size:28px;
+    font-weight:bold;
+    color:#1769ff;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+    .container{
+        padding:12px;
+    }
+
+    .nav button{
+        font-size:12px;
+    }
+
+    .result{
+        align-items:flex-start;
+    }
+
+    .searchRow{
+        flex-direction:column;
+    }
+
+    .searchBtn{
+        height:48px;
+    }
+
+    .bubble{
+        max-width:85%;
+    }
+}
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- ================================================= -->
-<!-- LOGIN -->
-<!-- ================================================= -->
+<!-- =====================================================
+                     LOGIN PAGE
+====================================================== -->
 
 <div id="loginPage">
 
-  <div class="loginBox">
+    <div class="loginBox">
 
-    <div class="logo">
-      ToGeo
+        <div class="logo">ToGeo</div>
+
+        <div class="subtitle">
+            Connect with everyone
+        </div>
+
+        <input
+            id="email"
+            type="email"
+            placeholder="Email address"
+        >
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+        >
+
+        <button
+            id="loginBtn"
+            class="primaryBtn"
+        >
+            Login
+        </button>
+
+        <button
+            id="signupBtn"
+            class="secondaryBtn"
+        >
+            Create Account
+        </button>
+
+        <div id="message"></div>
+
     </div>
-
-    <div class="subtitle">
-      Connect with everyone
-    </div>
-
-    <input
-      id="email"
-      type="email"
-      placeholder="Email address"
-    >
-
-    <input
-      id="password"
-      type="password"
-      placeholder="Password"
-    >
-
-    <button
-      id="loginBtn"
-      class="loginBtn"
-    >
-      Login
-    </button>
-
-    <button
-      id="signupBtn"
-      class="signupBtn"
-    >
-      Create Account
-    </button>
-
-    <div id="message"></div>
-
-  </div>
 
 </div>
 
 
-<!-- ================================================= -->
-<!-- MAIN APP -->
-<!-- ================================================= -->
+<!-- =====================================================
+                     MAIN APP
+====================================================== -->
 
-<div id="mainApp">
+<div id="mainApp" class="hidden">
 
+    <div class="topbar">
 
-  <div class="topbar">
+        <div class="topLogo">
+            ToGeo
+        </div>
 
-    <div class="topLogo">
-      ToGeo
-    </div>
-
-    <button
-      id="logoutBtn"
-      class="logoutBtn"
-    >
-      Logout
-    </button>
-
-  </div>
-
-
-  <!-- NAVIGATION -->
-
-  <div class="nav">
-
-    <button
-      class="navBtn active"
-      data-page="chatsPage"
-    >
-      💬 Chats
-    </button>
-
-    <button
-      class="navBtn"
-      data-page="friendsPage"
-    >
-      👥 Friends
-    </button>
-
-    <button
-      class="navBtn"
-      data-page="togetherPage"
-    >
-      🎬 Together
-    </button>
-
-    <button
-      class="navBtn"
-      data-page="statusPage"
-    >
-      ⭕ Status
-    </button>
-
-  </div>
-
-
-  <!-- ================================================= -->
-  <!-- CHATS -->
-  <!-- ================================================= -->
-
-  <div
-    id="chatsPage"
-    class="page active"
-  >
-
-    <div class="pageTitle">
-      Chats
-    </div>
-
-    <div id="chatList">
-
-      <div class="placeholder">
-        Add a friend and start chatting.
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ================================================= -->
-  <!-- FRIENDS -->
-  <!-- ================================================= -->
-
-  <div
-    id="friendsPage"
-    class="page"
-  >
-
-    <div class="pageTitle">
-      Friends
-    </div>
-
-
-    <div class="searchBox">
-
-      <input
-        id="friendSearch"
-        type="email"
-        placeholder="Search by email"
-      >
-
-      <button id="searchBtn">
-        Search
-      </button>
+        <button
+            id="logoutBtn"
+            class="logoutBtn"
+        >
+            Logout
+        </button>
 
     </div>
 
 
-    <div id="searchResult"></div>
+    <div class="container">
+
+        <!-- NAVIGATION -->
+
+        <div class="nav">
+
+            <button
+                id="navHome"
+                class="active"
+            >
+                🏠 Home
+            </button>
+
+            <button id="navChats">
+                💬 Chats
+            </button>
+
+            <button id="navFriends">
+                👥 Friends
+            </button>
+
+            <button id="navRequests">
+                🔔 Requests
+            </button>
+
+        </div>
 
 
-    <div class="sectionTitle">
-      My Friends
+        <!-- ================= HOME ================= -->
+
+        <div
+            id="homeSection"
+            class="section"
+        >
+
+            <div class="home">
+
+                <h1>Welcome to ToGeo 🎉</h1>
+
+                <p id="welcomeText">
+                    Welcome!
+                </p>
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <div
+                            id="friendCount"
+                            class="statNumber"
+                        >
+                            0
+                        </div>
+
+                        Friends
+
+                    </div>
+
+                    <div class="stat">
+
+                        <div
+                            id="requestCount"
+                            class="statNumber"
+                        >
+                            0
+                        </div>
+
+                        Requests
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= CHATS ================= -->
+
+        <div
+            id="chatsSection"
+            class="section hidden"
+        >
+
+            <h2>💬 Chats</h2>
+
+            <div id="chatList">
+
+                <div class="empty">
+                    No chats yet.
+                    Send a message to a friend.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= FRIENDS ================= -->
+
+        <div
+            id="friendsSection"
+            class="section hidden"
+        >
+
+            <h2>👥 Friends</h2>
+
+            <!-- SEARCH -->
+
+            <div class="searchRow">
+
+                <input
+                    id="searchInput"
+                    type="email"
+                    placeholder="Search by email"
+                >
+
+                <button
+                    id="searchBtn"
+                    class="searchBtn"
+                >
+                    Search
+                </button>
+
+            </div>
+
+
+            <div id="searchResult"></div>
+
+
+            <hr style="margin:25px 0;border:none;border-top:1px solid #eee">
+
+
+            <h3>
+                My Friends
+            </h3>
+
+            <div id="friendsList">
+
+                <div class="empty">
+                    No friends yet.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= REQUESTS ================= -->
+
+        <div
+            id="requestsSection"
+            class="section hidden"
+        >
+
+            <h2>🔔 Friend Requests</h2>
+
+            <div id="requestsList">
+
+                <div class="empty">
+                    No friend requests.
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-
-    <div id="friendsList">
-
-      <div class="placeholder">
-        No friends yet.
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
 
-  <!-- ================================================= -->
-  <!-- TOGETHER -->
-  <!-- ================================================= -->
+<!-- =====================================================
+                     CHAT WINDOW
+====================================================== -->
 
-  <div
-    id="togetherPage"
-    class="page"
-  >
-
-    <div class="pageTitle">
-      Together
-    </div>
-
-    <div class="placeholder">
-
-      🎬 Watch YouTube together<br><br>
-      🎵 Listen to music together<br><br>
-      ❤️ More features coming
-
-    </div>
-
-  </div>
-
-
-  <!-- ================================================= -->
-  <!-- STATUS -->
-  <!-- ================================================= -->
-
-  <div
-    id="statusPage"
-    class="page"
-  >
-
-    <div class="pageTitle">
-      Status
-    </div>
-
-    <div class="placeholder">
-
-      ⭕ Status feature coming next.
-
-    </div>
-
-  </div>
-
-
-  <!-- ================================================= -->
-  <!-- CHAT SCREEN -->
-  <!-- ================================================= -->
-
-  <div
-    id="chatScreen"
-    class="page chatPage"
-  >
+<div id="chatWindow">
 
     <div class="chatHeader">
 
-      <button
-        id="backChat"
-        class="backBtn"
-      >
-        ←
-      </button>
-
-      <div>
+        <button
+            id="backChatBtn"
+            class="backBtn"
+        >
+            ← Back
+        </button>
 
         <div
-          id="chatFriendName"
-          class="userName"
+            id="chatTitle"
+            class="chatTitle"
         >
-          Friend
+            Chat
         </div>
-
-        <div
-          id="chatFriendEmail"
-          class="userEmail"
-        >
-        </div>
-
-      </div>
 
     </div>
 
 
     <div
-      id="chatMessages"
-      class="chatMessages"
+        id="chatMessages"
+        class="chatMessages"
     >
     </div>
 
 
-    <div class="chatInput">
+    <div class="chatInputArea">
 
-      <input
-        id="messageInput"
-        type="text"
-        placeholder="Type a message..."
-      >
+        <input
+            id="chatInput"
+            type="text"
+            placeholder="Type a message..."
+        >
 
-      <button id="sendBtn">
-        Send
-      </button>
+        <button
+            id="sendBtn"
+            class="sendBtn"
+        >
+            Send
+        </button>
 
     </div>
-
-  </div>
-
 
 </div>
 
 
-<!-- ================================================= -->
-<!-- FIREBASE -->
-<!-- ================================================= -->
+<!-- =====================================================
+                     FIREBASE
+====================================================== -->
 
 <script type="module">
 
-
-/* ================= FIREBASE IMPORTS ================= */
-
 import {
-  initializeApp
+    initializeApp
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
 import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-  onSnapshot,
-  addDoc,
-  serverTimestamp,
-  orderBy
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    doc,
+    setDoc,
+    getDoc,
+    getDocs,
+    query,
+    where,
+    addDoc,
+    onSnapshot,
+    orderBy,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
-/* ================= FIREBASE CONFIG ================= */
+/* =====================================================
+                    FIREBASE CONFIG
+====================================================== */
 
 const firebaseConfig = {
 
-  apiKey:
-    "AIzaSyCMYx-0G0gCJMhuV-uHZGoYqNQwkQtAUc8",
+    apiKey:
+        "AIzaSyCMYx-0G0gCJMhuV-uHZGoYqNQwkQtAUc8",
 
-  authDomain:
-    "togeo-8e24c.firebaseapp.com",
+    authDomain:
+        "togeo-8e24c.firebaseapp.com",
 
-  projectId:
-    "togeo-8e24c",
+    projectId:
+        "togeo-8e24c",
 
-  storageBucket:
-    "togeo-8e24c.firebasestorage.app",
+    storageBucket:
+        "togeo-8e24c.firebasestorage.app",
 
-  messagingSenderId:
-    "772918055389",
+    messagingSenderId:
+        "772918055389",
 
-  appId:
-    "1:772918055389:web:14605859a71cf22860e634",
+    appId:
+        "1:772918055389:web:14605859a71cf22860e634",
 
-  measurementId:
-    "G-DF8JCSHQCH"
+    measurementId:
+        "G-DF8JCSHQCH"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =====================================================
+                    GLOBAL VARIABLES
+====================================================== */
+
+let currentUser = null;
+
+let currentChatUser = null;
+
+let unsubscribeMessages = null;
+
+let friendsCache = [];
+
+let requestsCache = [];
+
+
+/* =====================================================
+                    ELEMENTS
+====================================================== */
+
+const loginPage =
+    document.getElementById("loginPage");
+
+const mainApp =
+    document.getElementById("mainApp");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const loginBtn =
+    document.getElementById("loginBtn");
+
+const signupBtn =
+    document.getElementById("signupBtn");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+const message =
+    document.getElementById("message");
+
+
+/* =====================================================
+                    MESSAGE
+====================================================== */
+
+function showMessage(text, success = false){
+
+    message.textContent = text;
+
+    message.style.color =
+        success ? "green" : "red";
+}
+
+
+/* =====================================================
+                    NAVIGATION
+====================================================== */
+
+const sections = {
+
+    home:
+        document.getElementById("homeSection"),
+
+    chats:
+        document.getElementById("chatsSection"),
+
+    friends:
+        document.getElementById("friendsSection"),
+
+    requests:
+        document.getElementById("requestsSection")
+};
+
+
+function showSection(name){
+
+    Object.values(sections).forEach(section => {
+
+        section.classList.add("hidden");
+
+    });
+
+    sections[name].classList.remove("hidden");
+
+
+    document.querySelectorAll(".nav button")
+        .forEach(btn => btn.classList.remove("active"));
+
+
+    if(name === "home")
+        document.getElementById("navHome").classList.add("active");
+
+    if(name === "chats")
+        document.getElementById("navChats").classList.add("active");
+
+    if(name === "friends")
+        document.getElementById("navFriends").classList.add("active");
+
+    if(name === "requests")
+        document.getElementById("navRequests").classList.add("active");
+}
+
+
+document.getElementById("navHome")
+    .onclick = () => showSection("home");
+
+
+document.getElementById("navChats")
+    .onclick = () => {
+
+        showSection("chats");
+
+        loadChats();
+
+    };
+
+
+document.getElementById("navFriends")
+    .onclick = () => {
+
+        showSection("friends");
+
+        loadFriends();
+
+    };
+
+
+document.getElementById("navRequests")
+    .onclick = () => {
+
+        showSection("requests");
+
+        loadRequests();
+
+    };
+
+
+/* =====================================================
+                    CREATE ACCOUNT
+====================================================== */
+
+signupBtn.onclick = async () => {
+
+    const email =
+        emailInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+
+    if(!email || !password){
+
+        showMessage(
+            "Enter email and password."
+        );
+
+        return;
+    }
+
+
+    if(password.length < 6){
+
+        showMessage(
+            "Password must be at least 6 characters."
+        );
+
+        return;
+    }
+
+
+    try{
+
+        const result =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        /* Create profile */
+
+        try{
+
+            await setDoc(
+                doc(db,"users",result.user.uid),
+                {
+                    uid:result.user.uid,
+                    email:email,
+                    name:email.split("@")[0],
+                    createdAt:serverTimestamp()
+                }
+            );
+
+        }catch(profileError){
+
+            console.error(
+                "Profile creation error:",
+                profileError
+            );
+
+        }
+
+
+        showMessage(
+            "Account created successfully!",
+            true
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            error.code + " : " + error.message
+        );
+
+    }
 
 };
 
 
-const app =
-  initializeApp(firebaseConfig);
+/* =====================================================
+                        LOGIN
+====================================================== */
 
-const auth =
-  getAuth(app);
-
-const db =
-  getFirestore(app);
-
-
-/* ================= VARIABLES ================= */
-
-let currentUser = null;
-
-let currentFriend = null;
-
-let stopMessagesListener = null;
-
-let stopFriendsListener = null;
-
-
-/* ================= HTML ================= */
-
-const loginPage =
-  document.getElementById("loginPage");
-
-const mainApp =
-  document.getElementById("mainApp");
-
-const emailInput =
-  document.getElementById("email");
-
-const passwordInput =
-  document.getElementById("password");
-
-const loginBtn =
-  document.getElementById("loginBtn");
-
-const signupBtn =
-  document.getElementById("signupBtn");
-
-const logoutBtn =
-  document.getElementById("logoutBtn");
-
-const message =
-  document.getElementById("message");
-
-const friendSearch =
-  document.getElementById("friendSearch");
-
-const searchBtn =
-  document.getElementById("searchBtn");
-
-const searchResult =
-  document.getElementById("searchResult");
-
-const friendsList =
-  document.getElementById("friendsList");
-
-const chatScreen =
-  document.getElementById("chatScreen");
-
-const chatMessages =
-  document.getElementById("chatMessages");
-
-const messageInput =
-  document.getElementById("messageInput");
-
-const sendBtn =
-  document.getElementById("sendBtn");
-
-const backChat =
-  document.getElementById("backChat");
-
-const chatFriendName =
-  document.getElementById("chatFriendName");
-
-const chatFriendEmail =
-  document.getElementById("chatFriendEmail");
-
-const chatList =
-  document.getElementById("chatList");
-
-
-/* ================= MESSAGE ================= */
-
-function showMessage(
-  text,
-  success = false
-) {
-
-  message.textContent = text;
-
-  message.style.color =
-    success ? "green" : "red";
-}
-
-
-/* ================= FRIEND ID ================= */
-
-function makeFriendId(
-  uid1,
-  uid2
-) {
-
-  return [uid1, uid2]
-    .sort()
-    .join("_");
-}
-
-
-/* ================= CHAT ID ================= */
-
-function makeChatId(
-  uid1,
-  uid2
-) {
-
-  return [uid1, uid2]
-    .sort()
-    .join("_");
-}
-
-
-/* ================= GET INITIAL ================= */
-
-function getInitial(
-  email
-) {
-
-  if (!email) {
-    return "?";
-  }
-
-  return email
-    .charAt(0)
-    .toUpperCase();
-}
-
-
-/* ================================================= */
-/* CREATE ACCOUNT */
-/* ================================================= */
-
-signupBtn.addEventListener(
-  "click",
-  async () => {
+loginBtn.onclick = async () => {
 
     const email =
-      emailInput.value.trim();
+        emailInput.value.trim();
 
     const password =
-      passwordInput.value;
+        passwordInput.value;
 
 
-    if (!email || !password) {
+    if(!email || !password){
 
-      showMessage(
-        "Enter email and password."
-      );
-
-      return;
-    }
-
-
-    if (password.length < 6) {
-
-      showMessage(
-        "Password must be at least 6 characters."
-      );
-
-      return;
-    }
-
-
-    try {
-
-      const result =
-        await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
+        showMessage(
+            "Enter email and password."
         );
-
-
-      await setDoc(
-        doc(
-          db,
-          "users",
-          result.user.uid
-        ),
-        {
-          uid: result.user.uid,
-          email: email,
-          name: email.split("@")[0],
-          createdAt: serverTimestamp()
-        }
-      );
-
-
-      showMessage(
-        "Account created successfully!",
-        true
-      );
-
-
-    } catch (error) {
-
-      console.error(
-        "SIGNUP:",
-        error
-      );
-
-      showMessage(
-        error.code +
-        " : " +
-        error.message
-      );
-
-    }
-
-  }
-);
-
-
-/* ================================================= */
-/* LOGIN */
-/* ================================================= */
-
-loginBtn.addEventListener(
-  "click",
-  async () => {
-
-    const email =
-      emailInput.value.trim();
-
-    const password =
-      passwordInput.value;
-
-
-    if (!email || !password) {
-
-      showMessage(
-        "Enter email and password."
-      );
-
-      return;
-    }
-
-
-    try {
-
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-
-      showMessage(
-        "Login successful!",
-        true
-      );
-
-
-    } catch (error) {
-
-      console.error(
-        "LOGIN:",
-        error
-      );
-
-      showMessage(
-        error.code +
-        " : " +
-        error.message
-      );
-
-    }
-
-  }
-);
-
-
-/* ================================================= */
-/* AUTH STATE */
-/* ================================================= */
-
-onAuthStateChanged(
-  auth,
-  async (user) => {
-
-    if (user) {
-
-      currentUser = user;
-
-      loginPage.style.display =
-        "none";
-
-      mainApp.style.display =
-        "block";
-
-
-      /* Ensure user profile exists */
-
-      const userRef =
-        doc(
-          db,
-          "users",
-          user.uid
-        );
-
-      const userSnap =
-        await getDoc(userRef);
-
-
-      if (!userSnap.exists()) {
-
-        await setDoc(
-          userRef,
-          {
-            uid: user.uid,
-            email: user.email,
-            name: user.email.split("@")[0],
-            createdAt: serverTimestamp()
-          }
-        );
-
-      }
-
-
-      loadFriends();
-
-    } else {
-
-      currentUser = null;
-
-      loginPage.style.display =
-        "flex";
-
-      mainApp.style.display =
-        "none";
-
-    }
-
-  }
-);
-
-
-/* ================================================= */
-/* LOGOUT */
-/* ================================================= */
-
-logoutBtn.addEventListener(
-  "click",
-  async () => {
-
-    await signOut(auth);
-
-  }
-);
-
-
-/* ================================================= */
-/* NAVIGATION */
-/* ================================================= */
-
-document
-  .querySelectorAll(".navBtn")
-  .forEach(
-    button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const pageId =
-            button.dataset.page;
-
-
-          document
-            .querySelectorAll(".navBtn")
-            .forEach(
-              b =>
-                b.classList.remove(
-                  "active"
-                )
-            );
-
-
-          button.classList.add(
-            "active"
-          );
-
-
-          document
-            .querySelectorAll(".page")
-            .forEach(
-              page => {
-
-                if (
-                  page.id === pageId
-                ) {
-
-                  page.classList.add(
-                    "active"
-                  );
-
-                } else {
-
-                  page.classList.remove(
-                    "active"
-                  );
-
-                }
-
-              }
-            );
-
-        }
-      );
-
-    }
-  );
-
-
-/* ================================================= */
-/* SEARCH USER */
-/* ================================================= */
-
-searchBtn.addEventListener(
-  "click",
-  async () => {
-
-    const email =
-      friendSearch.value
-        .trim()
-        .toLowerCase();
-
-
-    if (!email) {
-
-      searchResult.innerHTML =
-        "<p>Enter an email address.</p>";
-
-      return;
-    }
-
-
-    if (
-      currentUser &&
-      email === currentUser.email.toLowerCase()
-    ) {
-
-      searchResult.innerHTML =
-        "<p>You cannot add yourself.</p>";
-
-      return;
-    }
-
-
-    try {
-
-      const usersRef =
-        collection(
-          db,
-          "users"
-        );
-
-
-      const q =
-        query(
-          usersRef,
-          where(
-            "email",
-            "==",
-            email
-          )
-        );
-
-
-      const snapshot =
-        await getDocs(q);
-
-
-      if (snapshot.empty) {
-
-        searchResult.innerHTML =
-          "<div class='placeholder'>User not found.</div>";
 
         return;
-      }
+    }
 
 
-      const userDoc =
-        snapshot.docs[0];
+    try{
 
-      const user =
-        userDoc.data();
-
-
-      searchResult.innerHTML = `
-
-        <div class="userCard">
-
-          <div class="userInfo">
-
-            <div class="avatar">
-              ${getInitial(user.email)}
-            </div>
-
-            <div>
-
-              <div class="userName">
-                ${user.name || "User"}
-              </div>
-
-              <div class="userEmail">
-                ${user.email}
-              </div>
-
-            </div>
-
-          </div>
-
-          <button
-            id="addFriendBtn"
-          >
-            Add
-          </button>
-
-        </div>
-
-      `;
-
-
-      document
-        .getElementById(
-          "addFriendBtn"
-        )
-        .addEventListener(
-          "click",
-          () => addFriend(user)
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
         );
 
 
-    } catch (error) {
+        showMessage(
+            "Login successful!",
+            true
+        );
 
-      console.error(
-        "SEARCH:",
-        error
-      );
 
-      searchResult.innerHTML =
-        "<p>Search failed. Check Firestore rules.</p>";
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            error.code + " : " + error.message
+        );
 
     }
 
-  }
-);
+};
 
 
-/* ================================================= */
-/* ADD FRIEND */
-/* ================================================= */
+/* =====================================================
+                    AUTH STATE
+====================================================== */
 
-async function addFriend(
-  friend
-) {
+onAuthStateChanged(auth, async (user) => {
 
-  if (!currentUser) {
-    return;
-  }
+    if(user){
+
+        currentUser = user;
 
 
-  const friendId =
-    makeFriendId(
-      currentUser.uid,
-      friend.uid
-    );
+        /*
+         IMPORTANT:
+         App opens immediately after authentication.
+         Firestore errors will NOT block app.
+        */
+
+        loginPage.style.display = "none";
+
+        mainApp.classList.remove("hidden");
 
 
-  try {
-
-    await setDoc(
-      doc(
-        db,
-        "friends",
-        friendId
-      ),
-      {
-        user1:
-          currentUser.uid,
-
-        user2:
-          friend.uid,
-
-        createdAt:
-          serverTimestamp()
-      }
-    );
+        document.getElementById("welcomeText")
+            .textContent =
+            "Logged in as: " + user.email;
 
 
-    /* Save copy for current user */
-
-    await setDoc(
-      doc(
-        db,
-        "users",
-        currentUser.uid,
-        "myFriends",
-        friend.uid
-      ),
-      {
-        uid:
-          friend.uid,
-
-        email:
-          friend.email,
-
-        name:
-          friend.name || "User"
-      }
-    );
+        showSection("home");
 
 
-    /* Save copy for friend */
+        /* Load data separately */
 
-    await setDoc(
-      doc(
-        db,
-        "users",
-        friend.uid,
-        "myFriends",
-        currentUser.uid
-      ),
-      {
-        uid:
-          currentUser.uid,
+        loadFriends();
 
-        email:
-          currentUser.email,
+        loadRequests();
 
-        name:
-          currentUser.email.split("@")[0]
-      }
-    );
+        loadChats();
 
 
-    searchResult.innerHTML =
-      "<div class='placeholder'>Friend added successfully! 🎉</div>";
+        /* Create missing profile */
+
+        try{
+
+            const userRef =
+                doc(db,"users",user.uid);
+
+            const snap =
+                await getDoc(userRef);
 
 
-  } catch (error) {
+            if(!snap.exists()){
 
-    console.error(
-      "ADD FRIEND:",
-      error
-    );
+                await setDoc(
+                    userRef,
+                    {
+                        uid:user.uid,
+                        email:user.email,
+                        name:user.email.split("@")[0],
+                        createdAt:serverTimestamp()
+                    }
+                );
 
-    searchResult.innerHTML =
-      "<p>Could not add friend.</p>";
+            }
 
-  }
+        }catch(error){
 
-}
+            console.error(
+                "Profile error:",
+                error
+            );
 
+        }
 
-/* ================================================= */
-/* LOAD FRIENDS */
-/* ================================================= */
+    }else{
 
-function loadFriends() {
+        currentUser = null;
 
-  if (!currentUser) {
-    return;
-  }
+        loginPage.style.display = "flex";
 
+        mainApp.classList.add("hidden");
 
-  if (stopFriendsListener) {
+    }
 
-    stopFriendsListener();
-
-  }
-
-
-  const friendsRef =
-    collection(
-      db,
-      "users",
-      currentUser.uid,
-      "myFriends"
-    );
+});
 
 
-  stopFriendsListener =
-    onSnapshot(
-      friendsRef,
-      snapshot => 
+/* =====================================================
+                        LOGOUT
+====================================================== */
+
+logoutBtn.onclick = async () => {
+
+    try{
+
+        await signOut(auth);
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+};
+
+
+/* =====================================================
+                    SEARCH USER
+====================================================== */
+
+document.getElementById("searchBtn")
+    .onclick = searchUser;
+
+
+document.getElementById("searchInput")
+    .addEventListener(
+        "keydown",
+        event => {
+
+            if(event.key === "Enter"){
+
+   
