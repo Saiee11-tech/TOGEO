@@ -12,45 +12,37 @@
 
 <title>ToGeo</title>
 
-
 <style>
 
-/* ================= RESET ================= */
-
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 body{
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family:Arial,sans-serif;
     background:#f4f7fb;
-
     color:#111827;
-
-    min-height:100vh;
 }
 
-
-/* ================= COMMON ================= */
+button,
+input{
+    font:inherit;
+}
 
 button{
-    border:none;
     cursor:pointer;
-    font-family:inherit;
+    border:none;
 }
 
-input{
-    font-family:inherit;
+.hidden{
+    display:none !important;
 }
 
-
-/* ================= LOGIN PAGE ================= */
+/* =========================
+   LOGIN
+========================= */
 
 #loginPage{
 
@@ -58,110 +50,100 @@ input{
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
+
+    justify-content:center;
 
     padding:20px;
 
     background:
-        linear-gradient(
-            135deg,
-            #eef2ff,
-            #f8fafc
-        );
-}
+    linear-gradient(
+        135deg,
+        #eef4ff,
+        #ffffff
+    );
 
+}
 
 .loginBox{
 
     width:100%;
+
     max-width:420px;
 
-    background:white;
+    background:#ffffff;
 
-    padding:35px;
+    padding:30px 24px;
 
     border-radius:20px;
 
     box-shadow:
-        0 15px 45px
-        rgba(0,0,0,0.10);
+    0 12px 40px
+    rgba(0,0,0,.12);
 
-    text-align:center;
 }
-
 
 .logo{
 
-    font-size:42px;
+    text-align:center;
+
+    font-size:40px;
 
     font-weight:800;
 
-    color:#2563eb;
+    color:#1769ff;
 
-    margin-bottom:5px;
 }
-
 
 .tagline{
 
+    text-align:center;
+
     color:#64748b;
 
-    margin-bottom:28px;
+    margin-top:6px;
 
-    font-size:14px;
+    margin-bottom:25px;
+
 }
 
-
-.inputGroup{
-
-    text-align:left;
+.field{
 
     margin-bottom:16px;
+
 }
 
-
-.inputGroup label{
+.field label{
 
     display:block;
 
-    margin-bottom:7px;
-
     font-size:14px;
 
-    font-weight:600;
+    font-weight:bold;
 
-    color:#374151;
+    margin-bottom:7px;
+
 }
 
-
-.inputGroup input{
+.field input{
 
     width:100%;
 
-    padding:13px 14px;
+    padding:14px;
 
-    border:
-        1px solid #d1d5db;
+    border:1px solid #d1d5db;
 
     border-radius:10px;
 
     outline:none;
 
-    font-size:15px;
 }
 
+.field input:focus{
 
-.inputGroup input:focus{
+    border-color:#1769ff;
 
-    border-color:#2563eb;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(37,99,235,0.10);
 }
-
 
 .authButtons{
 
@@ -170,82 +152,69 @@ input{
     gap:10px;
 
     margin-top:20px;
-}
 
+}
 
 .authButtons button{
 
     flex:1;
 
-    padding:13px;
+    padding:14px;
 
     border-radius:10px;
 
-    font-size:15px;
+    font-weight:bold;
 
-    font-weight:700;
 }
 
+.primary{
 
-#loginBtn{
+    background:#1769ff;
 
-    background:#2563eb;
+    color:#ffffff;
 
-    color:white;
 }
 
+.secondary{
 
-#signupBtn{
-
-    background:#e5e7eb;
+    background:#e8edf5;
 
     color:#111827;
+
 }
-
-
-.authButtons button:disabled{
-
-    opacity:.6;
-
-    cursor:not-allowed;
-}
-
 
 #message{
 
     min-height:22px;
 
-    margin-top:18px;
+    text-align:center;
+
+    margin-top:15px;
 
     font-size:14px;
 
-    font-weight:600;
+    font-weight:bold;
+
 }
 
-
-/* ================= MAIN APP ================= */
+/* =========================
+   MAIN APP
+========================= */
 
 #mainApp{
 
     min-height:100vh;
 
-    background:#f8fafc;
 }
-
-
-.hidden{
-
-    display:none !important;
-}
-
-
-/* ================= TOP BAR ================= */
 
 .topBar{
 
-    height:65px;
+    height:60px;
 
-    background:white;
+    background:#ffffff;
+
+    border-bottom:
+    1px solid #e5e7eb;
 
     display:flex;
 
@@ -253,293 +222,233 @@ input{
 
     justify-content:space-between;
 
-    padding:
-        0 20px;
-
-    border-bottom:
-        1px solid #e5e7eb;
+    padding:0 15px;
 
     position:sticky;
 
     top:0;
 
-    z-index:100;
-}
+    z-index:10;
 
+}
 
 .topLogo{
 
-    font-size:26px;
+    font-size:25px;
 
     font-weight:800;
 
-    color:#2563eb;
+    color:#1769ff;
+
 }
 
-
-#logoutBtn{
-
-    padding:
-        9px 15px;
-
-    border-radius:9px;
+.logoutBtn{
 
     background:#fee2e2;
 
     color:#b91c1c;
 
-    font-weight:700;
-}
-
-
-/* ================= NAVIGATION ================= */
-
-.navBar{
-
-    background:white;
-
-    border-bottom:
-        1px solid #e5e7eb;
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:8px;
-
-    padding:10px;
-
-    position:sticky;
-
-    top:65px;
-
-    z-index:90;
-}
-
-
-.navBar button{
-
-    padding:
-        10px 18px;
+    padding:9px 13px;
 
     border-radius:9px;
 
+    font-weight:bold;
+
+}
+
+.nav{
+
+    display:flex;
+
+    overflow-x:auto;
+
+    background:#ffffff;
+
+    border-bottom:
+    1px solid #e5e7eb;
+
+    padding:7px;
+
+    gap:5px;
+
+    position:sticky;
+
+    top:60px;
+
+    z-index:9;
+
+}
+
+.nav button{
+
+    white-space:nowrap;
+
     background:transparent;
+
+    padding:10px 14px;
+
+    border-radius:9px;
 
     color:#475569;
 
-    font-weight:600;
+    font-weight:bold;
+
 }
 
+.nav button.active{
 
-.navBar button:hover{
+    background:#e8f0ff;
 
-    background:#eff6ff;
+    color:#1769ff;
 
-    color:#2563eb;
 }
-
-
-/* ================= CONTENT ================= */
 
 .content{
 
     width:100%;
 
-    max-width:1100px;
+    max-width:900px;
 
     margin:auto;
 
-    padding:25px 20px;
-}
+    padding:18px;
 
+}
 
 .section{
 
     display:none;
-}
 
+}
 
 .section.active{
 
     display:block;
+
 }
 
+/* =========================
+   CARDS
+========================= */
 
-/* ================= HOME ================= */
+.card{
 
-.homeCard{
+    background:#ffffff;
 
-    background:white;
+    border:
+    1px solid #e5e7eb;
 
-    border-radius:18px;
+    border-radius:15px;
 
-    padding:30px;
+    padding:17px;
+
+    margin-bottom:12px;
 
     box-shadow:
-        0 5px 20px
-        rgba(0,0,0,.06);
+    0 3px 12px
+    rgba(0,0,0,.04);
 
-    margin-bottom:20px;
 }
 
+.card h2{
 
-.homeCard h1{
+    margin-bottom:7px;
 
-    margin-bottom:10px;
-
-    font-size:28px;
 }
 
-
-#welcomeText{
+.muted{
 
     color:#64748b;
 
-    margin-bottom:25px;
-}
+    font-size:14px;
 
+}
 
 .stats{
 
     display:grid;
 
-    grid-template-columns:
-        repeat(2,1fr);
+    grid-template-columns:1fr 1fr;
 
-    gap:15px;
+    gap:10px;
+
+    margin-top:18px;
+
 }
 
+.stat{
 
-.statCard{
-
-    padding:20px;
-
-    border-radius:14px;
+    padding:18px;
 
     background:#f8fafc;
 
+    border-radius:12px;
+
     border:
-        1px solid #e5e7eb;
+    1px solid #e5e7eb;
+
 }
 
+.stat b{
 
-.statCard h3{
-
-    color:#64748b;
-
-    font-size:14px;
-
-    margin-bottom:8px;
-}
-
-
-.statCard p{
+    display:block;
 
     font-size:28px;
 
-    font-weight:800;
+    color:#1769ff;
 
-    color:#2563eb;
+    margin-top:5px;
+
 }
 
-
-/* ================= SECTION HEADER ================= */
-
-.sectionHeader{
-
-    margin-bottom:20px;
-}
-
-
-.sectionHeader h2{
-
-    font-size:25px;
-
-    margin-bottom:5px;
-}
-
-
-.sectionHeader p{
-
-    color:#64748b;
-
-    font-size:14px;
-}
-
-
-/* ================= SEARCH ================= */
+/* =========================
+   SEARCH
+========================= */
 
 .searchBox{
 
     display:flex;
 
-    gap:10px;
+    gap:8px;
 
-    margin-bottom:20px;
+    margin-top:15px;
+
 }
-
 
 .searchBox input{
 
     flex:1;
 
-    padding:13px 14px;
+    padding:13px;
 
     border:
-        1px solid #d1d5db;
+    1px solid #d1d5db;
 
     border-radius:10px;
 
     outline:none;
 
-    font-size:15px;
 }
-
 
 .searchBox input:focus{
 
-    border-color:#2563eb;
-}
+    border-color:#1769ff;
 
+}
 
 .searchBox button{
 
-    padding:
-        0 20px;
+    padding:0 17px;
 
     border-radius:10px;
 
-    background:#2563eb;
-
-    color:white;
-
-    font-weight:700;
 }
 
+/* =========================
+   USER ROW
+========================= */
 
-/* ================= CARD ================= */
-
-.card{
-
-    background:white;
-
-    padding:18px;
-
-    border-radius:14px;
-
-    border:
-        1px solid #e5e7eb;
-
-    margin-bottom:12px;
-
-    box-shadow:
-        0 3px 12px
-        rgba(0,0,0,.04);
-}
-
-
-.cardRow{
+.row{
 
     display:flex;
 
@@ -547,33 +456,35 @@ input{
 
     justify-content:space-between;
 
-    gap:15px;
+    gap:12px;
+
 }
 
-
-.userInfo{
+.user{
 
     display:flex;
 
     align-items:center;
 
-    gap:12px;
+    gap:10px;
 
     min-width:0;
-}
 
+}
 
 .avatar{
 
-    width:45px;
+    width:44px;
 
-    height:45px;
+    height:44px;
+
+    min-width:44px;
 
     border-radius:50%;
 
-    background:#dbeafe;
+    background:#1769ff;
 
-    color:#2563eb;
+    color:#ffffff;
 
     display:flex;
 
@@ -581,96 +492,79 @@ input{
 
     justify-content:center;
 
-    font-weight:800;
+    font-weight:bold;
 
-    flex-shrink:0;
 }
 
+.user h3{
 
-.userText{
+    font-size:15px;
 
-    min-width:0;
 }
 
+.user p{
 
-.userText h3{
-
-    font-size:16px;
-
-    margin-bottom:4px;
-}
-
-
-.userText p{
-
-    font-size:13px;
+    font-size:12px;
 
     color:#64748b;
 
     overflow:hidden;
 
     text-overflow:ellipsis;
+
 }
 
+.smallBtn{
 
-.primaryBtn{
-
-    padding:
-        9px 14px;
+    padding:9px 12px;
 
     border-radius:8px;
 
-    background:#2563eb;
+    font-weight:bold;
 
-    color:white;
-
-    font-weight:700;
-
-    white-space:nowrap;
 }
 
-
-.successBtn{
-
-    padding:
-        9px 14px;
-
-    border-radius:8px;
+.success{
 
     background:#dcfce7;
 
-    color:#166534;
+    color:#15803d;
 
-    font-weight:700;
 }
 
-
-.dangerBtn{
-
-    padding:
-        9px 14px;
-
-    border-radius:8px;
+.danger{
 
     background:#fee2e2;
 
     color:#b91c1c;
 
-    font-weight:700;
 }
-
 
 .empty{
 
     text-align:center;
 
-    padding:40px 20px;
+    color:#64748b;
 
-    color:#94a3b8;
+    padding:25px;
+
 }
 
+.error{
 
-/* ================= CHAT ================= */
+    color:#dc2626;
+
+}
+
+.ok{
+
+    color:#16a34a;
+
+}
+
+/* =========================
+   CHAT
+========================= */
 
 #chatWindow{
 
@@ -680,55 +574,48 @@ input{
 
     background:#f8fafc;
 
-    z-index:200;
+    z-index:50;
 
     display:none;
 
     flex-direction:column;
-}
 
+}
 
 .chatHeader{
 
-    height:65px;
+    height:60px;
 
-    background:white;
+    background:#ffffff;
 
     border-bottom:
-        1px solid #e5e7eb;
+    1px solid #e5e7eb;
 
     display:flex;
 
     align-items:center;
 
-    gap:15px;
+    gap:12px;
 
-    padding:
-        0 18px;
+    padding:0 12px;
+
 }
 
+.backBtn{
 
-#backChatBtn{
+    background:#eef2f7;
 
-    background:#f1f5f9;
+    padding:8px 12px;
 
-    width:40px;
+    border-radius:8px;
 
-    height:40px;
-
-    border-radius:50%;
-
-    font-size:20px;
 }
 
+.chatTitle{
 
-#chatTitle{
+    font-weight:bold;
 
-    font-size:18px;
-
-    font-weight:700;
 }
-
 
 #chatMessages{
 
@@ -736,166 +623,113 @@ input{
 
     overflow-y:auto;
 
-    padding:20px;
+    padding:15px;
 
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
 }
 
+.messageBubble{
 
-.message{
+    max-width:78%;
 
-    max-width:75%;
-
-    padding:
-        10px 13px;
+    padding:10px 12px;
 
     border-radius:14px;
 
-    font-size:14px;
+    margin:6px 0;
 
-    line-height:1.4;
+    word-wrap:break-word;
+
 }
-
 
 .myMessage{
 
-    align-self:flex-end;
+    margin-left:auto;
 
-    background:#2563eb;
+    background:#1769ff;
 
-    color:white;
+    color:#ffffff;
 
     border-bottom-right-radius:4px;
-}
 
+}
 
 .otherMessage{
 
-    align-self:flex-start;
-
-    background:white;
-
-    color:#111827;
+    background:#ffffff;
 
     border:
-        1px solid #e5e7eb;
+    1px solid #e5e7eb;
 
     border-bottom-left-radius:4px;
-}
 
+}
 
 .chatInputArea{
 
-    background:white;
-
-    padding:12px;
-
     display:flex;
 
-    gap:10px;
+    gap:8px;
+
+    background:#ffffff;
 
     border-top:
-        1px solid #e5e7eb;
+    1px solid #e5e7eb;
+
+    padding:10px;
+
 }
 
-
-#chatInput{
+.chatInputArea input{
 
     flex:1;
 
-    padding:12px 14px;
+    padding:13px;
 
     border:
-        1px solid #d1d5db;
+    1px solid #d1d5db;
 
     border-radius:10px;
 
     outline:none;
+
 }
 
+.chatInputArea button{
 
-#sendBtn{
-
-    padding:
-        0 20px;
+    padding:0 17px;
 
     border-radius:10px;
 
-    background:#2563eb;
-
-    color:white;
-
-    font-weight:700;
 }
 
-
-/* ================= MOBILE ================= */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
+
+    .content{
+
+        padding:13px;
+
+    }
 
     .loginBox{
 
         padding:25px 20px;
+
     }
 
-
-    .navBar{
-
-        overflow-x:auto;
-
-        justify-content:flex-start;
-    }
-
-
-    .navBar button{
-
-        white-space:nowrap;
-    }
-
-
-    .content{
-
-        padding:
-            18px 12px;
-    }
-
-
-    .stats{
-
-        grid-template-columns:1fr;
-    }
-
-
-    .cardRow{
+    .row{
 
         align-items:flex-start;
+
     }
 
+    .smallBtn{
 
-    .primaryBtn,
-    .successBtn,
-    .dangerBtn{
+        padding:8px 10px;
 
-        padding:
-            8px 10px;
-
-        font-size:12px;
-    }
-
-
-    .searchBox{
-
-        flex-direction:column;
-    }
-
-
-    .searchBox button{
-
-        padding:12px;
     }
 
 }
@@ -905,7 +739,11 @@ input{
 </head>
 
 <body>
-<!-- ================= LOGIN PAGE ================= -->
+
+
+<!-- =========================
+     LOGIN PAGE
+========================= -->
 
 <div id="loginPage">
 
@@ -916,37 +754,37 @@ input{
         </div>
 
         <div class="tagline">
-            Connect. Chat. Together.
+            Connect. Chat. Watch. Listen. Together.
         </div>
 
 
-        <div class="inputGroup">
+        <div class="field">
 
-            <label for="email">
+            <label>
                 Email
             </label>
 
             <input
-                type="email"
                 id="email"
-                placeholder="Enter your email"
+                type="email"
                 autocomplete="email"
+                placeholder="Enter your email"
             >
 
         </div>
 
 
-        <div class="inputGroup">
+        <div class="field">
 
-            <label for="password">
+            <label>
                 Password
             </label>
 
             <input
-                type="password"
                 id="password"
-                placeholder="Enter your password"
+                type="password"
                 autocomplete="current-password"
+                placeholder="Minimum 6 characters"
             >
 
         </div>
@@ -954,11 +792,20 @@ input{
 
         <div class="authButtons">
 
-            <button id="loginBtn">
+            <button
+                type="button"
+                id="loginBtn"
+                class="primary"
+            >
                 Login
             </button>
 
-            <button id="signupBtn">
+
+            <button
+                type="button"
+                id="signupBtn"
+                class="secondary"
+            >
                 Sign Up
             </button>
 
@@ -972,15 +819,12 @@ input{
 </div>
 
 
-<!-- ================= MAIN APP ================= -->
+<!-- =========================
+     MAIN APP
+========================= -->
 
-<div
-    id="mainApp"
-    class="hidden"
->
+<div id="mainApp" class="hidden">
 
-
-    <!-- TOP BAR -->
 
     <div class="topBar">
 
@@ -988,87 +832,108 @@ input{
             ToGeo
         </div>
 
-        <button id="logoutBtn">
+
+        <button
+            type="button"
+            id="logoutBtn"
+            class="logoutBtn"
+        >
             Logout
         </button>
 
     </div>
 
 
-    <!-- NAVIGATION -->
+    <div class="nav">
 
-    <div class="navBar">
-
-        <button id="navHome">
-            🏠 Home
+        <button
+            type="button"
+            class="navBtn active"
+            data-section="home"
+        >
+            Home
         </button>
 
-        <button id="navChats">
-            💬 Chats
+
+        <button
+            type="button"
+            class="navBtn"
+            data-section="friends"
+        >
+            Friends
         </button>
 
-        <button id="navFriends">
-            👥 Friends
+
+        <button
+            type="button"
+            class="navBtn"
+            data-section="requests"
+        >
+            Requests
         </button>
 
-        <button id="navRequests">
-            🔔 Requests
+
+        <button
+            type="button"
+            class="navBtn"
+            data-section="chats"
+        >
+            Chats
+        </button>
+
+
+        <button
+            type="button"
+            class="navBtn"
+            data-section="settings"
+        >
+            Settings
         </button>
 
     </div>
 
 
-    <!-- CONTENT -->
-
-    <div class="content">
+    <main class="content">
 
 
-        <!-- ================= HOME ================= -->
+        <!-- HOME -->
 
         <section
             id="homeSection"
             class="section active"
         >
 
-            <div class="homeCard">
+            <div class="card">
 
-                <div class="sectionHeader">
+                <h2 id="welcomeText">
+                    Welcome
+                </h2>
 
-                    <h2>
-                        Welcome to ToGeo 👋
-                    </h2>
-
-                    <p id="welcomeText">
-                        Welcome
-                    </p>
-
-                </div>
+                <p class="muted">
+                    Welcome to ToGeo.
+                </p>
 
 
                 <div class="stats">
 
-                    <div class="statCard">
+                    <div class="stat">
 
-                        <h3>
-                            Friends
-                        </h3>
+                        Friends
 
-                        <p id="friendCount">
+                        <b id="friendCount">
                             0
-                        </p>
+                        </b>
 
                     </div>
 
 
-                    <div class="statCard">
+                    <div class="stat">
 
-                        <h3>
-                            Requests
-                        </h3>
+                        Requests
 
-                        <p id="requestCount">
+                        <b id="requestCount">
                             0
-                        </p>
+                        </b>
 
                     </div>
 
@@ -1079,68 +944,42 @@ input{
         </section>
 
 
-        <!-- ================= CHATS ================= -->
-
-        <section
-            id="chatsSection"
-            class="section"
-        >
-
-            <div class="sectionHeader">
-
-                <h2>
-                    Chats
-                </h2>
-
-                <p>
-                    Your conversations
-                </p>
-
-            </div>
-
-
-            <div id="chatList">
-
-                <div class="empty">
-                    No chats yet.
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= FRIENDS ================= -->
+        <!-- FRIENDS -->
 
         <section
             id="friendsSection"
             class="section"
         >
 
-            <div class="sectionHeader">
+            <div class="card">
 
                 <h2>
-                    Friends
+                    Find Friends
                 </h2>
 
-                <p>
-                    Search and connect with people
+                <p class="muted">
+                    Search using exact email.
                 </p>
 
-            </div>
+
+                <div class="searchBox">
+
+                    <input
+                        id="searchInput"
+                        type="email"
+                        placeholder="friend@example.com"
+                    >
 
 
-            <div class="searchBox">
+                    <button
+                        type="button"
+                        id="searchBtn"
+                        class="primary"
+                    >
+                        Search
+                    </button>
 
-                <input
-                    type="email"
-                    id="searchInput"
-                    placeholder="Search user by email"
-                >
-
-                <button id="searchBtn">
-                    Search
-                </button>
+                </div>
 
             </div>
 
@@ -1148,105 +987,128 @@ input{
             <div id="searchResult"></div>
 
 
-            <h3 style="margin:25px 0 12px;">
-                My Friends
-            </h3>
-
-
-            <div id="friendsList">
-
-                <div class="empty">
-                    No friends yet.
-                </div>
-
-            </div>
+            <div id="friendsList"></div>
 
         </section>
 
 
-        <!-- ================= REQUESTS ================= -->
+        <!-- REQUESTS -->
 
         <section
             id="requestsSection"
             class="section"
         >
 
-            <div class="sectionHeader">
+            <div class="card">
 
                 <h2>
                     Friend Requests
                 </h2>
 
-                <p>
-                    Manage your friend requests
+                <p class="muted">
+                    Accept or reject requests.
                 </p>
 
             </div>
 
 
-            <div id="requestsList">
+            <div id="requestsList"></div>
 
-                <div class="empty">
-                    No pending requests.
-                </div>
+        </section>
+
+
+        <!-- CHATS -->
+
+        <section
+            id="chatsSection"
+            class="section"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Private Chats
+                </h2>
+
+                <p class="muted">
+                    Chat with your friends.
+                </p>
+
+            </div>
+
+
+            <div id="chatsList"></div>
+
+        </section>
+
+
+        <!-- SETTINGS -->
+
+        <section
+            id="settingsSection"
+            class="section"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Settings
+                </h2>
+
+                <p class="muted">
+                    Logged in as
+                </p>
+
+                <p
+                    id="accountEmail"
+                    style="
+                        margin-top:8px;
+                        font-weight:bold;
+                    "
+                ></p>
 
             </div>
 
         </section>
 
 
-    </div>
+    </main>
 
 </div>
 
 
-<!-- ================= CHAT WINDOW ================= -->
+<!-- =========================
+     CHAT WINDOW
+========================= -->
 
 <div id="chatWindow">
 
 
     <div class="chatHeader">
 
-        <button id="backChatBtn">
-            ←
+        <button
+            type="button"
+            id="backChatBtn"
+            class="backBtn"
+        >
+            ← Back
         </button>
 
 
-        <div id="chatTitle">
+        <div
+            id="chatTitle"
+            class="chatTitle"
+        >
             Chat
         </div>
 
     </div>
-
-
-    <div id="chatMessages"></div>
-
-
-    <div class="chatInputArea">
-
-        <input
-            type="text"
-            id="chatInput"
-            placeholder="Type a message..."
-        >
-
-        <button id="sendBtn">
-            Send
-        </button>
-
-    </div>
-
-</div>
-<!-- ================= FIREBASE CODE ================= -->
-
 <script type="module">
-
-
-/* ================= FIREBASE ================= */
 
 import {
     initializeApp
-} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
 
 import {
@@ -1255,7 +1117,8 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut
-} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
 
 import {
@@ -1266,47 +1129,48 @@ import {
     getDocs,
     addDoc,
     updateDoc,
-    deleteDoc,
     doc,
     setDoc,
     getDoc,
     onSnapshot,
     orderBy,
     serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
-
-/* ================= CONFIG ================= */
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyCMYx-0G0gCJMhuV-uHZGoYqNQwkQtAUc8",
+    "AIzaSyCMYx-0Gg0CJMhuV-uHZGoYqNQwkQtAUc8",
 
     authDomain:
-        "togeo-8e24c.firebaseapp.com",
+    "togeo-8e24c.firebaseapp.com",
 
     projectId:
-        "togeo-8e24c",
+    "togeo-8e24c",
 
     storageBucket:
-        "togeo-8e24c.firebasestorage.app",
+    "togeo-8e24c.firebasestorage.app",
 
     messagingSenderId:
-        "772918055389",
+    "772918055389",
 
     appId:
-        "1:772918055389:web:14605859a71cf22860e634",
+    "1:772918055389:web:14605859a71cf22860e634",
 
     measurementId:
-        "G-DF8JCSHQCH"
-
+    "G-DF8JCSHQCH"
 };
 
 
-
-/* ================= INITIALIZE ================= */
+/* =========================
+   INITIALIZE
+========================= */
 
 const app =
     initializeApp(firebaseConfig);
@@ -1318,65 +1182,44 @@ const db =
     getFirestore(app);
 
 
+/* =========================
+   VARIABLES
+========================= */
 
-/* ================= GLOBAL ================= */
+let currentUser = null;
 
-window.toGeoDB =
-    db;
+let currentChatFriend = null;
 
-window.toGeoAuth =
-    auth;
-
-window.toGeoUser =
-    null;
-
-let currentUser =
-    null;
+let unsubscribeMessages = null;
 
 
+/* =========================
+   SHORT SELECTOR
+========================= */
 
-/* ================= ELEMENTS ================= */
+const $ = function(id){
 
-const loginPage =
-    document.getElementById("loginPage");
+    return document.getElementById(id);
 
-const mainApp =
-    document.getElementById("mainApp");
-
-const emailInput =
-    document.getElementById("email");
-
-const passwordInput =
-    document.getElementById("password");
-
-const loginBtn =
-    document.getElementById("loginBtn");
-
-const signupBtn =
-    document.getElementById("signupBtn");
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-const message =
-    document.getElementById("message");
-
-const welcomeText =
-    document.getElementById("welcomeText");
+};
 
 
-
-/* ================= MESSAGE ================= */
+/* =========================
+   MESSAGE
+========================= */
 
 function showMessage(
     text,
     success = false
 ){
 
-    message.textContent =
+    const box =
+        $("message");
+
+    box.textContent =
         text;
 
-    message.style.color =
+    box.style.color =
         success
         ? "#16a34a"
         : "#dc2626";
@@ -1384,277 +1227,448 @@ function showMessage(
 }
 
 
+/* =========================
+   ESCAPE HTML
+========================= */
 
-/* ================= SIGN UP ================= */
+function escapeHTML(value){
 
-signupBtn.addEventListener(
-    "click",
-    async function(){
+    return String(value ?? "")
+        .replace(
+            /[&<>"']/g,
+            function(char){
 
-        const email =
-            emailInput.value
-                .trim()
-                .toLowerCase();
+                return {
 
-        const password =
-            passwordInput.value;
+                    "&":"&amp;",
+                    "<":"&lt;",
+                    ">":"&gt;",
+                    '"':"&quot;",
+                    "'":"&#039;"
 
+                }[char];
 
-        if(!email){
-
-            showMessage(
-                "Please enter your email."
-            );
-
-            return;
-        }
-
-
-        if(!password){
-
-            showMessage(
-                "Please enter your password."
-            );
-
-            return;
-        }
-
-
-        if(password.length < 6){
-
-            showMessage(
-                "Password must be at least 6 characters."
-            );
-
-            return;
-        }
-
-
-        loginBtn.disabled =
-            true;
-
-        signupBtn.disabled =
-            true;
-
-
-        showMessage(
-            "Creating account...",
-            true
+            }
         );
 
-
-        try{
-
-            const result =
-                await createUserWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
+}
 
 
-            const user =
-                result.user;
+/* =========================
+   USER NAME
+========================= */
 
+function getUserName(user){
 
-            await setDoc(
-                doc(
-                    db,
-                    "users",
-                    user.uid
-                ),
-                {
+    if(
+        user &&
+        user.name
+    ){
 
-                    uid:
-                        user.uid,
-
-                    email:
-                        user.email,
-
-                    name:
-                        user.email
-                            .split("@")[0],
-
-                    createdAt:
-                        serverTimestamp()
-
-                }
-            );
-
-
-            currentUser =
-                user;
-
-            window.toGeoUser =
-                user;
-
-
-            loginPage.style.display =
-                "none";
-
-            mainApp.classList.remove(
-                "hidden"
-            );
-
-
-            welcomeText.textContent =
-                "Welcome, " +
-                user.email;
-
-
-            showMessage(
-                "Account created successfully!",
-                true
-            );
-
-
-        }
-        catch(error){
-
-            console.error(
-                "SIGNUP ERROR:",
-                error
-            );
-
-
-            showMessage(
-                error.code +
-                " : " +
-                error.message
-            );
-
-        }
-        finally{
-
-            loginBtn.disabled =
-                false;
-
-            signupBtn.disabled =
-                false;
-
-        }
+        return user.name;
 
     }
-);
 
 
+    if(
+        user &&
+        user.email
+    ){
 
-/* ================= LOGIN ================= */
+        return user.email
+            .split("@")[0];
 
-loginBtn.addEventListener(
-    "click",
-    async function(){
-
-        const email =
-            emailInput.value
-                .trim()
-                .toLowerCase();
-
-        const password =
-            passwordInput.value;
+    }
 
 
-        if(!email){
+    return "User";
 
-            showMessage(
-                "Please enter your email."
-            );
-
-            return;
-        }
+}
 
 
-        if(!password){
+/* =========================
+   CHAT ID
+========================= */
 
-            showMessage(
-                "Please enter your password."
-            );
+function createChatId(
+    uid1,
+    uid2
+){
 
-            return;
-        }
+    return [
+        uid1,
+        uid2
+    ]
+    .sort()
+    .join("_");
+
+}
 
 
-        loginBtn.disabled =
-            true;
+/* =========================
+   CREATE PROFILE
+========================= */
 
-        signupBtn.disabled =
-            true;
+async function createUserProfile(user){
 
-
-        showMessage(
-            "Logging in...",
-            true
+    const userRef =
+        doc(
+            db,
+            "users",
+            user.uid
         );
 
 
-        try{
-
-            const result =
-                await signInWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
+    const snap =
+        await getDoc(userRef);
 
 
-            const user =
-                result.user;
+    if(
+        !snap.exists()
+    ){
 
+        await setDoc(
+            userRef,
+            {
 
-            currentUser =
-                user;
+                uid:user.uid,
 
-            window.toGeoUser =
-                user;
+                email:user.email,
 
-
-            loginPage.style.display =
-                "none";
-
-            mainApp.classList.remove(
-                "hidden"
-            );
-
-
-            welcomeText.textContent =
-                "Logged in as: " +
-                user.email;
-
-
-            showMessage(
-                "Login successful!",
-                true
-            );
-
-
-            console.log(
-                "LOGIN SUCCESS",
+                name:
                 user.email
+                    .split("@")[0],
+
+                createdAt:
+                serverTimestamp()
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================
+   FIREBASE ERROR
+========================= */
+
+function firebaseError(error){
+
+    const code =
+        error.code || "";
+
+
+    if(
+        code ===
+        "auth/invalid-credential"
+    ){
+
+        return "Incorrect email or password.";
+
+    }
+
+
+    if(
+        code ===
+        "auth/invalid-email"
+    ){
+
+        return "Invalid email address.";
+
+    }
+
+
+    if(
+        code ===
+        "auth/email-already-in-use"
+    ){
+
+        return "This email is already registered.";
+
+    }
+
+
+    if(
+        code ===
+        "auth/weak-password"
+    ){
+
+        return "Password must be at least 6 characters.";
+
+    }
+
+
+    if(
+        code ===
+        "auth/network-request-failed"
+    ){
+
+        return "Internet connection problem.";
+
+    }
+
+
+    return (
+        error.message ||
+        "Something went wrong."
+    );
+
+}
+
+
+/* =========================
+   SIGN UP
+========================= */
+
+async function signupUser(){
+
+    const email =
+        $("email")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+        $("password")
+        .value;
+
+
+    if(!email){
+
+        showMessage(
+            "Please enter your email."
+        );
+
+        return;
+
+    }
+
+
+    if(!password){
+
+        showMessage(
+            "Please enter your password."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        password.length < 6
+    ){
+
+        showMessage(
+            "Password must be at least 6 characters."
+        );
+
+        return;
+
+    }
+
+
+    $("loginBtn").disabled =
+        true;
+
+    $("signupBtn").disabled =
+        true;
+
+
+    showMessage(
+        "Creating account...",
+        true
+    );
+
+
+    try{
+
+        const result =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        const user =
+            result.user;
+
+
+        try{
+
+            await createUserProfile(
+                user
             );
 
         }
-        catch(error){
+        catch(profileError){
 
             console.error(
-                "LOGIN ERROR",
-                error
-            );
-
-
-            showMessage(
-                error.code +
-                " : " +
-                error.message
+                "PROFILE ERROR:",
+                profileError
             );
 
         }
-        finally{
 
-            loginBtn.disabled =
-                false;
 
-            signupBtn.disabled =
-                false;
+        showMessage(
+            "Account created successfully!",
+            true
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "SIGNUP ERROR:",
+            error
+        );
+
+
+        showMessage(
+            firebaseError(error)
+        );
+
+    }
+    finally{
+
+        $("loginBtn").disabled =
+            false;
+
+        $("signupBtn").disabled =
+            false;
+
+    }
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function loginUser(){
+
+    const email =
+        $("email")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+        $("password")
+        .value;
+
+
+    if(!email){
+
+        showMessage(
+            "Please enter your email."
+        );
+
+        return;
+
+    }
+
+
+    if(!password){
+
+        showMessage(
+            "Please enter your password."
+        );
+
+        return;
+
+    }
+
+
+    $("loginBtn").disabled =
+        true;
+
+    $("signupBtn").disabled =
+        true;
+
+
+    showMessage(
+        "Logging in...",
+        true
+    );
+
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        showMessage(
+            "Login successful!",
+            true
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "LOGIN ERROR:",
+            error
+        );
+
+
+        showMessage(
+            firebaseError(error)
+        );
+
+    }
+    finally{
+
+        $("loginBtn").disabled =
+            false;
+
+        $("signupBtn").disabled =
+            false;
+
+    }
+
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+$("signupBtn")
+.addEventListener(
+    "click",
+    signupUser
+);
+
+
+$("loginBtn")
+.addEventListener(
+    "click",
+    loginUser
+);
+
+
+$("password")
+.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter"
+        ){
+
+            loginUser();
 
         }
 
@@ -1662,112 +1676,12 @@ loginBtn.addEventListener(
 );
 
 
+/* =========================
+   LOGOUT
+========================= */
 
-/* ================= AUTH STATE ================= */
-
-onAuthStateChanged(
-    auth,
-    async function(user){
-
-        if(user){
-
-            currentUser =
-                user;
-
-            window.toGeoUser =
-                user;
-
-
-            loginPage.style.display =
-                "none";
-
-            mainApp.classList.remove(
-                "hidden"
-            );
-
-
-            welcomeText.textContent =
-                "Logged in as: " +
-                user.email;
-
-
-            try{
-
-                const userRef =
-                    doc(
-                        db,
-                        "users",
-                        user.uid
-                    );
-
-
-                const userSnap =
-                    await getDoc(
-                        userRef
-                    );
-
-
-                if(!userSnap.exists()){
-
-                    await setDoc(
-                        userRef,
-                        {
-
-                            uid:
-                                user.uid,
-
-                            email:
-                                user.email,
-
-                            name:
-                                user.email
-                                    .split("@")[0],
-
-                            createdAt:
-                                serverTimestamp()
-
-                        }
-                    );
-
-                }
-
-            }
-            catch(error){
-
-                console.error(
-                    "PROFILE ERROR:",
-                    error
-                );
-
-            }
-
-        }
-        else{
-
-            currentUser =
-                null;
-
-            window.toGeoUser =
-                null;
-
-
-            loginPage.style.display =
-                "flex";
-
-            mainApp.classList.add(
-                "hidden"
-            );
-
-        }
-
-    }
-);
-
-
-
-/* ================= LOGOUT ================= */
-
-logoutBtn.addEventListener(
+$("logoutBtn")
+.addEventListener(
     "click",
     async function(){
 
@@ -1789,233 +1703,258 @@ logoutBtn.addEventListener(
 );
 
 
+/* =========================
+   AUTH STATE
+========================= */
 
-/* ================= ENTER LOGIN ================= */
+onAuthStateChanged(
+    auth,
+    async function(user){
 
-passwordInput.addEventListener(
-    "keydown",
-    function(event){
+        if(user){
 
-        if(event.key === "Enter"){
+            currentUser =
+                user;
 
-            loginBtn.click();
+
+            try{
+
+                await createUserProfile(
+                    user
+                );
+
+            }
+            catch(error){
+
+                console.error(
+                    "PROFILE ERROR:",
+                    error
+                );
+
+            }
+
+
+            $("loginPage")
+                .classList
+                .add("hidden");
+
+
+            $("mainApp")
+                .classList
+                .remove("hidden");
+
+
+            $("welcomeText")
+                .textContent =
+                "Welcome, " +
+                user.email;
+
+
+            $("accountEmail")
+                .textContent =
+                user.email;
+
+
+            loadHomeStats();
+
+        }
+        else{
+
+            currentUser =
+                null;
+
+
+            $("mainApp")
+                .classList
+                .add("hidden");
+
+
+            $("loginPage")
+                .classList
+                .remove("hidden");
 
         }
 
-    }
-);
+    });
 
 
+/* =========================
+   NAVIGATION
+========================= */
 
-console.log(
-    "🔥 ToGeo Firebase Ready"
-);
+document
+.querySelectorAll(".navBtn")
+.forEach(function(button){
 
+    button.addEventListener(
+        "click",
+        function(){
 
-
-/* ==================================================
-   PART 4 FUNCTIONS WILL CONTINUE BELOW
-   ================================================== */
-/* ================= NAVIGATION ================= */
-
-function showSection(sectionName){
-
-    const sections =
-        document.querySelectorAll(
-            ".section"
-        );
-
-
-    sections.forEach(
-        function(section){
-
-            section.classList.remove(
-                "active"
+            showSection(
+                button.dataset.section
             );
 
         }
     );
 
-
-    const target =
-        document.getElementById(
-            sectionName + "Section"
-        );
+});
 
 
-    if(target){
+function showSection(
+    sectionName
+){
 
-        target.classList.add(
-            "active"
-        );
+    document
+    .querySelectorAll(".section")
+    .forEach(function(section){
+
+        section
+        .classList
+        .remove("active");
+
+    });
+
+
+    const selected =
+        $(sectionName + "Section");
+
+
+    if(selected){
+
+        selected
+        .classList
+        .add("active");
 
     }
 
 
-    if(sectionName === "home"){
+    document
+    .querySelectorAll(".navBtn")
+    .forEach(function(button){
+
+        button
+        .classList
+        .toggle(
+            "active",
+            button.dataset.section ===
+            sectionName
+        );
+
+    });
+
+
+    if(
+        sectionName === "home"
+    ){
 
         loadHomeStats();
 
     }
 
 
-    if(sectionName === "friends"){
+    if(
+        sectionName === "friends"
+    ){
 
         loadFriends();
 
     }
 
 
-    if(sectionName === "requests"){
+    if(
+        sectionName === "requests"
+    ){
 
         loadRequests();
 
     }
 
 
-    if(sectionName === "chats"){
+    if(
+        sectionName === "chats"
+    ){
 
         loadChats();
 
     }
 
 }
-
-
-
-/* ================= NAV BUTTONS ================= */
-
-document
-    .getElementById("navHome")
-    .addEventListener(
-        "click",
-        function(){
-
-            showSection("home");
-
-        }
-    );
-
-
-document
-    .getElementById("navChats")
-    .addEventListener(
-        "click",
-        function(){
-
-            showSection("chats");
-
-        }
-    );
-
-
-document
-    .getElementById("navFriends")
-    .addEventListener(
-        "click",
-        function(){
-
-            showSection("friends");
-
-        }
-    );
-
-
-document
-    .getElementById("navRequests")
-    .addEventListener(
-        "click",
-        function(){
-
-            showSection("requests");
-
-        }
-    );
-
-
-
-/* ================= HOME STATS ================= */
+/* =========================
+   HOME STATS
+========================= */
 
 async function loadHomeStats(){
 
-    const user =
-        window.toGeoUser;
-
-    const database =
-        window.toGeoDB;
-
-
-    if(!user){
-
-        return;
-
-    }
+    if(!currentUser) return;
 
 
     try{
 
-        const friendsQuery =
-            query(
-                collection(
-                    database,
-                    "friends"
-                ),
-                where(
-                    "users",
-                    "array-contains",
-                    user.uid
+        const friendsSnapshot =
+            await getDocs(
+                query(
+                    collection(
+                        db,
+                        "friends"
+                    ),
+                    where(
+                        "users",
+                        "array-contains",
+                        currentUser.uid
+                    )
                 )
             );
 
 
-        const friendsSnapshot =
-            await getDocs(
-                friendsQuery
-            );
-
-
-        document.getElementById(
-            "friendCount"
-        ).textContent =
+        $("friendCount")
+            .textContent =
             friendsSnapshot.size;
 
 
-
-        const requestQuery =
-            query(
-                collection(
-                    database,
-                    "friendRequests"
-                ),
-                where(
-                    "toUid",
-                    "==",
-                    user.uid
-                ),
-                where(
-                    "status",
-                    "==",
-                    "pending"
+        const requestsSnapshot =
+            await getDocs(
+                query(
+                    collection(
+                        db,
+                        "friendRequests"
+                    ),
+                    where(
+                        "toUid",
+                        "==",
+                        currentUser.uid
+                    )
                 )
             );
 
 
-        const requestSnapshot =
-            await getDocs(
-                requestQuery
-            );
+        let pending = 0;
 
 
-        document.getElementById(
-            "requestCount"
-        ).textContent =
-            requestSnapshot.size;
+        requestsSnapshot.forEach(
+            function(item){
+
+                if(
+                    item.data().status ===
+                    "pending"
+                ){
+
+                    pending++;
+
+                }
+
+            }
+        );
+
+
+        $("requestCount")
+            .textContent =
+            pending;
 
     }
     catch(error){
 
         console.error(
-            "HOME STATS ERROR:",
+            "STATS ERROR:",
             error
         );
 
@@ -2024,134 +1963,119 @@ async function loadHomeStats(){
 }
 
 
+/* =========================
+   SEARCH EVENTS
+========================= */
 
-/* ================= SEARCH USER ================= */
-
-document
-    .getElementById("searchBtn")
-    .addEventListener(
-        "click",
-        searchUser
-    );
+$("searchBtn")
+.addEventListener(
+    "click",
+    searchUser
+);
 
 
-document
-    .getElementById("searchInput")
-    .addEventListener(
-        "keydown",
-        function(event){
+$("searchInput")
+.addEventListener(
+    "keydown",
+    function(event){
 
-            if(event.key === "Enter"){
+        if(
+            event.key === "Enter"
+        ){
 
-                searchUser();
-
-            }
+            searchUser();
 
         }
-    );
+
+    }
+);
 
 
+/* =========================
+   SEARCH USER
+========================= */
 
 async function searchUser(){
 
-    const user =
-        window.toGeoUser;
-
-    const database =
-        window.toGeoDB;
-
-
-    const input =
-        document.getElementById(
-            "searchInput"
-        );
-
-
-    const resultBox =
-        document.getElementById(
-            "searchResult"
-        );
+    if(!currentUser) return;
 
 
     const email =
-        input.value
-            .trim()
-            .toLowerCase();
+        $("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
 
 
-    if(!user){
-
-        return;
-
-    }
+    const result =
+        $("searchResult");
 
 
     if(!email){
 
-        resultBox.innerHTML =
-            `
-            <div class="card">
-                Please enter an email.
-            </div>
-            `;
-
-        return;
-
-    }
-
-
-    if(email === user.email.toLowerCase()){
-
-        resultBox.innerHTML =
-            `
-            <div class="card">
-                You cannot add yourself.
-            </div>
-            `;
-
-        return;
-
-    }
-
-
-    resultBox.innerHTML =
+        result.innerHTML =
         `
-        <div class="card">
-            Searching...
+        <div class="card error">
+            Please enter an email address.
         </div>
         `;
+
+        return;
+
+    }
+
+
+    if(
+        email ===
+        currentUser.email.toLowerCase()
+    ){
+
+        result.innerHTML =
+        `
+        <div class="card">
+            You cannot add yourself.
+        </div>
+        `;
+
+        return;
+
+    }
+
+
+    result.innerHTML =
+    `
+    <div class="card">
+        Searching...
+    </div>
+    `;
 
 
     try{
 
-        const usersQuery =
-            query(
-                collection(
-                    database,
-                    "users"
-                ),
-                where(
-                    "email",
-                    "==",
-                    email
-                )
-            );
-
-
         const snapshot =
             await getDocs(
-                usersQuery
+                query(
+                    collection(
+                        db,
+                        "users"
+                    ),
+                    where(
+                        "email",
+                        "==",
+                        email
+                    )
+                )
             );
 
 
         if(snapshot.empty){
 
-            resultBox.innerHTML =
-                `
-                <div class="card empty">
-                    User not found.
-                </div>
-                `;
+            result.innerHTML =
+            `
+            <div class="card empty">
+                User not found.
+            </div>
+            `;
 
             return;
 
@@ -2161,67 +2085,240 @@ async function searchUser(){
         const userDoc =
             snapshot.docs[0];
 
-        const foundUser =
+
+        const user =
             userDoc.data();
 
 
-        resultBox.innerHTML =
+        const targetUid =
+            userDoc.id;
+
+
+        /* CHECK FRIEND */
+
+        const friendsSnapshot =
+            await getDocs(
+                query(
+                    collection(
+                        db,
+                        "friends"
+                    ),
+                    where(
+                        "users",
+                        "array-contains",
+                        currentUser.uid
+                    )
+                )
+            );
+
+
+        let alreadyFriends =
+            false;
+
+
+        friendsSnapshot.forEach(
+            function(item){
+
+                const data =
+                    item.data();
+
+
+                if(
+                    data.users &&
+                    data.users.includes(
+                        targetUid
+                    )
+                ){
+
+                    alreadyFriends =
+                        true;
+
+                }
+
+            }
+        );
+
+
+        if(alreadyFriends){
+
+            result.innerHTML =
             `
             <div class="card">
 
-                <div class="cardRow">
+                <div class="row">
 
-                    <div class="userInfo">
+                    <div class="user">
 
                         <div class="avatar">
-                            ${foundUser.name
-                                ? foundUser.name
-                                    .charAt(0)
-                                    .toUpperCase()
-                                : "U"}
+                            ${escapeHTML(
+                                getUserName(user)
+                                .charAt(0)
+                                .toUpperCase()
+                            )}
                         </div>
 
-                        <div class="userText">
+                        <div>
 
                             <h3>
-                                ${foundUser.name || "User"}
+                                ${escapeHTML(
+                                    getUserName(user)
+                                )}
                             </h3>
 
                             <p>
-                                ${foundUser.email}
+                                ${escapeHTML(
+                                    user.email
+                                )}
                             </p>
 
                         </div>
 
                     </div>
 
-
-                    <button
-                        class="primaryBtn"
-                        id="addFriendBtn"
-                    >
-                        Add Friend
-                    </button>
+                    <span class="ok">
+                        Friends ✓
+                    </span>
 
                 </div>
 
             </div>
             `;
 
+            return;
 
-        document
-            .getElementById("addFriendBtn")
+        }
+
+
+        /* CHECK REQUEST */
+
+        const requestSnapshot =
+            await getDocs(
+                query(
+                    collection(
+                        db,
+                        "friendRequests"
+                    ),
+                    where(
+                        "fromUid",
+                        "==",
+                        currentUser.uid
+                    )
+                )
+            );
+
+
+        let requestSent =
+            false;
+
+
+        requestSnapshot.forEach(
+            function(item){
+
+                const data =
+                    item.data();
+
+
+                if(
+                    data.toUid ===
+                    targetUid &&
+                    data.status ===
+                    "pending"
+                ){
+
+                    requestSent =
+                        true;
+
+                }
+
+            }
+        );
+
+
+        result.innerHTML =
+        `
+        <div class="card">
+
+            <div class="row">
+
+                <div class="user">
+
+                    <div class="avatar">
+
+                        ${escapeHTML(
+                            getUserName(user)
+                            .charAt(0)
+                            .toUpperCase()
+                        )}
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(
+                                getUserName(user)
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                user.email
+                            )}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                ${
+                    requestSent
+
+                    ?
+
+                    `
+                    <button
+                        type="button"
+                        class="smallBtn secondary"
+                        disabled>
+                        Request Sent
+                    </button>
+                    `
+
+                    :
+
+                    `
+                    <button
+                        type="button"
+                        id="addFriendBtn"
+                        class="smallBtn primary">
+                        Add Friend
+                    </button>
+                    `
+                }
+
+            </div>
+
+        </div>
+        `;
+
+
+        if(!requestSent){
+
+            $("addFriendBtn")
             .addEventListener(
                 "click",
                 function(){
 
                     sendFriendRequest(
-                        userDoc.id,
-                        foundUser.email
+                        targetUid,
+                        user.email
                     );
 
                 }
             );
+
+        }
 
     }
     catch(error){
@@ -2232,75 +2329,86 @@ async function searchUser(){
         );
 
 
-        resultBox.innerHTML =
-            `
-            <div class="card">
-                Search error:
-                ${error.message}
-            </div>
-            `;
+        result.innerHTML =
+        `
+        <div class="card error">
+            ${escapeHTML(
+                error.message
+            )}
+        </div>
+        `;
 
     }
 
 }
 
 
-
-/* ================= FRIEND REQUEST ================= */
+/* =========================
+   SEND REQUEST
+========================= */
 
 async function sendFriendRequest(
-    toUid,
-    toEmail
+    targetUid,
+    targetEmail
 ){
 
-    const user =
-        window.toGeoUser;
-
-    const database =
-        window.toGeoDB;
-
-
-    if(!user){
-
-        return;
-
-    }
+    if(!currentUser) return;
 
 
     try{
 
-        /* CHECK EXISTING REQUEST */
-
-        const existingQuery =
-            query(
-                collection(
-                    database,
-                    "friendRequests"
-                ),
-                where(
-                    "fromUid",
-                    "==",
-                    user.uid
-                ),
-                where(
-                    "toUid",
-                    "==",
-                    toUid
+        const snapshot =
+            await getDocs(
+                query(
+                    collection(
+                        db,
+                        "friendRequests"
+                    ),
+                    where(
+                        "fromUid",
+                        "==",
+                        currentUser.uid
+                    )
                 )
             );
 
 
-        const existingSnapshot =
-            await getDocs(
-                existingQuery
-            );
+        let exists =
+            false;
 
 
-        if(!existingSnapshot.empty){
+        snapshot.forEach(
+            function(item){
 
-            alert(
-                "Friend request already sent."
-            );
+                const data =
+                    item.data();
+
+
+                if(
+                    data.toUid ===
+                    targetUid &&
+                    data.status ===
+                    "pending"
+                ){
+
+                    exists =
+                    true;
+
+                }
+
+            }
+        );
+
+
+        if(exists){
+
+            $("searchResult")
+            .innerHTML =
+            `
+            <div class="card">
+                Request already sent.
+            </div>
+            `;
 
             return;
 
@@ -2309,22 +2417,22 @@ async function sendFriendRequest(
 
         await addDoc(
             collection(
-                database,
+                db,
                 "friendRequests"
             ),
             {
 
                 fromUid:
-                    user.uid,
+                    currentUser.uid,
 
                 fromEmail:
-                    user.email,
+                    currentUser.email,
 
                 toUid:
-                    toUid,
+                    targetUid,
 
                 toEmail:
-                    toEmail,
+                    targetEmail,
 
                 status:
                     "pending",
@@ -2336,20 +2444,13 @@ async function sendFriendRequest(
         );
 
 
-        alert(
-            "Friend request sent successfully!"
-        );
-
-
-        document.getElementById(
-            "searchResult"
-        ).innerHTML =
-            `
-            <div class="card">
-                Friend request sent to
-                <b>${toEmail}</b>.
-            </div>
-            `;
+        $("searchResult")
+        .innerHTML =
+        `
+        <div class="card ok">
+            Friend request sent successfully ✓
+        </div>
+        `;
 
 
         loadHomeStats();
@@ -2358,649 +2459,1167 @@ async function sendFriendRequest(
     catch(error){
 
         console.error(
-            "FRIEND REQUEST ERROR:",
+            "SEND REQUEST ERROR:",
             error
         );
 
 
-        alert(
-            "Error: " +
-            error.message
-        );
+        $("searchResult")
+        .innerHTML =
+        `
+        <div class="card error">
+            ${escapeHTML(
+                error.message
+            )}
+        </div>
+        `;
 
     }
 
 }
 
 
-
-/* ================= LOAD REQUESTS ================= */
+/* =========================
+   LOAD REQUESTS
+========================= */
 
 async function loadRequests(){
 
-    const user =
-        window.toGeoUser;
-
-    const database =
-        window.toGeoDB;
+    if(!currentUser) return;
 
 
-    const container =
-        document.getElementById(
-            "requestsList"
-        );
+    const box =
+        $("requestsList");
 
 
-    if(!user){
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        `
-        <div class="empty">
-            Loading...
-        </div>
-        `;
+    box.innerHTML =
+    `
+    <div class="empty">
+        Loading requests...
+    </div>
+    `;
 
 
     try{
 
-        const requestsQuery =
-            query(
-                collection(
-                    database,
-                    "friendRequests"
-                ),
-                where(
-                    "toUid",
-                    "==",
-                    user.uid
-                ),
-                where(
-                    "status",
-                    "==",
-                    "pending"
+        const snapshot =
+            await getDocs(
+                query(
+                    collection(
+                        db,
+                        "friendRequests"
+                    ),
+                    where(
+                        "toUid",
+                        "==",
+                        currentUser.uid
+                    )
                 )
             );
 
 
-        const snapshot =
-            await getDocs(
-                requestsQuery
+        const pending =
+            snapshot.docs.filter(
+                function(item){
+
+                    return (
+                        item.data()
+                        .status ===
+                        "pending"
+                    );
+
+                }
             );
 
 
-        if(snapshot.empty){
+        if(
+            pending.length === 0
+        ){
 
-            container.innerHTML =
-                `
-                <div class="empty">
-                    No pending requests.
-                </div>
-                `;
-
-            loadHomeStats();
+            box.innerHTML =
+            `
+            <div class="empty">
+                No pending requests.
+            </div>
+            `;
 
             return;
 
         }
 
 
-        container.innerHTML =
-            "";
+        box.innerHTML = "";
 
 
-        snapshot.forEach(
-            function(requestDoc){
+        for(
+            const requestDoc
+            of pending
+        ){
 
-                const request =
-                    requestDoc.data();
+            const request =
+                requestDoc.data();
 
 
-                const firstLetter =
+            let sender = {
+
+                email:
+                    request.fromEmail,
+
+                name:
                     request.fromEmail
-                        .charAt(0)
-                        .toUpperCase();
+                    .split("@")[0]
+
+            };
 
 
-                const card =
-                    document.createElement(
-                        "div"
+            try{
+
+                const senderSnap =
+                    await getDoc(
+                        doc(
+                            db,
+                            "users",
+                            request.fromUid
+                        )
                     );
 
 
-                card.className =
-                    "card";
+                if(
+                    senderSnap.exists()
+                ){
 
+                    sender =
+                        senderSnap.data();
 
-                card.innerHTML =
-                    `
-                    <div class="cardRow">
+                }
 
-                        <div class="userInfo">
+            }
+            catch(error){
 
-                            <div class="avatar">
-                                ${firstLetter}
-                            </div>
-
-                            <div class="userText">
-
-                                <h3>
-                                    Friend Request
-                                </h3>
-
-                                <p>
-                                    ${request.fromEmail}
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div
-                            style="
-                                display:flex;
-                                gap:8px;
-                            "
-                        >
-
-                            <button
-                                class="successBtn"
-                                data-accept
-                            >
-                                Accept
-                            </button>
-
-                            <button
-                                class="dangerBtn"
-                                data-reject
-                            >
-                                Reject
-                            </button>
-
-                        </div>
-
-                    </div>
-                    `;
-
-
-                card
-                    .querySelector(
-                        "[data-accept]"
-                    )
-                    .addEventListener(
-                        "click",
-                        function(){
-
-                            acceptRequest(
-                                requestDoc.id,
-                                request
-                            );
-
-                        }
-                    );
-
-
-                card
-                    .querySelector(
-                        "[data-reject]"
-                    )
-                    .addEventListener(
-                        "click",
-                        function(){
-
-                            rejectRequest(
-                                requestDoc.id
-                            );
-
-                        }
-                    );
-
-
-                container.appendChild(
-                    card
+                console.error(
+                    error
                 );
 
             }
-        );
 
 
-        loadHomeStats();
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "card";
+
+
+            card.innerHTML =
+            `
+            <div class="row">
+
+                <div class="user">
+
+                    <div class="avatar">
+
+                        ${escapeHTML(
+                            getUserName(sender)
+                            .charAt(0)
+                            .toUpperCase()
+                        )}
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(
+                                getUserName(sender)
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                sender.email
+                            )}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <button
+                        type="button"
+                        class="smallBtn success acceptBtn">
+                        Accept
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="smallBtn danger rejectBtn">
+                        Reject
+                    </button>
+
+                </div>
+
+            </div>
+            `;
+
+
+            card
+            .querySelector(
+                ".acceptBtn"
+            )
+            .addEventListener(
+                "click",
+                function(){
+
+                    respondToRequest(
+                        requestDoc.id,
+                        request.fromUid,
+                        true
+                    );
+
+                }
+            );
+
+
+            card
+            .querySelector(
+                ".rejectBtn"
+            )
+            .addEventListener(
+                "click",
+                function(){
+
+                    respondToRequest(
+                        requestDoc.id,
+                        request.fromUid,
+                        false
+                    );
+
+                }
+            );
+
+
+            box.appendChild(card);
+
+        }
 
     }
     catch(error){
 
         console.error(
-            "LOAD REQUESTS ERROR:",
+            "REQUEST ERROR:",
             error
         );
 
 
-        container.innerHTML =
-            `
-            <div class="card">
-                ${error.message}
-            </div>
-            `;
+        box.innerHTML =
+        `
+        <div class="card error">
+            ${escapeHTML(
+                error.message
+            )}
+        </div>
+        `;
 
     }
 
 }
 
 
+/* =========================
+   ACCEPT / REJECT
+========================= */
 
-/* ================= ACCEPT REQUEST ================= */
-
-async function acceptRequest(
+async function respondToRequest(
     requestId,
-    request
+    senderUid,
+    accepted
 ){
-
-    const user =
-        window.toGeoUser;
-
-    const database =
-        window.toGeoDB;
-
 
     try{
 
         await updateDoc(
             doc(
-                database,
+                db,
                 "friendRequests",
                 requestId
             ),
             {
+
                 status:
-                    "accepted"
-            }
-        );
+                    accepted
+                    ? "accepted"
+                    : "rejected",
 
-
-        const chatId =
-            [user.uid, request.fromUid]
-                .sort()
-                .join("_");
-
-
-        await setDoc(
-            doc(
-                database,
-                "friends",
-                chatId
-            ),
-            {
-
-                users:[
-                    user.uid,
-                    request.fromUid
-                ],
-
-                userEmails:[
-                    user.email,
-                    request.fromEmail
-                ],
-
-                createdAt:
+                respondedAt:
                     serverTimestamp()
 
             }
         );
 
 
-        alert(
-            "Friend request accepted!"
-        );
+        if(accepted){
+
+            const friendshipId =
+                createChatId(
+                    currentUser.uid,
+                    senderUid
+                );
 
 
-        loadRequests();
+            await setDoc(
+                doc(
+                    db,
+                    "friends",
+                    friendshipId
+                ),
+                {
 
-        loadFriends();
+                    users:[
+                        currentUser.uid,
+                        senderUid
+                    ],
 
-        loadHomeStats();
+                    createdAt:
+                        serverTimestamp()
+
+                }
+            );
+
+        }
+
+
+        await loadRequests();
+
+        await loadFriends();
+
+        await loadChats();
+
+        await loadHomeStats();
 
     }
     catch(error){
 
         console.error(
-            "ACCEPT ERROR:",
+            "RESPOND ERROR:",
             error
         );
 
 
         alert(
-            "Error: " +
+            "Could not update request:\n" +
             error.message
         );
 
     }
 
 }
-
-
-
-/* ================= REJECT REQUEST ================= */
-
-async function rejectRequest(
-    requestId
-){
-
-    const database =
-        window.toGeoDB;
-
-
-    try{
-
-        await updateDoc(
-            doc(
-                database,
-                "friendRequests",
-                requestId
-            ),
-            {
-
-                status:
-                    "rejected"
-
-            }
-        );
-
-
-        loadRequests();
-
-        loadHomeStats();
-
-    }
-    catch(error){
-
-        console.error(
-            "REJECT ERROR:",
-            error
-        );
-
-    }
-
-}
-
-
-
-/* ================= LOAD FRIENDS ================= */
+/* =========================
+   LOAD FRIENDS
+========================= */
 
 async function loadFriends(){
 
-    const user =
-        window.toGeoUser;
-
-    const database =
-        window.toGeoDB;
+    if(!currentUser) return;
 
 
-    const container =
-        document.getElementById(
-            "friendsList"
-        );
+    const box =
+        $("friendsList");
 
 
-    if(!user){
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        `
-        <div class="empty">
-            Loading friends...
-        </div>
-        `;
+    box.innerHTML =
+    `
+    <div class="empty">
+        Loading friends...
+    </div>
+    `;
 
 
     try{
 
-        const friendsQuery =
-            query(
-                collection(
-                    database,
-                    "friends"
-                ),
-                where(
-                    "users",
-                    "array-contains",
-                    user.uid
-                )
-            );
-
-
         const snapshot =
             await getDocs(
-                friendsQuery
+                query(
+                    collection(
+                        db,
+                        "friends"
+                    ),
+                    where(
+                        "users",
+                        "array-contains",
+                        currentUser.uid
+                    )
+                )
             );
 
 
         if(snapshot.empty){
 
-            container.innerHTML =
-                `
-                <div class="empty">
-                    No friends yet.
-                </div>
-                `;
+            box.innerHTML =
+            `
+            <div class="empty">
+                No friends yet.
+            </div>
+            `;
 
             return;
 
         }
 
 
-        container.innerHTML =
-            "";
+        box.innerHTML = "";
 
 
-        snapshot.forEach(
-            function(friendDoc){
+        for(
+            const friendDoc
+            of snapshot.docs
+        ){
 
-                const friend =
-                    friendDoc.data();
+            const data =
+                friendDoc.data();
 
 
-                const index =
-                    friend.users.indexOf(
-                        user.uid
+            const friendUid =
+                (data.users || [])
+                .find(
+                    function(uid){
+
+                        return (
+                            uid !==
+                            currentUser.uid
+                        );
+
+                    }
+                );
+
+
+            if(!friendUid) continue;
+
+
+            let friend = {
+
+                email:"Unknown",
+
+                name:"User"
+
+            };
+
+
+            try{
+
+                const friendSnap =
+                    await getDoc(
+                        doc(
+                            db,
+                            "users",
+                            friendUid
+                        )
                     );
 
 
-                const otherIndex =
-                    index === 0
-                    ? 1
-                    : 0;
+                if(
+                    friendSnap.exists()
+                ){
 
+                    friend =
+                        friendSnap.data();
 
-                const otherUid =
-                    friend.users[
-                        otherIndex
-                    ];
+                }
 
+            }
+            catch(error){
 
-                const otherEmail =
-                    friend.userEmails[
-                        otherIndex
-                    ];
-
-
-                const firstLetter =
-                    otherEmail
-                        .charAt(0)
-                        .toUpperCase();
-
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                card.className =
-                    "card";
-
-
-                card.innerHTML =
-                    `
-                    <div class="cardRow">
-
-                        <div class="userInfo">
-
-                            <div class="avatar">
-                                ${firstLetter}
-                            </div>
-
-                            <div class="userText">
-
-                                <h3>
-                                    ${otherEmail}
-                                </h3>
-
-                                <p>
-                                    Friend
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            class="primaryBtn"
-                        >
-                            Chat
-                        </button>
-
-                    </div>
-                    `;
-
-
-                card
-                    .querySelector(
-                        "button"
-                    )
-                    .addEventListener(
-                        "click",
-                        function(){
-
-                            openChat(
-                                otherUid,
-                                otherEmail
-                            );
-
-                        }
-                    );
-
-
-                container.appendChild(
-                    card
+                console.error(
+                    error
                 );
 
             }
-        );
 
 
-        loadHomeStats();
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "card";
+
+
+            card.innerHTML =
+            `
+            <div class="row">
+
+                <div class="user">
+
+                    <div class="avatar">
+
+                        ${escapeHTML(
+                            getUserName(friend)
+                            .charAt(0)
+                            .toUpperCase()
+                        )}
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(
+                                getUserName(friend)
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                friend.email
+                            )}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="smallBtn primary chatBtn">
+                    Chat
+                </button>
+
+            </div>
+            `;
+
+
+            card
+            .querySelector(
+                ".chatBtn"
+            )
+            .addEventListener(
+                "click",
+                function(){
+
+                    openChat(
+                        friendUid,
+                        friend
+                    );
+
+                }
+            );
+
+
+            box.appendChild(card);
+
+        }
 
     }
     catch(error){
 
         console.error(
-            "LOAD FRIENDS ERROR:",
+            "FRIENDS ERROR:",
             error
         );
 
 
-        container.innerHTML =
-            `
-            <div class="card">
-                ${error.message}
-            </div>
-            `;
+        box.innerHTML =
+        `
+        <div class="card error">
+            ${escapeHTML(
+                error.message
+            )}
+        </div>
+        `;
 
     }
 
 }
 
 
+/* =========================
+   LOAD CHATS
+========================= */
 
-/* ================= CHAT ================= */
+async function loadChats(){
 
-let activeChatUid =
-    null;
-
-let activeChatEmail =
-    null;
-
-let unsubscribeMessages =
-    null;
+    if(!currentUser) return;
 
 
-
-function openChat(
-    otherUid,
-    otherEmail
-){
-
-    activeChatUid =
-        otherUid;
-
-    activeChatEmail =
-        otherEmail;
+    const box =
+        $("chatsList");
 
 
-    document.getElementById(
-        "chatTitle"
-    ).textContent =
-        otherEmail;
+    box.innerHTML =
+    `
+    <div class="empty">
+        Loading chats...
+    </div>
+    `;
 
 
-    document.getElementById(
-        "chatWindow"
-    ).style.display =
-        "flex";
+    try{
+
+        const snapshot =
+            await getDocs(
+                query(
+                    collection(
+                        db,
+                        "friends"
+                    ),
+                    where(
+                        "users",
+                        "array-contains",
+                        currentUser.uid
+                    )
+                )
+            );
 
 
-    loadMessages(
-        otherUid
-    );
+        if(snapshot.empty){
 
-}
+            box.innerHTML =
+            `
+            <div class="empty">
+                Add friends to start chatting.
+            </div>
+            `;
+
+            return;
+
+        }
 
 
+        box.innerHTML = "";
 
-document
-    .getElementById("backChatBtn")
-    .addEventListener(
-        "click",
-        function(){
 
-            if(unsubscribeMessages){
+        for(
+            const friendDoc
+            of snapshot.docs
+        ){
 
-                unsubscribeMessages();
+            const data =
+                friendDoc.data();
 
-                unsubscribeMessages =
-                    null;
+
+            const friendUid =
+                (data.users || [])
+                .find(
+                    function(uid){
+
+                        return (
+                            uid !==
+                            currentUser.uid
+                        );
+
+                    }
+                );
+
+
+            if(!friendUid) continue;
+
+
+            let friend = {
+
+                email:"Unknown",
+
+                name:"User"
+
+            };
+
+
+            try{
+
+                const friendSnap =
+                    await getDoc(
+                        doc(
+                            db,
+                            "users",
+                            friendUid
+                        )
+                    );
+
+
+                if(
+                    friendSnap.exists()
+                ){
+
+                    friend =
+                        friendSnap.data();
+
+                }
+
+            }
+            catch(error){
+
+                console.error(
+                    error
+                );
 
             }
 
 
-            document.getElementById(
-                "chatWindow"
-            ).style.display =
-                "none";
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "card";
+
+
+            card.innerHTML =
+            `
+            <div class="row">
+
+                <div class="user">
+
+                    <div class="avatar">
+
+                        ${escapeHTML(
+                            getUserName(friend)
+                            .charAt(0)
+                            .toUpperCase()
+                        )}
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(
+                                getUserName(friend)
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                friend.email
+                            )}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="smallBtn primary openChatBtn">
+                    Open
+                </button>
+
+            </div>
+            `;
+
+
+            card
+            .querySelector(
+                ".openChatBtn"
+            )
+            .addEventListener(
+                "click",
+                function(){
+
+                    openChat(
+                        friendUid,
+                        friend
+                    );
+
+                }
+            );
+
+
+            box.appendChild(card);
 
         }
-    );
+
+    }
+    catch(error){
+
+        console.error(
+            "CHATS ERROR:",
+            error
+        );
 
 
+        box.innerHTML =
+        `
+        <div class="card error">
+            ${escapeHTML(
+                error.message
+            )}
+        </div>
+        `;
 
-/* ================= LOAD MESSAGES ======
+    }
+
+}
+/* =========================
+   OPEN CHAT
+========================= */
+
+async function openChat(
+    friendUid,
+    friend
+){
+
+    if(!currentUser) return;
+
+
+    currentChatFriend = {
+
+        uid:
+            friendUid,
+
+        email:
+            friend.email,
+
+        name:
+            friend.name
+
+    };
+
+
+    $("chatTitle")
+        .textContent =
+        getUserName(friend);
+
+
+    $("chatWindow")
+        .style.display =
+        "flex";
+
+
+    $("chatMessages")
+        .innerHTML =
+        `
+        <div class="empty">
+            Loading messages...
+        </div>
+        `;
+
+
+    if(
+        unsubscribeMessages
+    ){
+
+        unsubscribeMessages();
+
+        unsubscribeMessages =
+            null;
+
+    }
+
+
+    const chatId =
+        createChatId(
+            currentUser.uid,
+            friendUid
+        );
+
+
+    const messagesRef =
+        collection(
+            db,
+            "chats",
+            chatId,
+            "messages"
+        );
+
+
+    const messagesQuery =
+        query(
+            messagesRef,
+            orderBy(
+                "timestamp",
+                "asc"
+            )
+        );
+
+
+    unsubscribeMessages =
+        onSnapshot(
+            messagesQuery,
+
+            function(snapshot){
+
+                const box =
+                    $("chatMessages");
+
+
+                box.innerHTML = "";
+
+
+                if(
+                    snapshot.empty
+                ){
+
+                    box.innerHTML =
+                    `
+                    <div class="empty">
+                        No messages yet.<br>
+                        Say hello 👋
+                    </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                snapshot.forEach(
+                    function(messageDoc){
+
+                        const message =
+                            messageDoc.data();
+
+
+                        const bubble =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        const mine =
+                            message.senderId ===
+                            currentUser.uid;
+
+
+                        bubble.className =
+                            "messageBubble " +
+                            (
+                                mine
+                                ? "myMessage"
+                                : "otherMessage"
+                            );
+
+
+                        bubble.textContent =
+                            message.text || "";
+
+
+                        box.appendChild(
+                            bubble
+                        );
+
+                    }
+                );
+
+
+                box.scrollTop =
+                    box.scrollHeight;
+
+            },
+
+            function(error){
+
+                console.error(
+                    "CHAT LISTENER ERROR:",
+                    error
+                );
+
+
+                $("chatMessages")
+                    .innerHTML =
+                    `
+                    <div class="empty error">
+
+                        Unable to load messages.
+
+                        <br><br>
+
+                        ${escapeHTML(
+                            error.message
+                        )}
+
+                    </div>
+                    `;
+
+            }
+
+        );
+
+}
+
+
+/* =========================
+   BACK CHAT
+========================= */
+
+$("backChatBtn")
+.addEventListener(
+    "click",
+    function(){
+
+        if(
+            unsubscribeMessages
+        ){
+
+            unsubscribeMessages();
+
+            unsubscribeMessages =
+                null;
+
+        }
+
+
+        currentChatFriend =
+            null;
+
+
+        $("chatWindow")
+            .style.display =
+            "none";
+
+
+        $("chatMessages")
+            .innerHTML =
+            "";
+
+        $("chatInput")
+            .value =
+            "";
+
+    }
+);
+
+
+/* =========================
+   SEND MESSAGE
+========================= */
+
+$("sendBtn")
+.addEventListener(
+    "click",
+    sendMessage
+);
+
+
+$("chatInput")
+.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter"
+        ){
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+
+async function sendMessage(){
+
+    if(
+        !currentUser ||
+        !currentChatFriend
+    ){
+
+        return;
+
+    }
+
+
+    const input =
+        $("chatInput");
+
+
+    const text =
+        input.value.trim();
+
+
+    if(!text){
+
+        return;
+
+    }
+
+
+    input.value = "";
+
+
+    $("sendBtn")
+        .disabled =
+        true;
+
+
+    try{
+
+        const chatId =
+            createChatId(
+                currentUser.uid,
+                currentChatFriend.uid
+            );
+
+
+        await addDoc(
+            collection(
+                db,
+                "chats",
+                chatId,
+                "messages"
+            ),
+            {
+
+                text:
+                    text,
+
+                senderId:
+                    currentUser.uid,
+
+                senderEmail:
+                    currentUser.email,
+
+                timestamp:
+                    serverTimestamp()
+
+            }
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "SEND MESSAGE ERROR:",
+            error
+        );
+
+
+        alert(
+            "Message could not be sent:\n" +
+            error.message
+        );
+
+
+        input.value =
+            text;
+
+    }
+    finally{
+
+        $("sendBtn")
+            .disabled =
+            false;
+
+    }
+
+}
+</script>
+
+</body>
+
+</html>
