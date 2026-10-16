@@ -1,164 +1,723 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Web Clone</title>
-    <!-- Socket.io Client -->
-    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #dadbd4; height: 100vh; display: flex; justify-content: center; align-items: center; }
-        
-        /* Login Screen Overlay */
-        #login-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #00a884; display: flex; justify-content: center; align-items: center; z-index: 10;
-        }
-        .login-box { background: white; padding: 30px; border-radius: 8px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 300px; }
-        .login-box input { width: 100%; padding: 10px; margin: 15px 0; border: 1px solid #ccc; border-radius: 4px; outline: none; }
-        .login-box button { background: #00a884; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToGeo | Connect & Chat</title>
+<style>
+:root {
+    --primary: #059669;
+    --primary-gradient: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+    --bg-gradient: radial-gradient(circle at top left, #064e3b, #022c22);
+    --card-bg: rgba(6, 78, 59, 0.4);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #34d399;
+    --danger: #f43f5e;
+    --success: #10b981;
+}
 
-        /* Main App Layout */
-        .app-container { display: flex; width: 90vw; height: 90vh; background: #f0f2f5; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border-radius: 3px; overflow: hidden; }
-        
-        /* Sidebar */
-        .sidebar { width: 30%; background: white; border-right: 1px solid #e2e2e2; display: flex; flex-direction: column; }
-        .sidebar-header { padding: 15px; background: #f0f2f5; font-weight: bold; border-bottom: 1px solid #ddd; }
-        .user-list { flex: 1; overflow-y: auto; padding: 10px; }
-        .user-item { padding: 10px; border-bottom: 1px solid #f0f2f5; font-size: 14px; color: #333; }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
 
-        /* Chat Area */
-        .chat-area { width: 70%; display: flex; flex-direction: column; background: #efeae2; }
-        .chat-header { padding: 15px; background: #f0f2f5; font-weight: bold; border-bottom: 1px solid #ddd; }
-        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        
-        /* Message Bubbles */
-        .message { max-width: 60%; padding: 8px 12px; border-radius: 7.5px; position: relative; font-size: 14px; word-wrap: break-word; box-shadow: 0 1px 0.5px rgba(0,0,0,0.13); }
-        .message.incoming { background: white; align-self: flex-start; border-top-left-radius: 0; }
-        .message.outgoing { background: #d9fdd3; align-self: flex-end; border-top-right-radius: 0; }
-        .message .meta { font-size: 10px; color: #999; text-align: right; margin-top: 4px; }
-        
-        /* Chat Input */
-        .chat-input-area { padding: 10px 20px; background: #f0f2f5; display: flex; gap: 10px; align-items: center; }
-        .chat-input-area input { flex: 1; padding: 10px 15px; border: none; border-radius: 8px; outline: none; font-size: 14px; }
-        .chat-input-area button { background: #00a884; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-    </style>
+body{
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    min-height: 100vh;
+}
+
+button, input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+    border:none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* =========================
+   LOGIN / AUTH PAGE
+========================= */
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background: radial-gradient(circle at bottom right, #065f46, #022c22);
+}
+
+.loginBox{
+    width:100%;
+    max-width:440px;
+    background: rgba(6, 78, 59, 0.65);
+    backdrop-filter: blur(20px);
+    padding:40px 30px;
+    border-radius:28px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.logo{
+    text-align:center;
+    font-size:46px;
+    font-weight:900;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+    filter: drop-shadow(0 4px 12px rgba(16, 185, 129, 0.3));
+}
+
+.tagline{
+    text-align:center;
+    color:var(--text-muted);
+    font-size: 14px;
+    margin-top:8px;
+    margin-bottom:30px;
+}
+
+.field{
+    margin-bottom:20px;
+}
+
+.field label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom:8px;
+    color: var(--accent);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.field input{
+    width:100%;
+    padding:14px 16px;
+    border:2px solid rgba(255, 255, 255, 0.1);
+    border-radius:14px;
+    outline:none;
+    font-size: 15px;
+    background: rgba(2, 44, 34, 0.8);
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.field input:focus{
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.3);
+    background: rgba(2, 44, 34, 0.95);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 14px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+.toggle-password:hover { color: #fff; background: rgba(255,255,255,0.1); }
+
+.authButtons{
+    display:flex;
+    gap:12px;
+    margin-top:25px;
+}
+
+.authButtons button{
+    flex:1;
+    padding:14px;
+    border-radius:14px;
+    font-weight:700;
+    font-size: 15px;
+}
+
+.primary{
+    background: var(--primary-gradient);
+    color:#ffffff;
+    box-shadow: 0 8px 20px rgba(5, 150, 105, 0.4);
+}
+.primary:hover{ opacity: 0.92; box-shadow: 0 10px 25px rgba(5, 150, 105, 0.6); }
+
+.secondary{
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.secondary:hover{ background: rgba(255, 255, 255, 0.15); }
+
+#message{
+    min-height:24px;
+    text-align:center;
+    margin-top:20px;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* =========================
+   MAIN APP NAVIGATION & LAYOUT
+========================= */
+#mainApp{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.topBar{
+    height:70px;
+    background: rgba(2, 44, 34, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom:1px solid rgba(255, 255, 255, 0.08);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 24px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.topLogo{
+    font-size:26px;
+    font-weight:900;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logoutBtn{
+    background: rgba(244, 63, 94, 0.15);
+    color: var(--danger);
+    border: 1px solid rgba(244, 63, 94, 0.3);
+    padding:10px 18px;
+    border-radius:12px;
+    font-weight:700;
+}
+.logoutBtn:hover { background: rgba(244, 63, 94, 0.25); }
+
+.nav{
+    display:flex;
+    overflow-x:auto;
+    background: rgba(2, 44, 34, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid rgba(255, 255, 255, 0.08);
+    padding:10px 20px;
+    gap:10px;
+    position:sticky;
+    top:70px;
+    z-index:9;
+}
+
+.nav button{
+    white-space:nowrap;
+    background: transparent;
+    padding:10px 20px;
+    border-radius:12px;
+    color: var(--text-muted);
+    font-weight:700;
+}
+.nav button:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+.nav button.active{
+    background: var(--primary-gradient);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4);
+}
+
+.content{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:28px 16px;
+    flex: 1;
+}
+
+.section{ display:none; }
+.section.active{ display:block; animation: fadeIn 0.4s ease-in-out; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================
+   CARDS & STATS
+========================= */
+.card{
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius:20px;
+    padding:26px;
+    margin-bottom:18px;
+    box-shadow:0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card h2{ font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.muted{ color: var(--text-muted); font-size:14px; }
+
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-top:20px;
+}
+
+.stat{
+    padding:20px;
+    background: rgba(2, 44, 34, 0.6);
+    border-radius:16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    font-weight: 600;
+}
+.stat b{
+    display:block;
+    font-size:34px;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top:8px;
+}
+
+/* SEARCH & LISTS */
+.searchBox{ display:flex; gap:12px; margin-top:18px; }
+.searchBox input{
+    flex:1;
+    padding:14px 18px;
+    border:2px solid rgba(255, 255, 255, 0.1);
+    border-radius:14px;
+    outline:none;
+    font-size: 15px;
+    background: rgba(2, 44, 34, 0.8);
+    color: #fff;
+}
+.searchBox input:focus { border-color: var(--primary); }
+
+.row{ display:flex; align-items:center; justify-content:space-between; gap:14px; }
+.user{ display:flex; align-items:center; gap:16px; min-width:0; }
+
+.avatar{
+    width:52px;
+    height:52px;
+    min-width:52px;
+    border-radius:50%;
+    background: var(--primary-gradient);
+    color:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size: 20px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+}
+
+.online-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 14px;
+    height: 14px;
+    background: var(--success);
+    border: 2px solid #022c22;
+    border-radius: 50%;
+}
+
+.user h3{ font-size:17px; font-weight: 700; color: #fff; }
+.user p{ font-size:13px; color:var(--text-muted); }
+
+.actionButtons { display: flex; gap: 8px; }
+
+.smallBtn{ padding:10px 16px; border-radius:12px; font-weight:700; font-size: 13px; }
+.success{ background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+.success:hover { background: rgba(16, 185, 129, 0.25); }
+
+.dangerBtn { background: rgba(244, 63, 94, 0.15); color: var(--danger); border: 1px solid rgba(244, 63, 94, 0.3); }
+.dangerBtn:hover { background: rgba(244, 63, 94, 0.25); }
+
+.empty{ text-align:center; color:var(--text-muted); padding:35px; }
+.error{ color: var(--danger); font-weight: 600; margin-top: 10px; }
+
+/* =========================
+   WHATSAPP STYLE CHAT WINDOW
+========================= */
+#chatWindow{
+    position:fixed;
+    inset:0;
+    background: #022c22;
+    z-index:50;
+    display:none;
+    flex-direction:column;
+}
+
+.chatHeader{
+    height:75px;
+    background: rgba(2, 44, 34, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom:1px solid rgba(255, 255, 255, 0.08);
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    padding:0 20px;
+}
+
+.chatHeaderLeft { display: flex; align-items: center; gap: 12px; }
+.chatHeaderRight { display: flex; gap: 10px; }
+
+.callBtn {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+}
+.callBtn:hover { background: rgba(255, 255, 255, 0.15); }
+
+.backBtn{ background: rgba(255, 255, 255, 0.08); color: #fff; padding:10px 14px; border-radius:12px; font-weight: 700; }
+.backBtn:hover { background: rgba(255, 255, 255, 0.15); }
+
+.chatTitle{ font-weight:800; font-size: 16px; color: #fff; }
+.chatSubtitle { font-size: 12px; color: var(--accent); }
+
+#chatMessages{
+    flex:1;
+    overflow-y:auto;
+    padding:24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.messageBubble{
+    max-width:75%;
+    padding:12px 16px;
+    border-radius:16px;
+    word-wrap:break-word;
+    font-size: 14px;
+    position: relative;
+}
+
+.myMessage{
+    margin-left:auto;
+    background: #059669;
+    color:#ffffff;
+    border-bottom-right-radius:4px;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+}
+
+.otherMessage{
+    background: rgba(6, 78, 59, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom-left-radius:4px;
+    color: #fff;
+}
+
+.msg-status {
+    font-size: 11px;
+    float: right;
+    margin-left: 8px;
+    margin-top: 4px;
+    color: #a7f3d0;
+}
+
+.chatInputArea{
+    display:flex;
+    gap:12px;
+    background: rgba(2, 44, 34, 0.95);
+    border-top:1px solid rgba(255, 255, 255, 0.08);
+    padding:16px 20px;
+    align-items: center;
+}
+
+.chatInputArea input{
+    flex:1;
+    padding:14px 18px;
+    border:2px solid rgba(255, 255, 255, 0.1);
+    border-radius:14px;
+    outline:none;
+    font-size: 15px;
+    background: rgba(2, 44, 34, 0.8);
+    color: #fff;
+}
+.chatInputArea input:focus { border-color: var(--primary); }
+</style>
 </head>
+
 <body>
 
-    <!-- Login Prompt -->
-    <div id="login-screen">
-        <div class="login-box">
-            <h2>WhatsApp Clone</h2>
-            <p style="color: #666; font-size: 13px; margin-top: 5px;">Enter your name to start chatting</p>
-            <input type="text" id="username-input" placeholder="Your Name..." autocomplete="off">
-            <button onclick="login()">Join Chat</button>
+<!-- AUTH & LOGIN PAGE -->
+<div id="loginPage">
+    <div class="loginBox">
+        <div class="logo">ToGeo</div>
+        <div class="tagline">Connect. Chat. Watch. Listen. Together.</div>
+
+        <div id="stepAuthMode" class="field">
+            <label>Login / Signup Mode</label>
+            <div class="authButtons" style="margin-top:10px;">
+                <button type="button" id="useEmailMode" class="primary">Email & Password</button>
+                <button type="button" id="usePhoneMode" class="secondary">Phone Number (OTP)</button>
+            </div>
+        </div>
+
+        <div id="emailForm" class="hidden">
+            <div class="field">
+                <label>Email Address</label>
+                <input id="emailInput" type="email" autocomplete="email" placeholder="Enter your email">
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <div class="input-wrapper">
+                    <input id="emailPassword" type="password" autocomplete="current-password" placeholder="Minimum 6 characters">
+                    <button type="button" class="toggle-password" id="toggleEmailPass">Show</button>
+                </div>
+            </div>
+            <div class="authButtons">
+                <button type="button" id="emailLoginBtn" class="primary">Login</button>
+                <button type="button" id="emailSignupBtn" class="secondary">Sign Up</button>
+            </div>
+        </div>
+
+        <div id="phoneForm" class="hidden">
+            <div class="field" id="phoneInputBox">
+                <label>Phone Number</label>
+                <input id="phoneInput" type="tel" autocomplete="tel" placeholder="+919876543210">
+                <div class="authButtons" style="margin-top:15px;">
+                    <button type="button" id="sendOtpBtn" class="primary">Send OTP</button>
+                </div>
+            </div>
+            <div class="field hidden" id="otpInputBox">
+                <label>Enter 6-Digit OTP</label>
+                <input id="otpInput" type="text" autocomplete="one-time-code" placeholder="Enter OTP">
+                <div class="authButtons" style="margin-top:15px;">
+                    <button type="button" id="verifyOtpBtn" class="primary">Verify OTP</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="stepUsername" class="field hidden">
+            <label>Create Unique Username</label>
+            <input id="usernameChoice" type="text" autocomplete="username" placeholder="e.g. rohit_123">
+            <div class="authButtons" style="margin-top:20px;">
+                <button type="button" id="completeSignupBtn" class="primary">Get Started</button>
+            </div>
+        </div>
+
+        <div id="recaptcha-container"></div>
+        <div id="message"></div>
+    </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp" class="hidden">
+    <div class="topBar">
+        <div class="topLogo">ToGeo</div>
+        <button type="button" id="logoutBtn" class="logoutBtn">Logout</button>
+    </div>
+
+    <div class="nav">
+        <button type="button" class="navBtn active" data-section="home">Home</button>
+        <button type="button" class="navBtn" data-section="friends">Friends</button>
+        <button type="button" class="navBtn" data-section="requests">Requests</button>
+        <button type="button" class="navBtn" data-section="chats">Chats</button>
+        <button type="button" class="navBtn" data-section="settings">Settings</button>
+    </div>
+
+    <main class="content">
+        <section id="homeSection" class="section active">
+            <div class="card">
+                <h2 id="welcomeText">Welcome</h2>
+                <p class="muted">Your WhatsApp-style secure communication hub.</p>
+                <div class="stats">
+                    <div class="stat">Friends<b id="friendCount">0</b></div>
+                    <div class="stat">Requests<b id="requestCount">0</b></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="friendsSection" class="section">
+            <div class="card">
+                <h2>Find Friends</h2>
+                <p class="muted">Search using exact unique username.</p>
+                <div class="searchBox">
+                    <input id="searchInput" type="text" placeholder="Enter username to search">
+                    <button type="button" id="searchBtn" class="primary">Search</button>
+                </div>
+            </div>
+            <div id="searchResult"></div>
+            <div id="friendsList"></div>
+        </section>
+
+        <section id="requestsSection" class="section">
+            <div class="card">
+                <h2>Friend Requests</h2>
+                <p class="muted">Manage incoming connection requests.</p>
+            </div>
+            <div id="requestsList"></div>
+        </section>
+
+        <section id="chatsSection" class="section">
+            <div class="card">
+                <h2>Private Chats</h2>
+                <p class="muted">Active conversations with double ticks & status.</p>
+            </div>
+            <div id="chatsList"></div>
+        </section>
+
+        <section id="settingsSection" class="section">
+            <div class="card">
+                <h2>Settings</h2>
+                <p class="muted">Logged in Username</p>
+                <p id="accountUsername" style="margin-top:8px; font-weight:bold; font-size: 16px; color: var(--accent);"></p>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- WHATSAPP STYLE CHAT WINDOW -->
+<div id="chatWindow">
+    <div class="chatHeader">
+        <div class="chatHeaderLeft">
+            <button type="button" id="backChatBtn" class="backBtn">←</button>
+            <div class="avatar" id="chatAvatar" style="width:40px;height:40px;font-size:16px;">
+                U<div class="online-dot"></div>
+            </div>
+            <div>
+                <div id="chatTitle" class="chatTitle">Chat</div>
+                <div id="chatStatusSubtitle" class="chatSubtitle">online</div>
+            </div>
+        </div>
+        <div class="chatHeaderRight">
+            <button type="button" class="callBtn" onclick="alert('Starting Voice Call...')">📞</button>
+            <button type="button" class="callBtn" onclick="alert('Starting Video Call...')">📹</button>
         </div>
     </div>
 
-    <!-- Main Chat Container -->
-    <div class="app-container" id="app-container" style="display: none;">
-        <!-- Sidebar showing active participants -->
-        <div class="sidebar">
-            <div class="sidebar-header" id="current-user-label">Chats</div>
-            <div class="user-list" id="user-list">
-                <!-- Dynamically populated active users -->
-            </div>
-        </div>
+    <div id="chatMessages"></div>
 
-        <!-- Conversation window -->
-        <div class="chat-area">
-            <div class="chat-header">Global Community Chat Room</div>
-            <div class="chat-messages" id="chat-messages">
-                <!-- Dynamically populated messages -->
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="message-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()">Send</button>
-            </div>
-        </div>
+    <div class="chatInputArea">
+        <input id="chatInput" type="text" placeholder="Type a message...">
+        <button type="button" id="sendMsgBtn" class="primary">Send</button>
     </div>
+</div>
 
-    <script>
-        let socket;
-        let currentUser = '';
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { 
+    getAuth, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    signInWithPhoneNumber, 
+    RecaptchaVerifier, 
+    onAuthStateChanged, 
+    signOut 
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import { 
+    getFirestore, 
+    collection, 
+    query, 
+    where, 
+    getDocs, 
+    addDoc, 
+    updateDoc, 
+    deleteDoc,
+    doc, 
+    setDoc, 
+    getDoc, 
+    onSnapshot, 
+    orderBy, 
+    serverTimestamp 
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-        function login() {
-            const input = document.getElementById('username-input').value.trim();
-            if (!input) {
-                alert('Please enter a valid username');
-                return;
-            }
-            currentUser = input;
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('app-container').style.display = 'flex';
-            document.getElementById('current-user-label').innerText = `Logged in as: ${currentUser}`;
+const firebaseConfig = {
+    apiKey: "AIzaSyCMYx-0G0gCJMhuV-uHZGoYqNQwkQtAUc8",
+    authDomain: "togeo-8e24c.firebaseapp.com",
+    projectId: "togeo-8e24c",
+    storageBucket: "togeo-8e24c.firebasestorage.app",
+    messagingSenderId: "772918055389",
+    appId: "1:772918055389:web:14605859a71cf22860e634",
+    measurementId: "G-DF8JCSHQCH"
+};
 
-            // Initialize Socket connection to backend server
-            socket = io('http://localhost:3000');
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-            socket.emit('join', currentUser);
+let currentUser = null;
+let currentChatFriend = null;
+let confirmationResultObj = null;
+let unsubscribeRequests = null;
+let unsubscribeMessages = null;
 
-            // Listen for incoming messages
-            socket.on('receive_message', (data) => {
-                appendMessage(data);
-            });
+const $ = (id) => document.getElementById(id);
 
-            // Listen for updates to active user list
-            socket.on('update_users', (users) => {
-                const userListEl = document.getElementById('user-list');
-                userListEl.innerHTML = '<p style="font-size:12px; color:#666; margin-bottom:8px;">Active Users:</p>';
-                users.forEach(user => {
-                    const div = document.createElement('div');
-                    div.className = 'user-item';
-                    div.innerText = `🟢 ${user}`;
-                    userListEl.appendChild(div);
-                });
-            });
-        }
+function showMessage(text, success = false) {
+    const box = $("message");
+    box.textContent = text;
+    box.style.color = success ? "var(--success)" : "var(--danger)";
+}
 
-        function sendMessage() {
-            const inputEl = document.getElementById('message-input');
-            const message = inputEl.value.trim();
-            if (!message) return;
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, function(char) {
+        return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[char];
+    });
+}
 
-            socket.emit('send_message', {
-                sender: currentUser,
-                message: message
-            });
+function createChatId(uid1, uid2) {
+    return [uid1, uid2].sort().join("_");
+}
 
-            inputEl.value = '';
-        }
+/* AUTH MODES */
+$("useEmailMode").addEventListener("click", () => {
+    $("stepAuthMode").classList.add("hidden");
+    $("emailForm").classList.remove("hidden");
+});
 
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
+$("usePhoneMode").addEventListener("click", () => {
+    $("stepAuthMode").classList.add("hidden");
+    $("phoneForm").classList.remove("hidden");
+});
 
-        function appendMessage(data) {
-            const messagesContainer = document.getElementById('chat-messages');
-            const messageDiv = document.createElement('div');
-            
-            const isOutgoing = data.sender === currentUser;
-            messageDiv.className = `message ${isOutgoing ? 'outgoing' : 'incoming'}`;
-            
-            messageDiv.innerHTML = `
-                ${!isOutgoing ? `<div style="font-size:11px; font-weight:bold; color:#00a884; margin-bottom:2px;">${data.sender}</div>` : ''}
-                <div>${escapeHtml(data.message)}</div>
-                <div class="meta">${data.timestamp}</div>
-            `;
-            
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight; // Auto scroll to bottom
-        }
+$("toggleEmailPass").addEventListener("click", () => {
+    const passInput = $("emailPassword");
+    passInput.type = passInput.type === "password" ? "text" : "password";
+    $("toggleEmailPass").textContent = passInput.type === "password" ? "Show" : "Hide";
+});
 
-        // Simple security utility to prevent script injection via chat
-        function escapeHtml(text) {
-            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-            return text.replace(/[&<>"']/g, m => map[m]);
-        }
-    </script>
-</body>
-</html>
+window.onload = function() {
+    if ($("recaptcha-container")) {
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', { 'size': 'invisible' });
+    }
+};
+
+$("emailSignupBtn").addEventListener("click", async () => {
+    const email = $("emailInput").value.trim();
+    const password = $("emailPassword").value;
+    if (!email || !password) { showMessage("Fill all fields."); return; }
+    
+    showMessage("Creating account...", true);
+    try {
+        const res = await createUserWithEmailAndPassword(auth, email, pa
