@@ -1,1090 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ToGeo | Connect & Chat</title>
-<style>
-:root {
-    --primary: #6366f1;
-    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-    --bg-gradient: radial-gradient(circle at top left, #1e1b4b, #0f172a);
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --accent: #38bdf8;
-    --danger: #f43f5e;
-    --success: #10b981;
-}
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-}
-
-body{
-    background: var(--bg-gradient);
-    color: var(--text-main);
-    min-height: 100vh;
-}
-
-button, input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-    border:none;
-    transition: all 0.3s ease;
-}
-
-button:active {
-    transform: scale(0.96);
-}
-
-.hidden{
-    display:none !important;
-}
-
-/* =========================
-   LOGIN / AUTH PAGE (Neon & Glass)
-========================= */
-#loginPage{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background: radial-gradient(circle at bottom right, #312e81, #0f172a);
-}
-
-.loginBox{
-    width:100%;
-    max-width:440px;
-    background: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(16px);
-    padding:40px 30px;
-    border-radius:28px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.logo{
-    text-align:center;
-    font-size:46px;
-    font-weight:900;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -1px;
-    text-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
-}
-
-.tagline{
-    text-align:center;
-    color:var(--text-muted);
-    font-size: 14px;
-    margin-top:8px;
-    margin-bottom:30px;
-}
-
-.field{
-    margin-bottom:20px;
-}
-
-.field label{
-    display:block;
-    font-size:12px;
-    font-weight:700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom:8px;
-    color: var(--accent);
-}
-
-.input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.field input{
-    width:100%;
-    padding:14px 16px;
-    border:2px solid rgba(255, 255, 255, 0.1);
-    border-radius:14px;
-    outline:none;
-    font-size: 15px;
-    background: rgba(15, 23, 42, 0.6);
-    color: #fff;
-    transition: all 0.3s;
-}
-
-.field input:focus{
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
-    background: rgba(15, 23, 42, 0.9);
-}
-
-.toggle-password {
-    position: absolute;
-    right: 14px;
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 8px;
-}
-.toggle-password:hover {
-    color: #fff;
-    background: rgba(255,255,255,0.1);
-}
-
-.authButtons{
-    display:flex;
-    gap:12px;
-    margin-top:25px;
-}
-
-.authButtons button{
-    flex:1;
-    padding:14px;
-    border-radius:14px;
-    font-weight:700;
-    font-size: 15px;
-}
-
-.primary{
-    background: var(--primary-gradient);
-    color:#ffffff;
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
-}
-.primary:hover{
-    opacity: 0.9;
-    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.6);
-}
-
-.secondary{
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.secondary:hover{
-    background: rgba(255, 255, 255, 0.15);
-}
-
-#message{
-    min-height:24px;
-    text-align:center;
-    margin-top:20px;
-    font-size:14px;
-    font-weight:600;
-}
-
-/* =========================
-   MAIN APP
-========================= */
-#mainApp{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-}
-
-.topBar{
-    height:70px;
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom:1px solid rgba(255, 255, 255, 0.08);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 24px;
-    position:sticky;
-    top:0;
-    z-index:10;
-}
-
-.topLogo{
-    font-size:26px;
-    font-weight:900;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -0.5px;
-}
-
-.logoutBtn{
-    background: rgba(244, 63, 94, 0.15);
-    color: var(--danger);
-    border: 1px solid rgba(244, 63, 94, 0.3);
-    padding:10px 18px;
-    border-radius:12px;
-    font-weight:700;
-    font-size: 14px;
-}
-.logoutBtn:hover {
-    background: rgba(244, 63, 94, 0.25);
-}
-
-.nav{
-    display:flex;
-    overflow-x:auto;
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(10px);
-    border-bottom:1px solid rgba(255, 255, 255, 0.08);
-    padding:10px 20px;
-    gap:10px;
-    position:sticky;
-    top:70px;
-    z-index:9;
-}
-
-.nav button{
-    white-space:nowrap;
-    background: transparent;
-    padding:10px 20px;
-    border-radius:12px;
-    color: var(--text-muted);
-    font-weight:700;
-    font-size: 14px;
-}
-
-.nav button:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.nav button.active{
-    background: var(--primary-gradient);
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-}
-
-.content{
-    width:100%;
-    max-width:900px;
-    margin:auto;
-    padding:28px 16px;
-    flex: 1;
-}
-
-.section{
-    display:none;
-}
-
-.section.active{
-    display:block;
-    animation: fadeIn 0.4s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* CARDS & STATS (Glassmorphism) */
-.card{
-    background: rgba(30, 41, 59, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius:20px;
-    padding:26px;
-    margin-bottom:18px;
-    box-shadow:0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.card h2{
-    font-size: 22px;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 6px;
-}
-
-.muted{
-    color: var(--text-muted);
-    font-size:14px;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-    margin-top:20px;
-}
-
-.stat{
-    padding:20px;
-    background: rgba(15, 23, 42, 0.5);
-    border-radius:16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    font-weight: 600;
-    color: var(--text-muted);
-}
-
-.stat b{
-    display:block;
-    font-size:34px;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top:8px;
-    font-weight: 900;
-}
-
-/* SEARCH & LISTS */
-.searchBox{
-    display:flex;
-    gap:12px;
-    margin-top:18px;
-}
-
-.searchBox input{
-    flex:1;
-    padding:14px 18px;
-    border:2px solid rgba(255, 255, 255, 0.1);
-    border-radius:14px;
-    outline:none;
-    font-size: 15px;
-    background: rgba(15, 23, 42, 0.6);
-    color: #fff;
-}
-
-.searchBox input:focus{
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
-}
-
-.searchBox button{
-    padding:0 24px;
-    border-radius:14px;
-    font-weight: 700;
-}
-
-.row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:14px;
-}
-
-.user{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    min-width:0;
-}
-
-.avatar{
-    width:52px;
-    height:52px;
-    min-width:52px;
-    border-radius:50%;
-    background: var(--primary-gradient);
-    color:#ffffff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:900;
-    font-size: 20px;
-    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
-}
-
-.user h3{
-    font-size:17px;
-    font-weight: 700;
-    color: #fff;
-}
-
-.user p{
-    font-size:13px;
-    color:var(--text-muted);
-}
-
-.smallBtn{
-    padding:10px 18px;
-    border-radius:12px;
-    font-weight:700;
-    font-size: 13px;
-}
-
-.success{
-    background: rgba(16, 185, 129, 0.15);
-    color: var(--success);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-}
-.success:hover { background: rgba(16, 185, 129, 0.25); }
-
-.empty{
-    text-align:center;
-    color:var(--text-muted);
-    padding:35px;
-    font-weight: 500;
-}
-
-.error{
-    color: var(--danger);
-    font-weight: 600;
-    margin-top: 10px;
-}
-
-/* CHAT WINDOW */
-#chatWindow{
-    position:fixed;
-    inset:0;
-    background: #0f172a;
-    z-index:50;
-    display:none;
-    flex-direction:column;
-}
-
-.chatHeader{
-    height:70px;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom:1px solid rgba(255, 255, 255, 0.08);
-    display:flex;
-    align-items:center;
-    gap:16px;
-    padding:0 20px;
-}
-
-.backBtn{
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-    padding:10px 16px;
-    border-radius:12px;
-    font-weight: 700;
-}
-.backBtn:hover { background: rgba(255, 255, 255, 0.15); }
-
-.chatTitle{
-    font-weight:800;
-    font-size: 18px;
-    color: #fff;
-}
-
-#chatMessages{
-    flex:1;
-    overflow-y:auto;
-    padding:24px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.messageBubble{
-    max-width:75%;
-    padding:14px 18px;
-    border-radius:18px;
-    word-wrap:break-word;
-    font-size: 15px;
-    line-height: 1.4;
-}
-
-.myMessage{
-    margin-left:auto;
-    background: var(--primary-gradient);
-    color:#ffffff;
-    border-bottom-right-radius:4px;
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
-}
-
-.otherMessage{
-    background: rgba(30, 41, 59, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom-left-radius:4px;
-    color: #fff;
-}
-
-.chatInputArea{
-    display:flex;
-    gap:12px;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(12px);
-    border-top:1px solid rgba(255, 255, 255, 0.08);
-    padding:18px 24px;
-}
-
-.chatInputArea input{
-    flex:1;
-    padding:14px 18px;
-    border:2px solid rgba(255, 255, 255, 0.1);
-    border-radius:14px;
-    outline:none;
-    font-size: 15px;
-    background: rgba(15, 23, 42, 0.6);
-    color: #fff;
-}
-
-.chatInputArea input:focus{
-    border-color: var(--primary);
-}
-
-.chatInputArea button{
-    padding:0 26px;
-    border-radius:14px;
-    font-weight: 700;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Web Clone</title>
+    <!-- Socket.io Client -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #dadbd4; height: 100vh; display: flex; justify-content: center; align-items: center; }
+        
+        /* Login Screen Overlay */
+        #login-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #00a884; display: flex; justify-content: center; align-items: center; z-index: 10;
+        }
+        .login-box { background: white; padding: 30px; border-radius: 8px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 300px; }
+        .login-box input { width: 100%; padding: 10px; margin: 15px 0; border: 1px solid #ccc; border-radius: 4px; outline: none; }
+        .login-box button { background: #00a884; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; }
+
+        /* Main App Layout */
+        .app-container { display: flex; width: 90vw; height: 90vh; background: #f0f2f5; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border-radius: 3px; overflow: hidden; }
+        
+        /* Sidebar */
+        .sidebar { width: 30%; background: white; border-right: 1px solid #e2e2e2; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 15px; background: #f0f2f5; font-weight: bold; border-bottom: 1px solid #ddd; }
+        .user-list { flex: 1; overflow-y: auto; padding: 10px; }
+        .user-item { padding: 10px; border-bottom: 1px solid #f0f2f5; font-size: 14px; color: #333; }
+
+        /* Chat Area */
+        .chat-area { width: 70%; display: flex; flex-direction: column; background: #efeae2; }
+        .chat-header { padding: 15px; background: #f0f2f5; font-weight: bold; border-bottom: 1px solid #ddd; }
+        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        
+        /* Message Bubbles */
+        .message { max-width: 60%; padding: 8px 12px; border-radius: 7.5px; position: relative; font-size: 14px; word-wrap: break-word; box-shadow: 0 1px 0.5px rgba(0,0,0,0.13); }
+        .message.incoming { background: white; align-self: flex-start; border-top-left-radius: 0; }
+        .message.outgoing { background: #d9fdd3; align-self: flex-end; border-top-right-radius: 0; }
+        .message .meta { font-size: 10px; color: #999; text-align: right; margin-top: 4px; }
+        
+        /* Chat Input */
+        .chat-input-area { padding: 10px 20px; background: #f0f2f5; display: flex; gap: 10px; align-items: center; }
+        .chat-input-area input { flex: 1; padding: 10px 15px; border: none; border-radius: 8px; outline: none; font-size: 14px; }
+        .chat-input-area button { background: #00a884; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    </style>
 </head>
-
 <body>
 
-<!-- AUTH & LOGIN PAGE -->
-<div id="loginPage">
-    <div class="loginBox">
-        <div class="logo">ToGeo</div>
-        <div class="tagline">Connect. Chat. Watch. Listen. Together.</div>
+    <!-- Login Prompt -->
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>WhatsApp Clone</h2>
+            <p style="color: #666; font-size: 13px; margin-top: 5px;">Enter your name to start chatting</p>
+            <input type="text" id="username-input" placeholder="Your Name..." autocomplete="off">
+            <button onclick="login()">Join Chat</button>
+        </div>
+    </div>
 
-        <!-- Step: Choose Mode -->
-        <div id="stepAuthMode" class="field">
-            <label>Login / Signup Mode</label>
-            <div class="authButtons" style="margin-top:10px;">
-                <button type="button" id="useEmailMode" class="primary">Email & Password</button>
-                <button type="button" id="usePhoneMode" class="secondary">Phone Number (OTP)</button>
+    <!-- Main Chat Container -->
+    <div class="app-container" id="app-container" style="display: none;">
+        <!-- Sidebar showing active participants -->
+        <div class="sidebar">
+            <div class="sidebar-header" id="current-user-label">Chats</div>
+            <div class="user-list" id="user-list">
+                <!-- Dynamically populated active users -->
             </div>
         </div>
 
-        <!-- Email/Password Form -->
-        <div id="emailForm" class="hidden">
-            <div class="field">
-                <label>Email Address</label>
-                <input id="emailInput" type="email" autocomplete="email" placeholder="Enter your email">
+        <!-- Conversation window -->
+        <div class="chat-area">
+            <div class="chat-header">Global Community Chat Room</div>
+            <div class="chat-messages" id="chat-messages">
+                <!-- Dynamically populated messages -->
             </div>
-            <div class="field">
-                <label>Password</label>
-                <div class="input-wrapper">
-                    <input id="emailPassword" type="password" autocomplete="current-password" placeholder="Minimum 6 characters">
-                    <button type="button" class="toggle-password" id="toggleEmailPass">Show</button>
-                </div>
-            </div>
-            <div class="authButtons">
-                <button type="button" id="emailLoginBtn" class="primary">Login</button>
-                <button type="button" id="emailSignupBtn" class="secondary">Sign Up</button>
+            <div class="chat-input-area">
+                <input type="text" id="message-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()">Send</button>
             </div>
         </div>
-
-        <!-- Phone / OTP Form -->
-        <div id="phoneForm" class="hidden">
-            <div class="field" id="phoneInputBox">
-                <label>Phone Number</label>
-                <input id="phoneInput" type="tel" autocomplete="tel" placeholder="+919876543210">
-                <div class="authButtons" style="margin-top:15px;">
-                    <button type="button" id="sendOtpBtn" class="primary">Send OTP</button>
-                </div>
-            </div>
-            <div class="field hidden" id="otpInputBox">
-                <label>Enter 6-Digit OTP</label>
-                <input id="otpInput" type="text" autocomplete="one-time-code" placeholder="Enter OTP">
-                <div class="authButtons" style="margin-top:15px;">
-                    <button type="button" id="verifyOtpBtn" class="primary">Verify OTP</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Step: Choose Username -->
-        <div id="stepUsername" class="field hidden">
-            <label>Create Unique Username</label>
-            <input id="usernameChoice" type="text" autocomplete="username" placeholder="e.g. rohit_123">
-            <div class="authButtons" style="margin-top:20px;">
-                <button type="button" id="completeSignupBtn" class="primary">Continue to App</button>
-            </div>
-        </div>
-
-        <div id="recaptcha-container"></div>
-        <div id="message"></div>
-    </div>
-</div>
-
-<!-- MAIN APP -->
-<div id="mainApp" class="hidden">
-    <div class="topBar">
-        <div class="topLogo">ToGeo</div>
-        <button type="button" id="logoutBtn" class="logoutBtn">Logout</button>
     </div>
 
-    <div class="nav">
-        <button type="button" class="navBtn active" data-section="home">Home</button>
-        <button type="button" class="navBtn" data-section="friends">Friends</button>
-        <button type="button" class="navBtn" data-section="requests">Requests</button>
-        <button type="button" class="navBtn" data-section="chats">Chats</button>
-        <button type="button" class="navBtn" data-section="settings">Settings</button>
-    </div>
+    <script>
+        let socket;
+        let currentUser = '';
 
-    <main class="content">
-        <!-- HOME -->
-        <section id="homeSection" class="section active">
-            <div class="card">
-                <h2 id="welcomeText">Welcome</h2>
-                <p class="muted">Your vibrant hub for staying connected with friends.</p>
-                <div class="stats">
-                    <div class="stat">Friends<b id="friendCount">0</b></div>
-                    <div class="stat">Requests<b id="requestCount">0</b></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FRIENDS -->
-        <section id="friendsSection" class="section">
-            <div class="card">
-                <h2>Find Friends</h2>
-                <p class="muted">Search using exact unique username.</p>
-                <div class="searchBox">
-                    <input id="searchInput" type="text" placeholder="Enter username to search">
-                    <button type="button" id="searchBtn" class="primary">Search</button>
-                </div>
-            </div>
-            <div id="searchResult"></div>
-            <div id="friendsList"></div>
-        </section>
-
-        <!-- REQUESTS -->
-        <section id="requestsSection" class="section">
-            <div class="card">
-                <h2>Friend Requests</h2>
-                <p class="muted">Manage incoming connection requests.</p>
-            </div>
-            <div id="requestsList"></div>
-        </section>
-
-        <!-- CHATS -->
-        <section id="chatsSection" class="section">
-            <div class="card">
-                <h2>Private Chats</h2>
-                <p class="muted">Active conversations with your friends.</p>
-            </div>
-            <div id="chatsList"></div>
-        </section>
-
-        <!-- SETTINGS -->
-        <section id="settingsSection" class="section">
-            <div class="card">
-                <h2>Settings</h2>
-                <p class="muted">Logged in Username</p>
-                <p id="accountUsername" style="margin-top:8px; font-weight:bold; font-size: 16px; color: var(--accent);"></p>
-            </div>
-        </section>
-    </main>
-</div>
-
-<!-- CHAT WINDOW -->
-<div id="chatWindow">
-    <div class="chatHeader">
-        <button type="button" id="backChatBtn" class="backBtn">← Back</button>
-        <div id="chatTitle" class="chatTitle">Chat</div>
-    </div>
-    <div id="chatMessages"></div>
-    <div class="chatInputArea">
-        <input id="chatInput" type="text" placeholder="Type a message...">
-        <button type="button" id="sendMsgBtn" class="primary">Send</button>
-    </div>
-</div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { 
-    getAuth, 
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, 
-    signInWithPhoneNumber, 
-    RecaptchaVerifier, 
-    onAuthStateChanged, 
-    signOut 
-} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-import { 
-    getFirestore, 
-    collection, 
-    query, 
-    where, 
-    getDocs, 
-    addDoc, 
-    updateDoc, 
-    doc, 
-    setDoc, 
-    getDoc, 
-    onSnapshot, 
-    orderBy, 
-    serverTimestamp 
-} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyCMYx-0G0gCJMhuV-uHZGoYqNQwkQtAUc8",
-    authDomain: "togeo-8e24c.firebaseapp.com",
-    projectId: "togeo-8e24c",
-    storageBucket: "togeo-8e24c.firebasestorage.app",
-    messagingSenderId: "772918055389",
-    appId: "1:772918055389:web:14605859a71cf22860e634",
-    measurementId: "G-DF8JCSHQCH"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-let currentUser = null;
-let currentChatFriend = null;
-let confirmationResultObj = null;
-let unsubscribeRequests = null;
-let unsubscribeMessages = null;
-
-const $ = (id) => document.getElementById(id);
-
-function showMessage(text, success = false) {
-    const box = $("message");
-    box.textContent = text;
-    box.style.color = success ? "var(--success)" : "var(--danger)";
-}
-
-function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, function(char) {
-        return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[char];
-    });
-}
-
-function createChatId(uid1, uid2) {
-    return [uid1, uid2].sort().join("_");
-}
-
-/* TOGGLE MODES */
-$("useEmailMode").addEventListener("click", () => {
-    $("stepAuthMode").classList.add("hidden");
-    $("emailForm").classList.remove("hidden");
-});
-
-$("usePhoneMode").addEventListener("click", () => {
-    $("stepAuthMode").classList.add("hidden");
-    $("phoneForm").classList.remove("hidden");
-});
-
-/* PASSWORD SHOW/HIDE */
-$("toggleEmailPass").addEventListener("click", () => {
-    const passInput = $("emailPassword");
-    if (passInput.type === "password") {
-        passInput.type = "text";
-        $("toggleEmailPass").textContent = "Hide";
-    } else {
-        passInput.type = "password";
-        $("toggleEmailPass").textContent = "Show";
-    }
-});
-
-/* RECAPTCHA FOR PHONE */
-window.onload = function() {
-    if ($("recaptcha-container")) {
-        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-            'size': 'invisible'
-        });
-    }
-};
-
-/* EMAIL SIGNUP */
-$("emailSignupBtn").addEventListener("click", async () => {
-    const email = $("emailInput").value.trim();
-    const password = $("emailPassword").value;
-    if (!email || !password) { showMessage("Fill all fields."); return; }
-    
-    showMessage("Creating account...", true);
-    try {
-        const res = await createUserWithEmailAndPassword(auth, email, password);
-        currentUser = res.user;
-        checkUsernameStep();
-    } catch (err) {
-        showMessage(err.message);
-    }
-});
-
-/* EMAIL LOGIN */
-$("emailLoginBtn").addEventListener("click", async () => {
-    const email = $("emailInput").value.trim();
-    const password = $("emailPassword").value;
-    if (!email || !password) { showMessage("Fill all fields."); return; }
-
-    showMessage("Logging in...", true);
-    try {
-        const res = await signInWithEmailAndPassword(auth, email, password);
-        currentUser = res.user;
-        checkUsernameStep();
-    } catch (err) {
-        showMessage("Incorrect email or password.");
-    }
-});
-
-/* PHONE SEND OTP */
-$("sendOtpBtn").addEventListener("click", async () => {
-    const phone = $("phoneInput").value.trim();
-    if (!phone) { showMessage("Enter phone number."); return; }
-
-    showMessage("Sending OTP...", true);
-    try {
-        confirmationResultObj = await signInWithPhoneNumber(auth, phone, window.recaptchaVerifier);
-        showMessage("OTP sent!", true);
-        $("phoneInputBox").classList.add("hidden");
-        $("otpInputBox").classList.remove("hidden");
-    } catch (err) {
-        showMessage("Failed to send OTP. Check format or enable in Firebase.");
-    }
-});
-
-/* PHONE VERIFY OTP */
-$("verifyOtpBtn").addEventListener("click", async () => {
-    const otp = $("otpInput").value.trim();
-    if (!otp) { showMessage("Enter OTP."); return; }
-
-    showMessage("Verifying...", true);
-    try {
-        const res = await confirmationResultObj.confirm(otp);
-        currentUser = res.user;
-        checkUsernameStep();
-    } catch (err) {
-        showMessage("Invalid OTP.");
-    }
-});
-
-async function checkUsernameStep() {
-    const userDoc = await getDoc(doc(db, "users", currentUser.uid));
-    if (userDoc.exists() && userDoc.data().username) {
-        enterApp(userDoc.data().username);
-    } else {
-        $("emailForm").classList.add("hidden");
-        $("phoneForm").classList.add("hidden");
-        $("stepUsername").classList.remove("hidden");
-        showMessage("Set your unique username!", true);
-    }
-}
-
-/* COMPLETE USERNAME SETUP */
-$("completeSignupBtn").addEventListener("click", async () => {
-    const username = $("usernameChoice").value.trim().toLowerCase();
-    if (!username || username.length < 3) {
-        showMessage("Username must be at least 3 characters.");
-        return;
-    }
-
-    showMessage("Checking username...", true);
-    try {
-        const q = query(collection(db, "users"), where("username", "==", username));
-        const snap = await getDocs(q);
-        if (!snap.empty) {
-            showMessage("Username already exists! Try another.");
-            return;
-        }
-
-        await setDoc(doc(db, "users", currentUser.uid), {
-            uid: currentUser.uid,
-            username: username,
-            createdAt: serverTimestamp()
-        });
-
-        enterApp(username);
-    } catch (err) {
-        showMessage("Error saving username.");
-    }
-});
-
-function enterApp(username) {
-    $("loginPage").classList.add("hidden");
-    $("mainApp").classList.remove("hidden");
-    $("accountUsername").textContent = username;
-    $("welcomeText").textContent = `Welcome, ${username}!`;
-    loadAppData();
-}
-
-/* SEARCH FRIEND */
-$("searchBtn").addEventListener("click", async () => {
-    const searchUsername = $("searchInput").value.trim().toLowerCase();
-    const resultDiv = $("searchResult");
-    if (!searchUsername) { resultDiv.innerHTML = `<p class="error">Enter username.</p>`; return; }
-
-    try {
-        const q = query(collection(db, "users"), where("username", "==", searchUsername));
-        const snap = await getDocs(q);
-        if (snap.empty) { resultDiv.innerHTML = `<p class="empty">User not found.</p>`; return; }
-
-        snap.forEach((docSnap) => {
-            const data = docSnap.data();
-            if (data.uid === currentUser.uid) {
-                resultDiv.innerHTML = `<p class="error">Cannot search yourself.</p>`;
+        function login() {
+            const input = document.getElementById('username-input').value.trim();
+            if (!input) {
+                alert('Please enter a valid username');
                 return;
             }
-            resultDiv.innerHTML = `
-                <div class="card row">
-                    <div class="user">
-                        <div class="avatar">${data.username.charAt(0).toUpperCase()}</div>
-                        <div><h3>${escapeHTML(data.username)}</h3><p>ToGeo User</p></div>
-                    </div>
-                    <button class="smallBtn primary" id="sendReqBtn">Add Friend</button>
-                </div>
-            `;
-            $("sendReqBtn").onclick = () => sendFriendRequest(data.uid);
-        });
-    } catch (err) {
-        resultDiv.innerHTML = `<p class="error">Search error.</p>`;
-    }
-});
+            currentUser = input;
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-container').style.display = 'flex';
+            document.getElementById('current-user-label').innerText = `Logged in as: ${currentUser}`;
 
-async function sendFriendRequest(friendUid) {
-    try {
-        await addDoc(collection(db, "friendRequests"), {
-            sender: currentUser.uid,
-            receiver: friendUid,
-            status: "pending",
-            createdAt: serverTimestamp()
-        });
-        alert("Request sent!");
-        $("searchResult").innerHTML = "";
-    } catch (err) {
-        alert("Failed to send request.");
-    }
-}
+            // Initialize Socket connection to backend server
+            socket = io('http://localhost:3000');
 
-function loadAppData() {
-    const myUid = currentUser.uid;
-    const reqQuery = query(collection(db, "friendRequests"), where("receiver", "==", myUid), where("status", "==", "pending"));
-    
-    unsubscribeRequests = onSnapshot(reqQuery, async (snapshot) => {
-        const requestsList = $("requestsList");
-        requestsList.innerHTML = "";
-        $("requestCount").textContent = snapshot.size;
+            socket.emit('join', currentUser);
 
-        if (snapshot.empty) {
-            requestsList.innerHTML = `<div class="card empty">No pending requests.</div>`;
-            return;
+            // Listen for incoming messages
+            socket.on('receive_message', (data) => {
+                appendMessage(data);
+            });
+
+            // Listen for updates to active user list
+            socket.on('update_users', (users) => {
+                const userListEl = document.getElementById('user-list');
+                userListEl.innerHTML = '<p style="font-size:12px; color:#666; margin-bottom:8px;">Active Users:</p>';
+                users.forEach(user => {
+                    const div = document.createElement('div');
+                    div.className = 'user-item';
+                    div.innerText = `🟢 ${user}`;
+                    userListEl.appendChild(div);
+                });
+            });
         }
 
-        for (const docSnap of snapshot.docs) {
-            const req = docSnap.data();
-            const senderDoc = await getDoc(doc(db, "users", req.sender));
-            if (senderDoc.exists()) {
-                const sData = senderDoc.data();
-                requestsList.innerHTML += `
-                    <div class="card row">
-                        <div class="user">
-                            <div class="avatar">${sData.username.charAt(0).toUpperCase()}</div>
-                            <div><h3>${escapeHTML(sData.username)}</h3><p>Sent request</p></div>
-                        </div>
-                        <button class="smallBtn success" onclick="acceptRequest('${docSnap.id}')">Accept</button>
-                    </div>
-                `;
+        function sendMessage() {
+            const inputEl = document.getElementById('message-input');
+            const message = inputEl.value.trim();
+            if (!message) return;
+
+            socket.emit('send_message', {
+                sender: currentUser,
+                message: message
+            });
+
+            inputEl.value = '';
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
             }
         }
-    });
-    loadFriendsList();
-}
 
-async function loadFriendsList() {
-    const myUid = currentUser.uid;
-    const q1 = query(collection(db, "friendRequests"), where("sender", "==", myUid), where("status", "==", "accepted"));
-    const q2 = query(collection(db, "friendRequests"), where("receiver", "==", myUid), where("status", "==", "accepted"));
-
-    const snap1 = await getDocs(q1);
-    const snap2 = await getDocs(q2);
-    const friendUids = new Set();
-    snap1.forEach(d => friendUids.add(d.data().receiver));
-    snap2.forEach(d => friendUids.add(d.data().sender));
-
-    const friendsList = $("friendsList");
-    const chatsList = $("chatsList");
-    friendsList.innerHTML = "";
-    chatsList.innerHTML = "";
-    $("friendCount").textContent = friendUids.size;
-
-    if (friendUids.size === 0) {
-        friendsList.innerHTML = `<div class="card empty">No friends yet.</div>`;
-        chatsList.innerHTML = `<div class="card empty">No chats available.</div>`;
-        return;
-    }
-
-    for (const fUid of friendUids) {
-        const fDoc = await getDoc(doc(db, "users", fUid));
-        if (fDoc.exists()) {
-            const fData = fDoc.data();
-            friendsList.innerHTML += `
-                <div class="card row">
-                    <div class="user">
-                        <div class="avatar">${fData.username.charAt(0).toUpperCase()}</div>
-                        <div><h3>${escapeHTML(fData.username)}</h3><p>Connected</p></div>
-                    </div>
-                    <button class="smallBtn primary" onclick="openChat('${fData.uid}', '${fData.username}')">Chat</button>
-                </div>
+        function appendMessage(data) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            
+            const isOutgoing = data.sender === currentUser;
+            messageDiv.className = `message ${isOutgoing ? 'outgoing' : 'incoming'}`;
+            
+            messageDiv.innerHTML = `
+                ${!isOutgoing ? `<div style="font-size:11px; font-weight:bold; color:#00a884; margin-bottom:2px;">${data.sender}</div>` : ''}
+                <div>${escapeHtml(data.message)}</div>
+                <div class="meta">${data.timestamp}</div>
             `;
-            chatsList.innerHTML += `
-                <div class="card row">
-                    <div class="user">
-                        <div class="avatar">${fData.username.charAt(0).toUpperCase()}</div>
-                        <div><h3>${escapeHTML(fData.username)}</h3><p>Open chat</p></div>
-                    </div>
-                    <button class="smallBtn primary" onclick="openChat('${fData.uid}', '${fData.username}')">Open Chat</button>
-                </div>
-            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight; // Auto scroll to bottom
         }
-    }
-}
 
-window.acceptRequest = async function(reqId) {
-    await updateDoc(doc(db, "friendRequests", reqId), { status: "accepted" });
-    alert("Request accepted!");
-    loadFriendsList();
-}
-
-window.openChat = function(friendUid, friendUsername) {
-    currentChatFriend = { uid: friendUid, username: friendUsername };
-    $("chatTitle").textContent = `Chat with ${friendUsername}`;
-    $("chatWindow").style.display = "flex";
-
-    const chatId = createChatId(currentUser.uid, friendUid);
-    const msgsQuery = query(collection(db, "chats", chatId, "messages"), orderBy("createdAt", "asc"));
-
-    if (unsubscribeMessages) unsubscribeMessages();
-
-    unsubscribeMessages = onSnapshot(msgsQuery, (snapshot) => {
-        const chatMsgsContainer = $("chatMessages");
-        chatMsgsContainer.innerHTML = "";
-        snapshot.forEach((docSnap) => {
-            const msg = docSnap.data();
-            const isMyMsg = msg.sender === currentUser.uid;
-            chatMsgsContainer.innerHTML += `
-                <div class="messageBubble ${isMyMsg ? 'myMessage' : 'otherMessage'}">
-                    ${escapeHTML(msg.text)}
-                </div>
-            `;
-        });
-        chatMsgsContainer.scrollTop = chatMsgsContainer.scrollHeight;
-    });
-}
-
-$("sendMsgBtn").addEventListener("click", sendMessage);
-$("chatInput").addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
-
-async function sendMessage() {
-    const text = $("chatInput").value.trim();
-    if (!text || !currentChatFriend) return;
-
-    const chatId = createChatId(currentUser.uid, currentChatFriend.uid);
-    await addDoc(collection(db, "chats", chatId, "messages"), {
-        sender: currentUser.uid,
-        text: text,
-        createdAt: serverTimestamp()
-    });
-    $("chatInput").value = "";
-}
-
-$("logoutBtn").addEventListener("click", () => signOut(auth).then(() => location.reload()));
-$("backChatBtn").addEventListener("click", () => { $("chatWindow").style.display = "none"; });
-
-/* NAVIGATION */
-document.querySelectorAll(".navBtn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-        document.querySelectorAll(".navBtn").forEach(b => b.classList.remove("active"));
-        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-        e.target.classList.add("active");
-        $(e.target.getAttribute("data-section") + "Section").classList.add("active");
-    });
-});
-</script>
+        // Simple security utility to prevent script injection via chat
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+    </script>
 </body>
 </html>
